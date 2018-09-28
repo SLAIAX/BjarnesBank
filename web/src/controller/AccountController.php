@@ -28,13 +28,9 @@ class AccountController extends Controller
     public function createAction()
     {
         $account = new AccountModel();
-        $names = ['Bob','Mary','Jon','Peter','Grace'];
-        shuffle($names);
-        $account->setFirstName($names[0]); // will come from Form data
         $account->save();
-        $id = $account->getId();
         $view = new View('accountCreated');
-        echo $view->addData('accountId', $id)->render();
+        echo $view->render();
     }
 
     /**

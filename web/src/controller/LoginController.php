@@ -1,6 +1,11 @@
 <?php
-namespace agilman\a2\controller;
 
+
+namespace agilman\a2\controller;
+session_start();
+
+use agilman\a2\model\LoginModel;
+use agilman\a2\view\View;
 
 /**
  * Class HomeController
@@ -15,7 +20,11 @@ class LoginController extends Controller
      */
     public function indexAction()
     {
-        $this->redirect('accountIndex');
+
+        $view = new View('loginPage');
+        echo $view->render();
+
+
     }
 
 
@@ -24,24 +33,29 @@ class LoginController extends Controller
      */
     public function validateAction()
     {
-        $flag = false;
-       $username = $_POST['name'];
+
+       $_SESSION["access"] = 0;
+       $username = $_POST['username'];
        $password = $_POST['password'];
+       try {
+           $login = new LoginModel($username, $password);
+           $flag = $login->validateLogin();
 
-       if(!isset($username) || !isset($password)){
-           error_log("error something went wrong");
-           echo " empty fields" ;// add somthing to display in html
+
+           if ($flag) {
+               $_SESSION['username'] = $username;
+               $_SESSION["access"] = 1;
+               $this->redirect('homePage');
+           } else {
+               unset($login);
+               $_SESSION["access"] = 2;
+               $this->redirect('loginPage');
+           }
+
+       } catch (\Exception $e){
+           echo "ERROR";
        }
-
-        $login = new LoginModel($username, $password);
-        $flag = $login->validateLogin();
-
-
-        if($flag) {
-            $view = new View('accountCreated'); // send to profile page
-            echo $view->render();
-        }else{
-            unset($login);
-        }
+       unset($password);
+       unset($username);
     }
 }

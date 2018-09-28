@@ -1,0 +1,13 @@
+TO DO:
+
+- Format account display
+- Create transaction page (hyperlink account name from account display?)
+- Format the user create page
+- Method to perform transactions between accounts
+
+• view a detailed list of transactions for a selected account (date/time,
+amount, transaction type)
+• perform transactions (deposit/withdraw/transfer) on a given account
+• filtering (e.g. of accounts by id or transactions by type)
+• sorting of transactions by date, asc/desc order
+• etc etc etc

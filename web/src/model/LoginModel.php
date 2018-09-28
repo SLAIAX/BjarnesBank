@@ -30,15 +30,26 @@ class LoginModel extends Model
     {
 
         try {
-            if (!$result = $this->db->query("SELECT `Password` FROM `user` WHERE `Username` = $this->username ;")) {
-                // throw new ...
+            $usernameTest = $this->db->query("SELECT `Username` FROM `user` WHERE `Username` = '$this->username' ;");
+            $username = array_column($usernameTest->fetch_all(),0);
+            if($username[0] == ""){
                 throw new \Exception();
             }
-            if($result === $this->password){
-                return true;
+
+
+            if (!$result = $this->db->query("SELECT `Password` FROM `user` WHERE `Username` = '$this->username' ;")) {
+                throw new \Exception();
+
+            }
+           $temp = array_column($result->fetch_all(),0);
+
+            if($temp[0] == $this->password){
 
                 unset($password);
                 unset($result);
+
+
+                return true;
             }
         }catch(\Exception $e){
             unset($password);

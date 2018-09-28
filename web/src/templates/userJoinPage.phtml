@@ -1,0 +1,50 @@
+<?php include "header.phtml" ?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="/images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="#">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li ><a href=<?= $linkTo('loginPage'); ?>>Log in</a></li>
+					<li class="current_page_item"><a href="#">Join</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!------header wrapper ends ----------------->
+
+
+
+	<div id="usercreate">
+		<h3><b> Create an Account</b></h3>
+		<br>
+		<form method="POST" action="<?= $linkTo('accountCreate'); ?>">
+			
+		<div id="personinfo">
+			<p> First Name  <input type="text" name="firstname" size="25"> </p>
+			<p> Last Name  <input type="text" name="lastname" size="25"> </p>
+			<p> Email  <input type="text" name="email" size="25"> </p>
+			<p> Phone Number  <input type="text" name="phonenumber" size="25"> </p>
+			<br>
+			<p> Username  <input type="text" name="username" size="25"> </p>
+			<p> Password  <input type="password" name="password" size ="25"> </p>
+			<p> Address  <input type="text" name="address" size ="25"> </p>
+			<br>
+		</div>
+			<p> <u>Forgot your password?</u>  <input class="login" type="submit" value="Create"> </p>
+		</form>
+		<a href=<?= $linkTo('accountCreate'); ?>>Create new account.</a>
+	</div>
+	<!------User Create ends ----------------->
+
+</div>
+
+
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

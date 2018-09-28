@@ -21,37 +21,6 @@ class AccountModel extends Model
     private $mEmail;
     private $mPhone;
 
-    /**
-     * User constructor.
-     * @param $mID
-     * @param $mUserName
-     * @param $mFirstName
-     * @param $mLastName
-     * @param $mUserType
-     * @param $mAddress
-     * @param $mPassword
-     * @param $mDOB
-     * @param $mEmail
-     * @param $mPhone
-     */
-//    public function __construct($mID, $mUserName, $mFirstName, $mLastName, $mUserType, $mAddress, $mPassword, $mDOB, $mEmail, $mPhone)
-//    {
-//        $this->mID = $mID;
-//        $this->mUserName = $mUserName;
-//        $this->mFirstName = $mFirstName;
-//        $this->mLastName = $mLastName;
-//        $this->mUserType = $mUserType;
-//        $this->mAddress = $mAddress;
-//        $this->mPassword = $mPassword;
-//        $this->mDOB = $mDOB;
-//        $this->mEmail = $mEmail;
-//        $this->mPhone = $mPhone;
-//    }
-
-
-    /**
-     * @var string Account Name
-     */
 
     /**
      * @return string Account Name
@@ -140,8 +109,19 @@ class AccountModel extends Model
     /**
      * @return mixed
      */
-    public function getID()
+    public function findID($username)
     {
+        if (!$result = $this->db->query("SELECT ID FROM `user` WHERE `Username` = '$username';")) {
+          //  return 0;
+            echo $username;
+
+        }
+        $result = $result->fetch_assoc();
+        //$result = $result->fetch_assoc();
+        return $result['ID'];
+    }
+
+    public function getID(){
         return $this->mID;
     }
 
@@ -193,6 +173,29 @@ class AccountModel extends Model
         $this->mPhone = $mPhone;
     }
 
+    public function getAccounts($id){
+        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `UserID` = '$id';")) {
+            return 0;
+        }
+
+        $i = 0;
+        while($accounts = $result->fetch_assoc()){
+            $temp[$i][0] = $accounts['AccountType'];
+            $temp[$i][1] = $accounts['AccountName'];
+            $temp[$i][2] = $accounts['Balance'];
+            $i++;
+
+        }
+//        $account[0] = array_column($result->fetch_all(), 0);
+//        $account[1] = array_column($result->fetch_all(), 1);
+//        $account[2] = array_column($result->fetch_all(), 2);
+//        $account[3] = array_column($result->fetch_all(), 3);
+
+
+      //  $this->N = $result->num_rows;
+        return $temp;
+    }
+
 
 
 
@@ -229,9 +232,17 @@ class AccountModel extends Model
     {
         $name = $this->mFirstName ?? "NULL";
        // $this->mFirstName = $name;
+
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $address = $_POST['address'];
+        $email = $_POST['email'];
+        $phonenumber = $_POST['phonenumber'];
         if (!isset($this->mID)) {
             // New account - Perform INSERT
-            if (!$result = $this->db->query("INSERT INTO `user` VALUES (NULL,'$name', 'jim', 'admin', 'admin', 'address', 'st','st');")) {
+            if (!$result = $this->db->query("INSERT INTO `user` VALUES (NULL, '$firstname', '$lastname', '$username', '$password', '$address', '$email','$phonenumber');")) {
                 // throw new ...
             }
             $this->mID = $this->db->insert_id;
@@ -241,7 +252,6 @@ class AccountModel extends Model
                 // throw new ...
             }
         }
-
         return $this;
     }
 

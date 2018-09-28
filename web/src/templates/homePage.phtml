@@ -1,0 +1,94 @@
+<?php
+session_start();
+include "header.phtml"
+
+?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="#">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li class="current_page_item"><a href="#">Homepage</a></li>
+					<li><a href="<?= $linkTo('transaction'); ?>">View Transactions</a></li>
+					<li><a href="#">Contact</a></li>
+					<li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- end #header -->
+	<div id="page">
+		<div id="content">
+			<div class="post">
+				<h2 class="title"><a href="#">Welcome to Bjarnes Bank, <?php print $_SESSION['username'];?></a></h2>
+				<div class="entry">
+
+                    <?php
+                        print("<table><tr><th>Account Type</th>
+                            <th>Account Name</th>
+                            <th>Account Balance</th>
+                            </tr>");
+                        for($i = 0; $i < count($accounts); $i++){
+                            print("<tr>
+                            <td>".$accounts[$i][0]."</td>
+                            <td>".$accounts[$i][1]."</td>
+                            <td>".$accounts[$i][2]."</td>
+                            </tr>");
+                        }
+
+                        print("</table>");
+                    ?>
+
+
+				</div>
+			</div>
+		</div>
+		<!-- end #content -->
+		<div id="sidebar">
+			<ul>
+				<li>
+					<h2>Categories</h2>
+					<ul>
+						<li><a href="#">Budget Calculator</a></li>
+						<li><a href="#">Make Transaction</a></li>
+						<li><a href="#">Types of Accounts</a></li>
+						<li><a href="#">Why choose Bjarnes Bank</a></li>
+						<li><a href="#">Recent Updates</a></li>
+						<li><a href="#">About us</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	<!-- end #page --> 
+	<div id="featured-content">
+		<div id="column1">
+			<h2>Bjarnes World New home Page</h2>
+			<p><img src="images/img06.jpg" width="300" height="150" alt="" /></p>
+			<p>Bjarnes Bank has recently updated their home page to improve the user experience, we hope you enjoy it</p>
+			<p class="button"><a href="#">Read More</a></p>
+		</div>
+		<div id="column2">
+			<h2>New Budget Calculator</h2>
+			<p><img src="images/img07.jpg" width="300" height="150" alt="" /></p>
+			<p>Struggling to manage your finances? Well our new budget calculator will hold you're hand and deal with the pesky details of budgeting</p>
+			<p class="button"><a href="#">Try Now</a></p>
+		</div>
+		<div id="column3">
+			<h2>Bjarnes Bank Now Taking Gold Coins</h2>
+			<p><img src="images/img08.jpg" width="300" height="150" alt="" /></p>
+			<p>This is our First post, We are now open for buissness, Notice me senpai</p>
+			<p class="button"><a href="#">Read More</a></p>
+		</div>
+	</div>
+</div>
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

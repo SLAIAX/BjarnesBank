@@ -24,8 +24,8 @@ class Model
         $this->db = new mysqli(
             Model::DB_HOST,
             Model::DB_USER,
-            Model::DB_PASS
-            //Model::DB_NAME
+            Model::DB_PASS,
+            Model::DB_NAME
         );
 
         if (!$this->db) {
@@ -43,7 +43,7 @@ class Model
             error_log("Mysql database not available!", 0);
         }
 
-        $result = $this->db->query("SHOW TABLES LIKE 'user';");
+        $result = $this->db->query("SHOW TABLES LIKE 'account';");
 
         if ($result->num_rows == 0) {
             // table doesn't exist
@@ -62,13 +62,41 @@ class Model
             `Phone` VARCHAR(256) DEFAULT NULL , 
             PRIMARY KEY (`ID`));"
             );
+            if (!$result) {
+                // handle appropriately
+                error_log("Failed creating table user", 0);
+            }
 
+
+
+            $result = $this->db->query(  "CREATE TABLE `transactions` (
+                    `TransID` INT(8) unsigned NOT NULL AUTO_INCREMENT , 
+                    `AccountID` INT(8) unsigned NOT NULL,
+            `Description` VARCHAR(256) DEFAULT NULL , 
+            `DateOfTrans` VARCHAR(256) DEFAULT NULL , 
+            `MoneyIn` DECIMAL(16) DEFAULT NULL , 
+            `MoneyOut` DECIMAL(16) DEFAULT NULL , 
+            `Balance` DECIMAL(16) DEFAULT NULL , 
+            PRIMARY KEY (`TransID`));"
+            );
+            if (!$result) {
+                // handle appropriately
+                error_log("Failed creating table transaction", 0);
+            }
+            $result = $this->db->query( "CREATE TABLE `account` (
+                    `AccountID` INT(8) unsigned NOT NULL AUTO_INCREMENT , 
+                    `UserID` INT(8) unsigned DEFAULT NULL , 
+            `AccountType` VARCHAR(256) DEFAULT NULL , 
+            `Balance` DECIMAL(16) DEFAULT NULL , 
+            `AccountName` VARCHAR(256) DEFAULT NULL ,
+            PRIMARY KEY (`AccountID`));"
+            );
             if (!$result) {
                 // handle appropriately
                 error_log("Failed creating table account", 0);
             }
-
         }
+
 //        if (!$this->db->query("INSERT INTO `user` VALUES (NULL,'Bob', 'jim', 'address', 'st','st');")) {
 //            // handle appropriately
 //            echo $this->db->error;
