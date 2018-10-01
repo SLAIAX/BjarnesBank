@@ -1,0 +1,45 @@
+<?php include "header.phtml" ?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="/images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="#">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li ><a href=<?= $linkTo('loginPage'); ?>>Log in</a></li>
+					<li class="current_page_item"><a href="#">Join</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!------header wrapper ends ----------------->
+
+
+
+	<div id="usercreate">
+		<h3><b> Create an Account</b></h3>
+		<br>
+		<form method="POST" action="#">
+			
+		<div id="personinfo">
+			<p> Account Name  <input type="text" name="Account Name" size="25"> </p>
+			<p> Account Type  <input type="select" name="Account Type" size="25"> </p>
+
+			<br>
+		</div>
+			<p> <u>Forgot your password?</u>  <input class="login" type="submit" value="Create"> </p>
+		</form>
+		<a href=<?= $linkTo('accountCreate'); ?>>Create new account.</a>
+	</div>
+	<!------User Create ends ----------------->
+
+</div>
+
+
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

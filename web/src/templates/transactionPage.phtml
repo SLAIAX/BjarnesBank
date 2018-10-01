@@ -30,18 +30,27 @@ include "header.phtml"
 
 	<!------header wrapper ends ----------------->
 
-	<div id="transactions">
-        <select>
-            <option value="volvo">Volvo<?php print("1") ?></option>
-            <option value="saab">Saab<?php print("2") ?></option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-        </select>
+    <div class="entry">
+
+        <table><tr><th>Account Type</th>
+                <th>Account Name</th>
+                <th>Account Balance</th>
+            </tr>
+
+            <?php
+
+            for($i = 0; $i < count($tranz); $i++){
+                ?>
+                test
+                <?php
+
+            }
 
 
+            ?>
+        </table>
 
-		
-	</div>
+    </div>
 	<!------Login ends ----------------->
 </div>
 

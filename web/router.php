@@ -19,6 +19,17 @@ $collection->attachRoute(
 
 $collection->attachRoute(
     new Route(
+        '/transactions',
+        array(
+            '_controller' => 'agilman\a2\controller\AccountController::viewTransactions',
+            'methods' => 'POST',
+            'name' => 'viewTransactions'
+        )
+    )
+);
+
+$collection->attachRoute(
+    new Route(
         '/userJoinPage',
         array(
             '_controller' => 'agilman\a2\controller\UserCreateController::indexAction',

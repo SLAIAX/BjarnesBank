@@ -15,7 +15,7 @@ include "header.phtml"
 			<div id="menu">
 				<ul>
 					<li class="current_page_item"><a href="#">Homepage</a></li>
-					<li><a href="<?= $linkTo('transaction'); ?>">View Transactions</a></li>
+					<li><a href="<?= $linkTo('viewTransactions'); ?>">View Transactions</a></li>
 					<li><a href="#">Contact</a></li>
 					<li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
 				</ul>
@@ -27,24 +27,30 @@ include "header.phtml"
 		<div id="content">
 			<div class="post">
 				<h2 class="title"><a href="#">Welcome to Bjarnes Bank, <?php print $_SESSION['username'];?></a></h2>
-				<div class="entry">
+
+                <div class="entry">
+                    <table>
+                    <tr><tr><th>Account Name</th>
+                            <th>Account Type</th>
+                            <th>Account Balance</th>
+                        </tr>
 
                     <?php
-                        print("<table><tr><th>Account Type</th>
-                            <th>Account Name</th>
-                            <th>Account Balance</th>
-                            </tr>");
-                        for($i = 0; $i < count($accounts); $i++){
-                            print("<tr>
-                            <td>".$accounts[$i][0]."</td>
-                            <td>".$accounts[$i][1]."</td>
-                            <td>".$accounts[$i][2]."</td>
-                            </tr>");
-                        }
 
-                        print("</table>");
+                        for($i = 0; $i < count($accounts); $i++){
+                    ?>
+                        <form method="post" action="<?= $linkTo('viewTransactions'); ?>">
+                            <tr><td> <input type="submit" id="tranzLink" name="account" value="<?= $accounts[$i][1] ?>"></td>
+                        </form>
+                            <td><?=$accounts[$i][0]?></td>
+                        <td><?=$accounts[$i][2]?></td></tr>
+                        <?php
+                        }
                     ?>
 
+                        </table>
+                    <br>
+                    <p><a href="#">Create New Account</a></p>
 
 				</div>
 			</div>

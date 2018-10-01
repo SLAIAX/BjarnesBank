@@ -54,4 +54,12 @@ class AccountController extends Controller
         $account = (new AccountModel())->load($id);
         $account->setName('Joe')->save(); // new name will come from Form data
     }
+
+    public function viewTransactions()
+    {
+        $transactions = $_POST['account'];
+        $trans = new transactionModel($transactions);
+        $view = new View('transactionPage');
+        echo $view->addData('tranz', $trans)->render();
+    }
 }
