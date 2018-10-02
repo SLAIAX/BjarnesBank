@@ -21,9 +21,31 @@ $collection->attachRoute(
     new Route(
         '/transactions',
         array(
-            '_controller' => 'agilman\a2\controller\AccountController::viewTransactions',
+            '_controller' => 'agilman\a2\controller\BankAccountController::viewTransactions',
             'methods' => 'POST',
             'name' => 'viewTransactions'
+        )
+    )
+);
+
+$collection->attachRoute(
+    new Route(
+        '/bank/account/',
+        array(
+            '_controller' => 'agilman\a2\controller\BankAccountController::indexAction',
+            'methods' => 'GET',
+            'name' => 'bankAccount'
+        )
+    )
+);
+
+$collection->attachRoute(
+    new Route(
+        '/bank/account/create',
+        array(
+            '_controller' => 'agilman\a2\controller\BankAccountController::createBankAccount',
+            'methods' => 'POST',
+            'name' => 'bankAccountCreate'
         )
     )
 );

@@ -28,6 +28,10 @@ class AccountCollectionModel extends Model
         }
     }
 
+    public function bankAccountCreate(){
+
+    }
+
     /**
      * Get account collection
      *

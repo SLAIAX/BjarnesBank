@@ -24,17 +24,20 @@
 	<div id="usercreate">
 		<h3><b> Create an Account</b></h3>
 		<br>
-		<form method="POST" action="#">
+		<form method="POST" action="<?= $linkTo('bankAccountCreate'); ?>">
 			
 		<div id="personinfo">
-			<p> Account Name  <input type="text" name="Account Name" size="25"> </p>
-			<p> Account Type  <input type="select" name="Account Type" size="25"> </p>
-
+			<p> Account Name  <input type="text" name="AccountName" pattern="[A-Za-z]{1,}" title="Alphanumeric characters only with no spaces." size="25"> </p>
+			<p> Account Type  <select name="AccountType">
+                    <option value="Savings">Savings</option>
+                    <option value="Cheque">Cheque</option>
+                    <option value="FastSaver">FastSaver</option>
+                </select> </p>
 			<br>
 		</div>
-			<p> <u>Forgot your password?</u>  <input class="login" type="submit" value="Create"> </p>
+			<input class="login" type="submit" value="Create"> </p>
 		</form>
-		<a href=<?= $linkTo('accountCreate'); ?>>Create new account.</a>
+
 	</div>
 	<!------User Create ends ----------------->
 
