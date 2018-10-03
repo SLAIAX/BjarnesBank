@@ -23,12 +23,12 @@
 
 
 
-	<div id="usercreate">
+	<div id="accountcreate">
 		<h3><b> Create an Account</b></h3>
 		<br>
 		<form method="POST" action="<?= $linkTo('bankAccountCreate'); ?>">
 			
-		<div id="personinfo">
+		<div>
 			<p> Account Name  <input type="text" name="AccountName" pattern="[A-Za-z]{1,}" title="Alphanumeric characters only with no spaces." size="25"> </p>
 			<p> Account Type  <select name="AccountType">
                     <option value="Savings">Savings</option>

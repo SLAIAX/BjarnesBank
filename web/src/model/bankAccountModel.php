@@ -111,10 +111,12 @@ class bankAccountModel extends Model
             $temp[$i][0] = $accounts['AccountType'];
             $temp[$i][1] = $accounts['AccountName'];
             $temp[$i][2] = $accounts['Balance'];
+            $temp[$i][3] = $accounts['AccountID'];
+            echo $temp[$i][3];
+            echo $temp[$i][0];
             $i++;
 
         }
-
 
 
       //  $this->N = $result->num_rows;
@@ -163,7 +165,6 @@ class bankAccountModel extends Model
 
             if (!$result = $this->db->query("INSERT INTO `account` VALUES (NULL, '$id', '$AccountType', 0, '$AccountName');")) {
                 // throw new ...
-                echo "d";
             }
             $this->mID = $this->db->insert_id;
         } else {

@@ -2,6 +2,7 @@
 namespace agilman\a2\controller;
 
 use agilman\a2\model\bankAccountModel;
+use agilman\a2\model\transactionModel;
 use agilman\a2\view\View;
 
 /**
@@ -20,15 +21,15 @@ class BankAccountController extends Controller
 
     public function viewTransactions()
     {
-        $transactions = $_POST['account'];
-        $trans = new transactionModel($transactions);
+        $account = $_POST['account'];
+        $transMod = new transactionModel();
+        $transactions = $transMod->getTransactions($account);
         $view = new View('transactionPage');
-        echo $view->addData('tranz', $trans)->render();
+        echo $view->addData('transactions', $transactions)->render();
     }
 
     public function createBankAccount()
     {
-
         $account = new bankAccountModel();
         $account->save();
         $this->redirect('homePage');

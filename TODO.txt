@@ -3,7 +3,6 @@ TO DO:
 - Format account display
 - Create transaction page (hyperlink account name from account display?)
 - Format the user create page
-- Method to perform transactions between accounts
 
 • view a detailed list of transactions for a selected account (date/time,
 amount, transaction type)

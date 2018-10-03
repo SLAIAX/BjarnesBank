@@ -183,6 +183,7 @@ class AccountModel extends Model
             $temp[$i][0] = $accounts['AccountType'];
             $temp[$i][1] = $accounts['AccountName'];
             $temp[$i][2] = $accounts['Balance'];
+            $temp[$i][3] = $accounts['AccountID'];
             $i++;
 
         }

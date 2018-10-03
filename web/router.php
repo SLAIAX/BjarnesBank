@@ -75,7 +75,7 @@ $collection->attachRoute(
 
 $collection->attachRoute(
     new Route(
-        '/bank/account/ ',
+        '/bank/account/',
         array(
             '_controller' => 'agilman\a2\controller\BankAccountController::indexAction',
             'methods' => 'GET',

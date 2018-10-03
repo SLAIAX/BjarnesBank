@@ -34,9 +34,11 @@ class transferController extends Controller
         $toAccountID = $account->findID($_POST['accountTo']);
         $fromAccountID = $account->findID($_POST['accountFrom']);
         $transaction = new transactionModel();
-        $transaction->makeTransfer($toAccountID, $fromAccountID);
-       // $this->redirect('transactionComplete');
-        $view = new View('transactionComplete');
-        echo $view->render();
+        if($transaction->makeTransfer($toAccountID, $fromAccountID)) {
+            $view = new View('transactionComplete');
+            echo $view->render();
+        }else{
+            $this->redirect('transferPage');
+        }
     }
 }

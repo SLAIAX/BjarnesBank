@@ -32,16 +32,31 @@ include "header.phtml"
 
     <div class="entry">
 
-        <table><tr><th>Account Type</th>
-                <th>Account Name</th>
-                <th>Account Balance</th>
+        <table><tr><th>From</th>
+                <th>To</th>
+                <th>Amount In</th>
+                <th>Amount Out</th>
+                <th>Balance</th>
+                <th>Date of Transaction</th>
+                <th>Description</th>
             </tr>
 
             <?php
 
-            for($i = 0; $i < count($tranz); $i++){
+            for($i = 0; $i < count($transactions); $i++){
+
                 ?>
-                test
+
+                <tr>
+                <td><?=$transactions[$i][0]?></td>
+                <td><?=$transactions[$i][1]?></td>
+                <td><?=$transactions[$i][2]?></td>
+                <td><?=$transactions[$i][3]?></td>
+                <td><?=$transactions[$i][4]?></td>
+                <td><?=$transactions[$i][5]?></td>
+                <td><?=$transactions[$i][6]?></td></tr>
+
+
                 <?php
 
             }

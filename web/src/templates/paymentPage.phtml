@@ -32,6 +32,11 @@ include "header.phtml"
 
     <div class="entry">
         <form method="POST" action="<?= $linkTo('makepayment'); ?>">
+            <?php if(!$_SESSION['validTransaction']){
+                print("<p>Invalid Payment </p><br>");
+            }
+            ?>
+
             <p> From:  <select name="accountFrom">
 
                     <?php
@@ -53,8 +58,8 @@ include "header.phtml"
 
             <p> To: <input type="text" name="accountTo" size="25"> </p>
             <br>
-            <p> Amount:  <input type="text" name="amount" size="25"> </p>
-            <p> Description:  <input type="text" name="description" pattern="[A-Za-z]{1,}" title="Alphabetic characters only with no spaces." size="25"> </p>
+            <p> Amount:  <input type="text" name="amount" pattern="^\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$" title="Please enter a valid amount" size="25"> </p>
+            <p> Description:  <input type="text" name="description" pattern="^[a-zA-Z0-9_\s]+$" title="Alphanumeric characters with spaces and underscores only." size="25"> </p>
             <input class="transfer" type="submit" value="Make Transfer" > </p>
         </form>
     </div>

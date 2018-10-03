@@ -31,42 +31,50 @@ class transactionModel extends Model
 
 
     public function makeTransfer($toAccountID, $fromAccountID){
-        $amount = (float)$_POST['amount'];
-        $description = $_POST['description'];
+        try {
+            $amount = (float)$_POST['amount'];
+            $description = $_POST['description'];
 
-        $date = date("Y-m-d");
-        if($toAccountID == $fromAccountID)
-            error_log("can't transfer to same account");
+            $date = date("Y-m-d");
+            if($toAccountID == $fromAccountID)
+                error_log("can't transfer to same account");
 
-        if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$toAccountID';")){
+            if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$toAccountID';")){
 
-        }
-        $toAccount = $result->fetch_assoc();
-        $toAccountBal = (int)$toAccount['Balance'];
+            }
+            $toAccount = $result->fetch_assoc();
+            $toAccountBal = (int)$toAccount['Balance'];
 
-        if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$fromAccountID';")){
-            //throw
-        }
-        $fromAccount = $result->fetch_assoc();
-        $fromAccountBal = (int)$fromAccount['Balance'];
+            if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$fromAccountID';")){
+                //throw
+            }
+            $fromAccount = $result->fetch_assoc();
+            $fromAccountBal = (int)$fromAccount['Balance'];
 
-        if($fromAccountBal < $amount){
-            //throw
+            if ($fromAccountBal < $amount) {
+                //throw
+                throw new \LogicException();
+            }
+            $balanceFrom = $fromAccountBal - $amount;
+            $balanceTo = $toAccountBal + $amount;
+            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$fromAccountID', '$description', '$date', 0, '$amount', '$balanceFrom','$toAccountID');")) {
+                //throw
+            }
+            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$fromAccountID', '$description', '$date', '$amount', 0, '$balanceTo','$toAccountID');")) {
+                //throw
+            }
+            if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$balanceFrom' WHERE `AccountID` = '$fromAccountID';")) {
+                //throw
+            }
+            if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$balanceTo' WHERE `AccountID` = '$toAccountID';")) {
+                //throw
+            }
         }
-        $balanceFrom = $fromAccountBal-$amount;
-        $balanceTo = $toAccountBal+$amount;
-        if(!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$fromAccountID', '$description', '$date', 0, '$amount', '$balanceFrom','$toAccountID');")) {
-            //throw
+        catch(\LogicException $e){
+            $_SESSION['validTransaction'] = False;
+            return 0;
         }
-        if(!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$fromAccountID', '$description', '$date', '$amount', 0, '$balanceTo','$toAccountID');")) {
-            //throw
-        }
-        if(!$result = $this->db->query("UPDATE `account` SET `Balance` = '$balanceFrom' WHERE `AccountID` = '$fromAccountID';")) {
-            //throw
-        }
-        if(!$result = $this->db->query("UPDATE `account` SET `Balance` = '$balanceTo' WHERE `AccountID` = '$toAccountID';")) {
-            //throw
-        }
+            return 1;
     }
 
 
@@ -82,5 +90,24 @@ class transactionModel extends Model
             // load accounts from DB one at a time only when required
             yield (new AccountModel())->load($id);
         }
+    }
+
+    public function getTransactions($accountID){
+        if(!$result = $this->db->query("SELECT * FROM `transactions` WHERE `FromAccountID` = '$accountID' and `MoneyOut` > 0 or `ToAccountID` = '$accountID' and `MoneyIn` > 0;")){
+            //throw
+            echo "throw";
+        }
+        $i = 0;
+        while($transactions = $result->fetch_assoc()){
+            $temp[$i][0] = $transactions['FromAccountID'];
+            $temp[$i][1] = $transactions['ToAccountID'];
+            $temp[$i][2] = $transactions['MoneyIn'];
+            $temp[$i][3] = $transactions['MoneyOut'];
+            $temp[$i][4] = $transactions['Balance'];
+            $temp[$i][6] = $transactions['Description'];
+            $temp[$i][5] = $transactions['DateOfTrans'];
+            $i++;
+        }
+        return $temp;
     }
 }
