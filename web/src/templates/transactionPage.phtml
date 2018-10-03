@@ -15,13 +15,13 @@ include "header.phtml"
 		<div id="header" class="container">
 			<div id="logo">
 				<img src="images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
-				<h1><a href="#">Bjarnes Bank</a></h1>
+				<h1><a href="<?= $linkTo('homePage'); ?>">Bjarnes Bank</a></h1>
 			</div>
 			<div id="menu">
 				<ul>
-                    <li ><a href="<?= $linkTo('homePage'); ?>">Homepage</a></li>
-                    <li class="current_page_item"><a href="#">Transactions</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="<?= $linkTo('homePage'); ?>">Homepage</a></li>
+                    <li class="current_page_item"><a href="#">View Transactions</a></li>
+                    <li><a href="<?= $linkTo('bankAccount'); ?>">Create Account</a></li>
                     <li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
 				</ul>
 			</div>

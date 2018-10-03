@@ -71,12 +71,13 @@ class Model
 
             $result = $this->db->query(  "CREATE TABLE `transactions` (
                     `TransID` INT(8) unsigned NOT NULL AUTO_INCREMENT , 
-                    `AccountID` INT(8) unsigned NOT NULL,
+                    `FromAccountID` INT(8) unsigned NOT NULL,
             `Description` VARCHAR(256) DEFAULT NULL , 
-            `DateOfTrans` VARCHAR(256) DEFAULT NULL , 
+            `DateOfTrans` DATE DEFAULT NULL , 
             `MoneyIn` DECIMAL(16) DEFAULT NULL , 
             `MoneyOut` DECIMAL(16) DEFAULT NULL , 
-            `Balance` DECIMAL(16) DEFAULT NULL , 
+            `Balance` DECIMAL(16) DEFAULT NULL ,
+            `ToAccountID` int(8) UNSIGNED NOT NULL,
             PRIMARY KEY (`TransID`));"
             );
             if (!$result) {

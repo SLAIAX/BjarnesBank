@@ -6,13 +6,15 @@
 		<div id="header" class="container">
 			<div id="logo">
 				<img src="/images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
-				<h1><a href="#">Bjarnes Bank</a></h1>
+				<h1><a href="<?= $linkTo('homePage'); ?>">Bjarnes Bank</a></h1>
 			</div>
 			<div id="menu">
-				<ul>
-					<li ><a href=<?= $linkTo('loginPage'); ?>>Log in</a></li>
-					<li class="current_page_item"><a href="#">Join</a></li>
-				</ul>
+                <ul>
+                    <li><a href="<?= $linkTo('homePage'); ?>">Homepage</a></li>
+                    <li><a href="<?= $linkTo('viewTransactions'); ?>">View Transactions</a></li>
+                    <li class="current_page_item"><a href="#">Create Account</a></li>
+                    <li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
+                </ul>
 			</div>
 		</div>
 	</div>
@@ -33,7 +35,7 @@
                     <option value="Cheque">Cheque</option>
                     <option value="FastSaver">FastSaver</option>
                 </select> </p>
-			<br>
+            <br>
 		</div>
 			<input class="login" type="submit" value="Create"> </p>
 		</form>

@@ -30,7 +30,52 @@ $collection->attachRoute(
 
 $collection->attachRoute(
     new Route(
-        '/bank/account/',
+        '/payments',
+        array(
+            '_controller' => 'agilman\a2\controller\PaymentController::indexAction',
+            'methods' => 'GET',
+            'name' => 'paymentPage'
+        )
+    )
+);
+
+$collection->attachRoute(
+    new Route(
+        '/payments/make',
+        array(
+            '_controller' => 'agilman\a2\controller\PaymentController::makePaymentAction',
+            'methods' => 'POST',
+            'name' => 'makepayment'
+        )
+    )
+);
+
+$collection->attachRoute(
+    new Route(
+        '/transfers',
+        array(
+            '_controller' => 'agilman\a2\controller\TransferController::indexAction',
+            'methods' => 'GET',
+            'name' => 'transferPage'
+        )
+    )
+);
+
+$collection->attachRoute(
+    new Route(
+        '/transfers/make',
+        array(
+            '_controller' => 'agilman\a2\controller\transferController::makeTransferAction',
+            'methods' => 'POST',
+            'name' => 'maketransfer'
+        )
+    )
+);
+
+
+$collection->attachRoute(
+    new Route(
+        '/bank/account/ ',
         array(
             '_controller' => 'agilman\a2\controller\BankAccountController::indexAction',
             'methods' => 'GET',

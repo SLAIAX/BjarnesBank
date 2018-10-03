@@ -1,0 +1,67 @@
+
+
+<?php
+
+session_start();
+
+
+include "header.phtml"
+
+?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="<?= $linkTo('homePage'); ?>">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+                    <li><a href="<?= $linkTo('homePage'); ?>">Homepage</a></li>
+                    <li><a href="<?= $linkTo('viewTransactions'); ?>">View Transactions</a></li>
+                    <li><a href="<?= $linkTo('bankAccount'); ?>">Create Account</a></li>
+                    <li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!------header wrapper ends ----------------->
+
+    <div class="entry">
+        <form method="POST" action="<?= $linkTo('makepayment'); ?>">
+            <p> From:  <select name="accountFrom">
+
+                    <?php
+
+                    for($i = 0; $i < count($accounts);$i++){
+
+                    ?>
+
+                    <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]."   \t $".$accounts[$i][2]?></option>
+
+                    <?php
+                    }
+                    ?>
+
+                </select> </p>
+            <br>
+
+
+
+            <p> To: <input type="text" name="accountTo" size="25"> </p>
+            <br>
+            <p> Amount:  <input type="text" name="amount" size="25"> </p>
+            <p> Description:  <input type="text" name="description" pattern="[A-Za-z]{1,}" title="Alphabetic characters only with no spaces." size="25"> </p>
+            <input class="transfer" type="submit" value="Make Transfer" > </p>
+        </form>
+    </div>
+	<!------Login ends ----------------->
+</div>
+
+
+
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

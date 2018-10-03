@@ -8,93 +8,23 @@ session_start();
  * @package agilman/a2
  * @author  Andrew Gilman <a.gilman@massey.ac.nz>
  */
-class bankAccountModel extends Model
+class transferModel extends Model
 {
-    private $mID;
-    private $mAccountName;
-    private $mType;
-    private $mBalance;
-
-
 
     /**
      * @return mixed
      */
-    public function getMID()
+    public function findID($username)
     {
-        return $this->mID;
-    }
-
-
-
-    /**
-     * @return mixed
-     */
-    public function getMAccountName()
-    {
-        return $this->mAccountName;
-    }
-
-    /**
-     * @param mixed $mAccountName
-     */
-    public function setMAccountName($mAccountName)
-    {
-        $this->mAccountName = $mAccountName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMType()
-    {
-        return $this->mType;
-    }
-
-    /**
-     * @param mixed $mType
-     */
-    public function setMType($mType)
-    {
-        $this->mType = $mType;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMBalance()
-    {
-        return $this->mBalance;
-    }
-
-    /**
-     * @param mixed $mBalance
-     */
-    public function setMBalance($mBalance)
-    {
-        $this->mBalance = $mBalance;
-    }
-
-
-
-
-
-    /**
-     * @return mixed
-     */
-    public function findID($accountName)
-    {
-        if (!$result = $this->db->query("SELECT `AccountID` FROM `account` WHERE `AccountName` = '$accountName';")) {
+        if (!$result = $this->db->query("SELECT ID FROM `user` WHERE `Username` = '$username';")) {
           //  return 0;
 
 
         }
         $result = $result->fetch_assoc();
         //$result = $result->fetch_assoc();
-        return $result['AccountID'];
+        return $result['ID'];
     }
-
-
 
 
 
@@ -163,7 +93,6 @@ class bankAccountModel extends Model
 
             if (!$result = $this->db->query("INSERT INTO `account` VALUES (NULL, '$id', '$AccountType', 0, '$AccountName');")) {
                 // throw new ...
-                echo "d";
             }
             $this->mID = $this->db->insert_id;
         } else {
