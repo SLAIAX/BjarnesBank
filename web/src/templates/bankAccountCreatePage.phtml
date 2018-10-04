@@ -29,7 +29,7 @@
 		<form method="POST" action="<?= $linkTo('bankAccountCreate'); ?>">
 			
 		<div>
-			<p> Account Name  <input type="text" name="AccountName" pattern="[A-Za-z]{1,}" title="Alphanumeric characters only with no spaces." size="25"> </p>
+			<p> Account Name  <input type="text" name="AccountName" pattern="^[a-zA-Z0-9_\s]+$" title="Alphanumeric characters and underscores only with no spaces." size="25"> </p>
 			<p> Account Type  <select name="AccountType">
                     <option value="Savings">Savings</option>
                     <option value="Cheque">Cheque</option>

@@ -45,7 +45,7 @@ include "header.phtml"
 
                     ?>
 
-                    <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]."   \t $".$accounts[$i][2]?></option>
+                    <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]."   \t $".money_format('%.2n', $accounts[$i][2])?></option>
 
                     <?php
                     }
@@ -59,7 +59,7 @@ include "header.phtml"
             <p> To: <input type="text" name="accountTo" size="25"> </p>
             <br>
             <p> Amount:  <input type="text" name="amount" pattern="^\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$" title="Please enter a valid amount" size="25"> </p>
-            <p> Description:  <input type="text" name="description" pattern="^[a-zA-Z0-9_\s]+$" title="Alphanumeric characters with spaces and underscores only." size="25"> </p>
+            <p> Description:  <input type="text" name="description" pattern="^[a-zA-Z0-9_\s]+$" title="Alphanumeric characters with spaces and underscores only." size="100"> </p>
             <input class="transfer" type="submit" value="Make Transfer" > </p>
         </form>
     </div>

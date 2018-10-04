@@ -95,7 +95,20 @@ class bankAccountModel extends Model
     }
 
 
+    /**
+     * @return mixed
+     */
+    public function findUserID($username)
+    {
+        if (!$result = $this->db->query("SELECT `ID` FROM `user` WHERE `Username` = '$username';")) {
+            //  return 0;
 
+
+        }
+        $result = $result->fetch_assoc();
+        //$result = $result->fetch_assoc();
+        return $result['ID'];
+    }
 
 
 
@@ -157,7 +170,7 @@ class bankAccountModel extends Model
      */
     public function save()
     {
-        $id = (int)$this->findID($_SESSION['username']);
+        $id = $this->findUserID($_SESSION['username']);
         $AccountName = $_POST['AccountName'];
         $AccountType = $_POST['AccountType'];
         if (!isset($this->mID)) {

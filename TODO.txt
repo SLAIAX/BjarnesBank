@@ -10,3 +10,9 @@ amount, transaction type)
 • filtering (e.g. of accounts by id or transactions by type)
 • sorting of transactions by date, asc/desc order
 • etc etc etc
+
+Current issues:
+Users can have the same username
+Users can have multiple accounts with the same name
+Fields can be submitted with no data entered within them
+Refresh on creating accounts and performing transactions

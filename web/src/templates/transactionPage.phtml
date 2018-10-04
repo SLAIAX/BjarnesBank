@@ -50,9 +50,9 @@ include "header.phtml"
                 <tr>
                 <td><?=$transactions[$i][0]?></td>
                 <td><?=$transactions[$i][1]?></td>
-                <td><?=$transactions[$i][2]?></td>
-                <td><?=$transactions[$i][3]?></td>
-                <td><?=$transactions[$i][4]?></td>
+                <td><?="$".money_format('%.2n',$transactions[$i][2])?></td>
+                <td><?="$".money_format('%.2n',$transactions[$i][3])?></td>
+                <td><?="$".money_format('%.2n',$transactions[$i][4])?></td>
                 <td><?=$transactions[$i][5]?></td>
                 <td><?=$transactions[$i][6]?></td></tr>
 

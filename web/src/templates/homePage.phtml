@@ -39,6 +39,7 @@ include "header.phtml"
                         </tr>
 
                     <?php
+                    setlocale(LC_MONETARY, 'en_NZ.UTF-8');
 
                         for($i = 0; $i < count($accounts); $i++){
                     ?>
@@ -49,7 +50,7 @@ include "header.phtml"
                                 <td><?=$accounts[$i][1]?></td>
 
                             <td><?=$accounts[$i][0]?></td>
-                        <td><?=$accounts[$i][2]?></td></tr>
+                        <td><?="$".money_format('%.2n', $accounts[$i][2]);?></td></tr>
                         <?php
                         }
                     ?>
