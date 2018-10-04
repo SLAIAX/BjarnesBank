@@ -229,15 +229,12 @@ class AccountModel extends Model
 
      * @return $this AccountModel
      */
-    public function save()
+    public function save($firstname, $lastname, $username, $password)
     {
         $name = $this->mFirstName ?? "NULL";
        // $this->mFirstName = $name;
 
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+
         $address = $_POST['address'];
         $email = $_POST['email'];
         $phonenumber = $_POST['phonenumber'];
@@ -268,5 +265,17 @@ class AccountModel extends Model
         }
 
         return $this;
+    }
+
+    public function validate($firstname ,$lastname ,$username, $password){
+        if(!$firstname || !$lastname || !$username || !$password){
+            throw new \Exception();
+        }
+
+
+        if ($result = $this->db->query("SELECT * FROM `user` WHERE `Username` = $username;")) {
+            // throw new ...
+        }
+
     }
 }

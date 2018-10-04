@@ -494,6 +494,24 @@ ul.style1 .first {
 	text-align: center;
 	text-decoration: none;
 }
+.transfer {
+	display: block;
+	float: left;
+	width: 100px;
+	padding: 5px 5px;
+	margin-right: 10px;
+	background: #B50D0D;
+	border-radius: 5px;
+	color: #FFFFFF;
+	text-align: center;
+	text-decoration: none;
+}
+
+.transferFields {
+	position: absolute;
+	left: 120px;
+	width: 200px;
+}
 
 #tranzLink {
 	background:none!important;
@@ -504,4 +522,25 @@ ul.style1 .first {
 	/*border is optional*/
 	border-bottom:1px solid #444;
 	cursor: pointer;
+}
+
+.loginFields {
+	position: absolute;
+	left: 280px;
+}
+
+#createUserAccount {
+	position: absolute;
+	top: 524px;
+	left: 405px;
+	display: block;
+	float: left;
+	width: 88px;
+	padding: 5px 5px;
+	margin-right: 10px;
+	background: #B50D0D;
+	border-radius: 5px;
+	color: #FFFFFF;
+	text-align: center;
+	text-decoration: none
 }

@@ -31,14 +31,16 @@ class PaymentController extends Controller
     public function makePaymentAction()
     {
 
+        if($_SESSION['actionAvailable']) {
+            $account = new bankAccountModel();
+            $toAccountID = $_POST['accountTo'];
+            $fromAccountID = $account->findID($_POST['accountFrom']);
+            $transaction = new transactionModel();
+            $transaction->makeTransfer($toAccountID, $fromAccountID);
 
-        $account = new bankAccountModel();
-        $toAccountID = $_POST['accountTo'];
-        $fromAccountID = $account->findID($_POST['accountFrom']);
-        $transaction = new transactionModel();
-        $transaction->makeTransfer($toAccountID, $fromAccountID);
-
-        $view = new View('transactionComplete');
-        echo $view->render();
+            $view = new View('transactionComplete');
+            echo $view->render();
+            $_SESSION['actionAvailable'] = False;
+        }
     }
 }

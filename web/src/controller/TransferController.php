@@ -30,15 +30,20 @@ class transferController extends Controller
 
     public function makeTransferAction()
     {
-        $account = new bankAccountModel();
-        $toAccountID = $account->findID($_POST['accountTo']);
-        $fromAccountID = $account->findID($_POST['accountFrom']);
-        $transaction = new transactionModel();
-        if($transaction->makeTransfer($toAccountID, $fromAccountID)) {
-            $view = new View('transactionComplete');
-            echo $view->render();
-        }else{
-            $this->redirect('transferPage');
+
+        if($_SESSION['actionAvailable']){
+
+            $account = new bankAccountModel();
+            $toAccountID = $account->findID($_POST['accountTo']);
+            $fromAccountID = $account->findID($_POST['accountFrom']);
+            $transaction = new transactionModel();
+            if ($transaction->makeTransfer($toAccountID, $fromAccountID)) {
+                $view = new View('transactionComplete');
+                echo $view->render();
+                $_SESSION['actionAvailable'] = False;
+            } else {
+                $this->redirect('transferPage');
+            }
         }
     }
 }

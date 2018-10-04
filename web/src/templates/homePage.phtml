@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+$_SESSION['actionAvailable'] = True;
 $_SESSION['validTransaction'] = True;
 include "header.phtml"
 
@@ -45,7 +46,7 @@ include "header.phtml"
                     ?>
                             <tr>
                                 <form method="post" action="<?= $linkTo('viewTransactions'); ?>">
-                                    <td> <input type="submit" id="tranzLink" name="account" value="<?= $accounts[$i][3] ?>"></td>
+                                    <td><input type="submit" id="tranzLink" name="account" value="<?= $accounts[$i][3] ?>"></td>
                                 </form>
                                 <td><?=$accounts[$i][1]?></td>
 
@@ -71,7 +72,7 @@ include "header.phtml"
 						<li><a href="<?= $linkTo('transferPage'); ?>">Make Transfer</a></li>
 						<li><a href="<?= $linkTo('paymentPage'); ?>">Make Payment</a></li>
 						<li><a href="#">Deposit / Withdraw</a></li>
-						<li><a href="#">Why choose Bjarnes Bank</a></li>
+						<li><a href="<?= $linkTo('closeAccountPage'); ?>">Close Account</a></li>
 						<li><a href="#">Types of accounts</a></li>
 						<li><a href="#">About us</a></li>
 					</ul>

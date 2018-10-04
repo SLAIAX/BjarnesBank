@@ -35,6 +35,10 @@ class transactionModel extends Model
             $amount = (float)$_POST['amount'];
             $description = $_POST['description'];
 
+            if(!$amount){
+                //throw
+            }
+
             $date = date("Y-m-d");
             if($toAccountID == $fromAccountID)
                 error_log("can't transfer to same account");
@@ -55,6 +59,7 @@ class transactionModel extends Model
                 //throw
                 throw new \LogicException();
             }
+
             $balanceFrom = $fromAccountBal - $amount;
             $balanceTo = $toAccountBal + $amount;
             if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$fromAccountID', '$description', '$date', 0, '$amount', '$balanceFrom','$toAccountID');")) {
@@ -69,12 +74,13 @@ class transactionModel extends Model
             if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$balanceTo' WHERE `AccountID` = '$toAccountID';")) {
                 //throw
             }
+
         }
         catch(\LogicException $e){
             $_SESSION['validTransaction'] = False;
             return 0;
         }
-            return 1;
+        return 1;
     }
 
 

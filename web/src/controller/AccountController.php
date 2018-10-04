@@ -1,5 +1,6 @@
 <?php
 namespace agilman\a2\controller;
+session_start();
 
 use agilman\a2\model\{AccountModel, AccountCollectionModel};
 use agilman\a2\view\View;
@@ -27,10 +28,25 @@ class AccountController extends Controller
      */
     public function createAction()
     {
-        $account = new AccountModel();
-        $account->save();
-        $view = new View('accountCreated');
-        echo $view->render();
+        if($_SESSION['actionAvailable']) {
+            try {
+                $firstname = $_POST['firstname'];
+                $lastname = $_POST['lastname'];
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+
+
+                $account = new AccountModel();
+                $account->validate($firstname, $lastname, $username, $password);
+                $account->save($firstname, $lastname, $username, $password);
+                $view = new View('accountCreated');
+                echo $view->render();
+                $_SESSION['actionAvailable'] = False;
+            } catch (\Exception $e) {
+                $view = new View('userJoinPage');
+                echo $view->render();
+            }
+        }
     }
 
     /**

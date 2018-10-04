@@ -1,7 +1,9 @@
 <?php
-namespace agilman\a2\controller;
 
+namespace agilman\a2\controller;
+session_start();
 use agilman\a2\model\bankAccountModel;
+use agilman\a2\model\AccountModel;
 use agilman\a2\model\transactionModel;
 use agilman\a2\view\View;
 
@@ -30,8 +32,37 @@ class BankAccountController extends Controller
 
     public function createBankAccount()
     {
-        $account = new bankAccountModel();
-        $account->save();
-        $this->redirect('homePage');
+        if($_SESSION['actionAvailable']) {
+            try {
+
+                $accountname = $_POST['AccountName'];
+                $account = new bankAccountModel();
+                $id = $account->findUserID($_SESSION['username']);
+                $account->validate($accountname, $id);
+                $account->save($id);
+                $this->redirect('homePage');
+                $_SESSION['actionAvailable'] = False;
+
+            } catch (\Exception $e) {
+                // display and redirect
+            }
+        }
+    }
+
+    public function closeBankAccount(){
+        $bank = new bankAccountModel();
+        $accountName = $_POST['accountClose'];
+        $id = $bank->findID($accountName);
+        $bank->deleteAccount($id);
+        $view = new View('deletionComplete');
+        echo $view->render();
+    }
+
+    public function closeAccountIndex(){
+        $user = new AccountModel();
+        $id = $user->findID($_SESSION['username']);
+        $accounts = $user->getAccounts($id);
+        $view = new View('closeBankAccountPage');
+        echo $view->addData('accounts', $accounts)->render();
     }
 }

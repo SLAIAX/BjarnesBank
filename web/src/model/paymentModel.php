@@ -8,100 +8,16 @@ session_start();
  * @package agilman/a2
  * @author  Andrew Gilman <a.gilman@massey.ac.nz>
  */
-class bankAccountModel extends Model
+class transferModel extends Model
 {
-    private $mID;
-    private $mAccountName;
-    private $mType;
-    private $mBalance;
-
-
 
     /**
      * @return mixed
      */
-    public function getMID()
+    public function findID($username)
     {
-        return $this->mID;
-    }
-
-
-
-    /**
-     * @return mixed
-     */
-    public function getMAccountName()
-    {
-        return $this->mAccountName;
-    }
-
-    /**
-     * @param mixed $mAccountName
-     */
-    public function setMAccountName($mAccountName)
-    {
-        $this->mAccountName = $mAccountName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMType()
-    {
-        return $this->mType;
-    }
-
-    /**
-     * @param mixed $mType
-     */
-    public function setMType($mType)
-    {
-        $this->mType = $mType;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMBalance()
-    {
-        return $this->mBalance;
-    }
-
-    /**
-     * @param mixed $mBalance
-     */
-    public function setMBalance($mBalance)
-    {
-        $this->mBalance = $mBalance;
-    }
-
-
-
-
-
-    /**
-     * @return mixed
-     */
-    public function findID($accountName)
-    {
-        if (!$result = $this->db->query("SELECT `AccountID` FROM `account` WHERE `AccountName` = '$accountName';")) {
+        if (!$result = $this->db->query("SELECT ID FROM `user` WHERE `Username` = '$username';")) {
           //  return 0;
-
-
-        }
-        $result = $result->fetch_assoc();
-        //$result = $result->fetch_assoc();
-        return $result['AccountID'];
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function findUserID($username)
-    {
-        if (!$result = $this->db->query("SELECT `ID` FROM `user` WHERE `Username` = '$username';")) {
-            //  return 0;
 
 
         }
@@ -109,6 +25,7 @@ class bankAccountModel extends Model
         //$result = $result->fetch_assoc();
         return $result['ID'];
     }
+
 
 
 
@@ -124,12 +41,10 @@ class bankAccountModel extends Model
             $temp[$i][0] = $accounts['AccountType'];
             $temp[$i][1] = $accounts['AccountName'];
             $temp[$i][2] = $accounts['Balance'];
-            $temp[$i][3] = $accounts['AccountID'];
-            echo $temp[$i][3];
-            echo $temp[$i][0];
             $i++;
 
         }
+
 
 
       //  $this->N = $result->num_rows;
@@ -168,9 +83,9 @@ class bankAccountModel extends Model
 
      * @return $this AccountModel
      */
-    public function save($id)
+    public function save()
     {
-
+        $id = (int)$this->findID($_SESSION['username']);
         $AccountName = $_POST['AccountName'];
         $AccountType = $_POST['AccountType'];
         if (!isset($this->mID)) {
@@ -201,25 +116,5 @@ class bankAccountModel extends Model
         }
 
         return $this;
-    }
-
-    public function validate($accname, $ID){
-        if(!$accname){
-            throw new \Exception();
-            //throw incomplete data
-        }
-        if ($result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = $accname and `UserID` = $ID; ")) {
-            // throw new ACCOUNT ALREADY EXISTS
-        }
-
-    }
-
-    public function deleteAccount($id){
-        if (!$result = $this->db->query("DELETE FROM `account` WHERE `AccountID` = $id;")) {
-            //throw new ...
-        }
-        if (!$result = $this->db->query("DELETE FROM `transactions` WHERE `AccountID` = $id;")) {
-            //throw new ...
-        }
     }
 }

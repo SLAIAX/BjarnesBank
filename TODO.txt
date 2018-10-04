@@ -16,3 +16,11 @@ Users can have the same username
 Users can have multiple accounts with the same name
 Fields can be submitted with no data entered within them
 Refresh on creating accounts and performing transactions
+DELETE ACCOUNTS
+
+NEED TO DEAL WITH TELLING USERS THEY LEFT FIELDS BLANK. TEMP FIX WAS TO RELOAD PAGE
+Make database loadable with data
+Logo doesn't appear when on delete bank account page... I guess I need to do it through the router
+Types of Accounts
+About Us
+Deposit/Withdraw

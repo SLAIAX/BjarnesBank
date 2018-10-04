@@ -86,6 +86,28 @@ $collection->attachRoute(
 
 $collection->attachRoute(
     new Route(
+        '/bank/account/close',
+        array(
+            '_controller' => 'agilman\a2\controller\BankAccountController::closeAccountIndex',
+            'methods' => 'GET',
+            'name' => 'closeAccountPage'
+        )
+    )
+);
+
+$collection->attachRoute(
+    new Route(
+        '/bank/account/closeAction',
+        array(
+            '_controller' => 'agilman\a2\controller\BankAccountController::closeBankAccount',
+            'methods' => 'POST',
+            'name' => 'bankAccountCloseAction'
+        )
+    )
+);
+
+$collection->attachRoute(
+    new Route(
         '/bank/account/create',
         array(
             '_controller' => 'agilman\a2\controller\BankAccountController::createBankAccount',
