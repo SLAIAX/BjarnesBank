@@ -119,6 +119,17 @@ $collection->attachRoute(
 
 $collection->attachRoute(
     new Route(
+        '/bank/account/type',
+        array(
+            '_controller' => 'agilman\a2\controller\BankAccountController::typeAccountIndex',
+            'methods' => 'GET',
+            'name' => 'typeAccountPage'
+        )
+    )
+);
+
+$collection->attachRoute(
+    new Route(
         '/userJoinPage',
         array(
             '_controller' => 'agilman\a2\controller\UserCreateController::indexAction',

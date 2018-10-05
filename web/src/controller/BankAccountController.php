@@ -71,4 +71,9 @@ class BankAccountController extends Controller
         $view = new View('closeBankAccountPage');
         echo $view->addData('accounts', $accounts)->render();
     }
+
+    public function typeAccountIndex(){
+        $view = new View('accountTypesPage');
+        echo $view->render();
+    }
 }

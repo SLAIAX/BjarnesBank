@@ -18,7 +18,7 @@ include "header.phtml"
 			</div>
 			<div id="menu">
 				<ul>
-					<li class="current_page_item"><a href="#">Homepage</a></li>
+					<li><a href="#">Homepage</a></li>
 					<li><a href="<?= $linkTo('bankAccount'); ?>">Create Account</a></li>
 					<li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
 				</ul>
@@ -28,40 +28,62 @@ include "header.phtml"
 	<!-- end #header -->
 	<div id="page">
 		<div id="content">
-			<div class="post">
-				<h2 class="title"><a href="#">Welcome to Bjarnes Bank, <?php print $_SESSION['username'];?></a></h2>
+			<h1 class="title">Types of Accounts</h1>
 
-                <div class="entry">
-                    <table>
-                    <tr><tr><th>Account ID</th>
-                            <th>Account Name</th>
-                            <th>Account Type</th>
-                            <th>Account Balance</th>
-                        </tr>
+			<p>Here at Bjarne's Bank we offer a plethora of account types with bonus's and perks to help your financial life , from Everyday Account to Saving accounts</p>
 
-                    <?php
-                    setlocale(LC_MONETARY, 'en_NZ.UTF-8');
+			<h2 class="title">Everyday Accounts</h2>
+			<div id = 'freedom'>
+				<h3>Freedom Account</h3>
+				An everyday account that gives you the freedom to bank the way you want to.
+				<ul>
+					<li>No transaction fees, non-standard fees may apply.</li>
+					<li>Easy access to your account 24 hours, 365 days.</li>
+					<li>The $5 monthly account fee will be waived each month that you deposit at least $2,500 into your account.</li>
+				</ul>
 
-                        for($i = 0; $i < count($accounts); $i++){
-                    ?>
-                            <tr>
-                                <form method="post" action="<?= $linkTo('viewTransactions'); ?>">
-                                    <td><input type="submit" id="tranzLink" name="account" value="<?= $accounts[$i][3] ?>"></td>
-                                </form>
-                                <td><?=$accounts[$i][1]?></td>
-
-                            <td><?=$accounts[$i][0]?></td>
-                        <td><?="$".money_format('%.2n', $accounts[$i][2]);?></td></tr>
-                        <?php
-                        }
-                    ?>
-
-                        </table>
-                    <br>
-                    <p><a href="<?= $linkTo('bankAccount'); ?>">Create New Account</a></p>
-
-				</div>
 			</div>
+
+			<div id = 'jumpstart'>
+				<h3>Jump-Start Account</h3>
+				<p>A bank account for under 21s or if you are studying full-time.</p>
+				<ul>
+					<li>No monthly account or transaction fees, non-standard fees may apply.</li>
+					<li>Easy access to your account 24 hours, 365 days.</li>
+					<li>An interest free overdraft of up to $2000^, and special benefits if you are studying full-time.</li>
+				</ul>
+
+			</div>
+
+			<div id = 'select'>
+				<h3>Select Account</h3>
+				<p>An interest bearing everyday account for customers who keep an average monthly balance of $5,000 or more.</p>
+				<ul>
+					<li>Your $6 monthly account fee will be waived if your average monthly balance is $5,000 or more.</li>
+					<li>No transaction fees, non-standard fees may apply.</li>
+					<li>Earn interest on credit balances $5,000 and over.</li>
+					<li>Easy access to your account 24 hours, 365 days.</li>
+				</ul>
+
+			</div>
+
+
+			<h2 class="title">Savings Accounts</h2>
+
+			<div id='serioussaver'>
+				<h3>Serious Saver Account</h3>
+				<p>The Serious Saver helps you reach your savings goals by rewarding you with Premium interest if you can commit to making no withdrawals and saving $20 or more each month (not including credit interest). .</p>
+			</div>
+
+		
+
+			<div id = 'readysaver'>
+				<h3>Ready-Saver Account</h3>
+				<p>Ready Saver is ideal to set aside money for upcoming expenses and still earn interest, while having the flexibility to access your money anytime you need..</p>
+			</div>
+
+			
+
 		</div>
 		<!-- end #content -->
 		<div id="sidebar">
@@ -83,26 +105,6 @@ include "header.phtml"
 		<div style="clear: both;">&nbsp;</div>
 	</div>
 	<!-- end #page --> 
-	<div id="featured-content">
-		<div id="column1">
-			<h2>Bjarnes World New home Page</h2>
-			<p><img src="images/img06.jpg" width="300" height="150" alt="" /></p>
-			<p>Bjarnes Bank has recently updated their home page to improve the user experience, we hope you enjoy it</p>
-			<p class="button"><a href="#">Read More</a></p>
-		</div>
-		<div id="column2">
-			<h2>New Budget Calculator</h2>
-			<p><img src="images/img07.jpg" width="300" height="150" alt="" /></p>
-			<p>Struggling to manage your finances? Well our new budget calculator will hold you're hand and deal with the pesky details of budgeting</p>
-			<p class="button"><a href="#">Try Now</a></p>
-		</div>
-		<div id="column3">
-			<h2>Bjarnes Bank Now Taking Gold Coins</h2>
-			<p><img src="images/img08.jpg" width="300" height="150" alt="" /></p>
-			<p>This is our First post, We are now open for buissness, Notice me senpai</p>
-			<p class="button"><a href="#">Read More</a></p>
-		</div>
-	</div>
 </div>
 <!---------- Body ends -------------------->
 <?php include "footer.phtml" ?>
