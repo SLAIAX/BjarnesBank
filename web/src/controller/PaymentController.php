@@ -36,7 +36,8 @@ class PaymentController extends Controller
             try {
                 $account = new bankAccountModel();
                 $toAccountID = $_POST['accountTo'];
-                $fromAccountID = $account->findID($_POST['accountFrom']);
+                $id = $account->findUserID($_SESSION['username']);
+                $fromAccountID = $account->findID($_POST['accountFrom'], $id);
                 $transaction = new transactionModel();
                 $transaction->makeTransfer($toAccountID, $fromAccountID);
 
