@@ -82,11 +82,10 @@ class bankAccountModel extends Model
     /**
      * @return mixed
      */
-    public function findID($accountName)
+    public function findID($accountName, $id)
     {
-        if (!$result = $this->db->query("SELECT `AccountID` FROM `account` WHERE `AccountName` = '$accountName';")) {
+        if (!$result = $this->db->query("SELECT `AccountID` FROM `account` WHERE `AccountName` = '$accountName' and `UserID` = '$id';")) {
           //  return 0;
-
 
         }
         $result = $result->fetch_assoc();

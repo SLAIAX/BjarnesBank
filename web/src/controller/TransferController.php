@@ -35,8 +35,9 @@ class transferController extends Controller
         if($_SESSION['actionAvailable']){
             try {
                 $account = new bankAccountModel();
-                $toAccountID = $account->findID($_POST['accountTo']);
-                $fromAccountID = $account->findID($_POST['accountFrom']);
+                $id = $account->findUserID($_SESSION['username']);
+                $toAccountID = $account->findID($_POST['accountTo'], $id);
+                $fromAccountID = $account->findID($_POST['accountFrom'], $id);
                 $transaction = new transactionModel();
                 $transaction->makeTransfer($toAccountID, $fromAccountID);
                 $view = new View('transactionComplete');
