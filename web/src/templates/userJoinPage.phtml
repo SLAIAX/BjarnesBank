@@ -20,10 +20,14 @@
 	<!------header wrapper ends ----------------->
 
 
-
+    <?php
+    if($_SESSION['emptyField']){
+        print("<p> Please fill in the required fields. </p> <br>");
+    }
+    ?>
 	<div id="usercreate">
 		<form method="POST" action="<?= $linkTo('accountCreate'); ?>">
-			
+
 		<div id="personinfo">
 			<p> First Name  <input type="text" name="firstname" pattern="[A-Za-z]{2,}" title="Alphabetic characters only with no spaces." size="25"> </p>
 			<p> Last Name  <input type="text" name="lastname" pattern="[A-Za-z]{2,}" title="Alphabetic characters only with no spaces." size="25"> </p>

@@ -6,6 +6,7 @@ use agilman\a2\model\bankAccountModel;
 use agilman\a2\model\AccountModel;
 use agilman\a2\model\transactionModel;
 use agilman\a2\view\View;
+use const Grpc\CALL_ERROR_TOO_MANY_OPERATIONS;
 
 /**
  * Class AccountController
@@ -32,16 +33,20 @@ class transferController extends Controller
     {
 
         if($_SESSION['actionAvailable']){
-
-            $account = new bankAccountModel();
-            $toAccountID = $account->findID($_POST['accountTo']);
-            $fromAccountID = $account->findID($_POST['accountFrom']);
-            $transaction = new transactionModel();
-            if ($transaction->makeTransfer($toAccountID, $fromAccountID)) {
+            try {
+                $account = new bankAccountModel();
+                $toAccountID = $account->findID($_POST['accountTo']);
+                $fromAccountID = $account->findID($_POST['accountFrom']);
+                $transaction = new transactionModel();
+                $transaction->makeTransfer($toAccountID, $fromAccountID);
                 $view = new View('transactionComplete');
                 echo $view->render();
                 $_SESSION['actionAvailable'] = False;
-            } else {
+            }catch(\UnexpectedValueException $e){
+                $_SESSION['emptyField'] = True;
+                $this->redirect('transferPage');
+            }catch(\LogicException $e){
+                $_SESSION['validTransaction'] = False;
                 $this->redirect('transferPage');
             }
         }

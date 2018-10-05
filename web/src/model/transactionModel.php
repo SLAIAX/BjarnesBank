@@ -1,6 +1,8 @@
 <?php
 namespace agilman\a2\model;
 
+use \Exception;
+use agilman\a2\exception\EmptyFieldException;
 /**
  * Class AccountCollectionModel
  *
@@ -31,17 +33,21 @@ class transactionModel extends Model
 
 
     public function makeTransfer($toAccountID, $fromAccountID){
-        try {
-            $amount = (float)$_POST['amount'];
+
+            $amount = $_POST['amount'];
             $description = $_POST['description'];
 
             if(!$amount){
                 //throw
+
+                throw new \UnexpectedValueException();
+
             }
 
             $date = date("Y-m-d");
-            if($toAccountID == $fromAccountID)
-                error_log("can't transfer to same account");
+            if($toAccountID == $fromAccountID) {
+                throw new \LogicException();
+            }
 
             if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$toAccountID';")){
 
@@ -51,6 +57,7 @@ class transactionModel extends Model
 
             if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$fromAccountID';")){
                 //throw
+
             }
             $fromAccount = $result->fetch_assoc();
             $fromAccountBal = (int)$fromAccount['Balance'];
@@ -75,12 +82,8 @@ class transactionModel extends Model
                 //throw
             }
 
-        }
-        catch(\LogicException $e){
-            $_SESSION['validTransaction'] = False;
-            return 0;
-        }
-        return 1;
+
+
     }
 
 

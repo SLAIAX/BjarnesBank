@@ -15,7 +15,8 @@ use agilman\a2\view\View;
  */
 class PaymentController extends Controller
 {
-    public function indexAction(){
+    public function indexAction()
+    {
 
 
         $user = new AccountModel();
@@ -31,16 +32,24 @@ class PaymentController extends Controller
     public function makePaymentAction()
     {
 
-        if($_SESSION['actionAvailable']) {
-            $account = new bankAccountModel();
-            $toAccountID = $_POST['accountTo'];
-            $fromAccountID = $account->findID($_POST['accountFrom']);
-            $transaction = new transactionModel();
-            $transaction->makeTransfer($toAccountID, $fromAccountID);
+        if ($_SESSION['actionAvailable']) {
+            try {
+                $account = new bankAccountModel();
+                $toAccountID = $_POST['accountTo'];
+                $fromAccountID = $account->findID($_POST['accountFrom']);
+                $transaction = new transactionModel();
+                $transaction->makeTransfer($toAccountID, $fromAccountID);
 
-            $view = new View('transactionComplete');
-            echo $view->render();
-            $_SESSION['actionAvailable'] = False;
+                $view = new View('transactionComplete');
+                echo $view->render();
+                $_SESSION['actionAvailable'] = False;
+            } catch (\UnexpectedValueException $e) {
+                $_SESSION['emptyField'] = True;
+                $this->redirect('paymentPage');
+            } catch (\LogicException $e) {
+                $_SESSION['validTransaction'] = False;
+                $this->redirect('paymentPage');
+            }
         }
     }
 }

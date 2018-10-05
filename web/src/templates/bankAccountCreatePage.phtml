@@ -11,7 +11,6 @@
 			<div id="menu">
                 <ul>
                     <li><a href="<?= $linkTo('homePage'); ?>">Homepage</a></li>
-                    <li><a href="<?= $linkTo('viewTransactions'); ?>">View Transactions</a></li>
                     <li class="current_page_item"><a href="#">Create Account</a></li>
                     <li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
                 </ul>
@@ -20,7 +19,11 @@
 	</div>
 
 	<!------header wrapper ends ----------------->
-
+    <?php
+    if($_SESSION['emptyField']){
+        print("<p> Please fill in the required fields. </p> <br>");
+    }
+    ?>
 	<div id="accountcreate">
 		<h3><b> Create an Account</b></h3>
 		<br>

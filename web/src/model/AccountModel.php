@@ -269,7 +269,7 @@ class AccountModel extends Model
 
     public function validate($firstname ,$lastname ,$username, $password){
         if(!$firstname || !$lastname || !$username || !$password){
-            throw new \Exception();
+            throw new \UnexpectedValueException();
         }
 
 

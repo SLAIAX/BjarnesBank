@@ -20,7 +20,6 @@ include "header.phtml"
 			<div id="menu">
 				<ul>
                     <li><a href="<?= $linkTo('homePage'); ?>">Homepage</a></li>
-                    <li><a href="<?= $linkTo('viewTransactions'); ?>">View Transactions</a></li>
                     <li><a href="<?= $linkTo('bankAccount'); ?>">Create Account</a></li>
                     <li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
 				</ul>
@@ -38,6 +37,9 @@ include "header.phtml"
                 print("<p> Invalid Transaction </p> <br>");
 
             }
+            if($_SESSION['emptyField']){
+                print("<p> Please fill in the required fields. </p> <br>");
+            }
             ?>
 
             <p> From:  <select class="transferFields" name="accountFrom">
@@ -48,7 +50,7 @@ include "header.phtml"
 
                     ?>
 
-                    <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]."   \t $".$accounts[$i][2]?></option>
+                    <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]." $".money_format('%.2n', $accounts[$i][2])?></option>
 
                     <?php
                     }
@@ -66,7 +68,7 @@ include "header.phtml"
 
                         ?>
 
-                        <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]."  \t $".money_format('%.2n', $accounts[$i][2])?></option>
+                        <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]." $".money_format('%.2n', $accounts[$i][2])?></option>
 
                         <?php
                     }

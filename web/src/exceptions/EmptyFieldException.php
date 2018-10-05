@@ -1,14 +1,14 @@
 <?php
-namespace agilman\a2\model;
+namespace agilman\a2\exception;
 /**
  * Created by PhpStorm.
- * User: Jordan
+ * User: Jordan & Zane
  * Date: 21/09/2018
  * Time: 12:41 PM
  */
 use Exception;
 
-class DBException extends  Exception
+class EmptyFieldException extends  Exception
 {
   /**
      * DBException constructor.

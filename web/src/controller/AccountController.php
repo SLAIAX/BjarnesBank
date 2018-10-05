@@ -42,6 +42,10 @@ class AccountController extends Controller
                 $view = new View('accountCreated');
                 echo $view->render();
                 $_SESSION['actionAvailable'] = False;
+            } catch (\UnexpectedValueException $e){
+                $_SESSION['emptyField'] = True;
+                $view = new View('userJoinPage');
+                echo $view->render();
             } catch (\Exception $e) {
                 $view = new View('userJoinPage');
                 echo $view->render();

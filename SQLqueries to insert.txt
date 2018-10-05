@@ -1,0 +1,6 @@
+INSERT INTO `user` (`ID`, `First Name`, `Last Name`, `Username`, `Password`, `Address`, `Email`, `Phone`) VALUES
+(NULL, 'Bob', 'jim', 'admin', 'Admin1234', 'address', 'st', 'st'),
+(NULL, 'Jordan', 'Drumm', 'SLAIAX', 'football22', '124 Sunset Ave', 'jordan@gmail.com', '09 473 0000'),
+(NULL, 'Zane', 'Lamb ', 'Zane', 'Lamb', '26 portobello place', 'Zane@gmail.com', '021 02725760'),
+(NULL, 'Sam', 'Arnet', 'Sammy', 'Sammy', '9 Pleasantville ave', 'sam@gmail.com', '1027493');
+

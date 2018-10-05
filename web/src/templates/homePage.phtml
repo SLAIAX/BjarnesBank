@@ -3,6 +3,7 @@ session_start();
 
 $_SESSION['actionAvailable'] = True;
 $_SESSION['validTransaction'] = True;
+$_SESSION['emptyField'] = False;
 include "header.phtml"
 
 ?>
@@ -18,7 +19,6 @@ include "header.phtml"
 			<div id="menu">
 				<ul>
 					<li class="current_page_item"><a href="#">Homepage</a></li>
-					<li><a href="<?= $linkTo('viewTransactions'); ?>">View Transactions</a></li>
 					<li><a href="<?= $linkTo('bankAccount'); ?>">Create Account</a></li>
 					<li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
 				</ul>

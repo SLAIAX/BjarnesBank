@@ -205,7 +205,7 @@ class bankAccountModel extends Model
 
     public function validate($accname, $ID){
         if(!$accname){
-            throw new \Exception();
+            throw new \UnexpectedValueException();
             //throw incomplete data
         }
         if ($result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = $accname and `UserID` = $ID; ")) {
