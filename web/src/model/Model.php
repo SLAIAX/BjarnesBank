@@ -24,8 +24,13 @@ class Model
         $this->db = new mysqli(
             Model::DB_HOST,
             Model::DB_USER,
+<<<<<<< HEAD
             Model::DB_PASS
            // Model::DB_NAME
+=======
+            Model::DB_PASS//,
+            //Model::DB_NAME
+>>>>>>> 65011ef603fe54de7ff9c4bcffedf78e71ed99f1
         );
 
         if (!$this->db) {

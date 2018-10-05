@@ -1,8 +1,6 @@
 TO DO:
 
 - Format account display
-- Create transaction page (hyperlink account name from account display?)
-- Format the user create page
 
 • view a detailed list of transactions for a selected account (date/time,
 amount, transaction type)
@@ -14,17 +12,10 @@ amount, transaction type)
 Current issues:
 Users can have the same username
 Users can have multiple accounts with the same name
-Fields can be submitted with no data entered within them
-Refresh on creating accounts and performing transactions
-DELETE ACCOUNTS
-Logo doesn't appear when on delete bank account page... I guess I need to do it through the router
 
-NEED TO DEAL WITH TELLING USERS THEY LEFT FIELDS BLANK. TEMP FIX WAS TO RELOAD PAGE
-validate transfers amount not null
 Make database loadable with data
 Types of Accounts
 About Us
-Deposit/Withdraw
 
 FORMAT bank account CREATE page
 FORMAT USER CREATE ACCOUNT PAGE error
