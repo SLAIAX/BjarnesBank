@@ -28,39 +28,59 @@ include "header.phtml"
 	</div>
 
 	<!------header wrapper ends ----------------->
-
-    <div class="entry">
-        <form method="POST" action="<?= $linkTo('bankAccountCloseAction'); ?>">
-            <?php if(!$_SESSION['validTransaction']){
-                print("<p>Invalid Payment </p><br>");
-            }
-            ?>
-
-            <p> From:  <select name="accountClose">
-
-                    <?php
-
-                    for($i = 0; $i < count($accounts);$i++){
-
-                    ?>
-
-                    <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]."   \t $".money_format('%.2n', $accounts[$i][2])?></option>
-
-                    <?php
+    <div id="page">
+        <div id="content">
+            <div class="entry">
+                <form method="POST" action="<?= $linkTo('bankAccountCloseAction'); ?>">
+                    <?php if(!$_SESSION['validTransaction']){
+                        print("<p>Invalid Payment </p><br>");
                     }
                     ?>
 
-                </select> </p>
-            <br>
+                    <p> From:  <select name="accountClose">
+
+                            <?php
+
+                            for($i = 0; $i < count($accounts);$i++){
+
+                            ?>
+
+                            <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]."   \t $".money_format('%.2n', $accounts[$i][2])?></option>
+
+                            <?php
+                            }
+                            ?>
+
+                        </select> </p>
+                    <br>
 
 
 
 
 
-            <input class="transfer" type="submit" value="Delete" > </p>
-        </form>
+                    <input class="transfer" type="submit" value="Delete" > </p>
+                </form>
+
+            </div>
+            <!------Login ends ----------------->
+
+        </div>
+        <div id="sidebar">
+            <ul>
+                <li>
+                    <h2>Categories</h2>
+                    <ul>
+                        <li><a href="<?= $linkTo('transferPage'); ?>">Make Transfer</a></li>
+                        <li><a href="<?= $linkTo('paymentPage'); ?>">Make Payment</a></li>
+                        <li><a href="<?= $linkTo('closeAccountPage'); ?>">Close Account</a></li>
+                        <li><a href="<?= $linkTo('typeAccountPage'); ?>">Types of accounts</a></li>
+                        <li><a href="<?= $linkTo('aboutus'); ?>">About us</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- end #sidebar -->
     </div>
-	<!------Login ends ----------------->
 </div>
 
 
