@@ -46,7 +46,7 @@ class AccountController extends Controller
                 $_SESSION['emptyField'] = True;
                 $view = new View('userJoinPage');
                 echo $view->render();
-            } catch (\Exception $e) {
+            } catch (\LogicException $e) {
                 $view = new View('userJoinPage');
                 echo $view->render();
             }

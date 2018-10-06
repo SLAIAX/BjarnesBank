@@ -48,7 +48,7 @@ class BankAccountController extends Controller
                 $_SESSION['emptyField'] = True;
                 $view = new View('bankAccountCreatePage');
                 echo $view->render();
-            } catch (\Exception $e){
+            } catch (\LogicException $e){
                 $view = new View('bankAccountCreatePage');
                 echo $view->render();
             }

@@ -209,6 +209,7 @@ class bankAccountModel extends Model
         }
         if ($result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = $accname and `UserID` = $ID; ")) {
             // throw new ACCOUNT ALREADY EXISTS
+            throw new \LogicException();
         }
 
     }
