@@ -3,12 +3,7 @@ namespace agilman\a2\model;
 
 use \Exception;
 use agilman\a2\exception\EmptyFieldException;
-/**
- * Class AccountCollectionModel
- *
- * @package agilman/a2
- * @author  Andrew Gilman <a.gilman@massey.ac.nz>
- */
+
 class TransactionModel extends Model
 {
     private $mAmount;
@@ -39,11 +34,9 @@ class TransactionModel extends Model
         }
         $fromAccount = $result->fetch_assoc();
         $this->mBalanceFrom = (int)$fromAccount['Balance'];
-
         if ($this->mBalanceFrom < $this->mAmount) {
             throw new \LogicException();
         }
-
     }
 
     public function makeTransfer(){
@@ -57,7 +50,6 @@ class TransactionModel extends Model
             if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', '$this->mAmount', 0, '$this->mBalanceTo','$this->mToAccountID');")) {
                 throw new \mysqli_sql_exception();
             }
-
     }
 
     public function save(){
@@ -69,23 +61,21 @@ class TransactionModel extends Model
         }
     }
 
-
-
     public function getTransactions($accountID){  //Move to collection Model
         if(!$result = $this->db->query("SELECT * FROM `transactions` WHERE `FromAccountID` = '$accountID' and `MoneyOut` > 0 or `ToAccountID` = '$accountID' and `MoneyIn` > 0;")){
             throw new \mysqli_sql_exception();
         }
         $i = 0;
         while($transactions = $result->fetch_assoc()){
-            $temp[$i][0] = $transactions['FromAccountID'];
-            $temp[$i][1] = $transactions['ToAccountID'];
-            $temp[$i][2] = $transactions['MoneyIn'];
-            $temp[$i][3] = $transactions['MoneyOut'];
-            $temp[$i][4] = $transactions['Balance'];
-            $temp[$i][6] = $transactions['Description'];
-            $temp[$i][5] = $transactions['DateOfTrans'];
+            $transactionData[$i][0] = $transactions['FromAccountID'];
+            $transactionData[$i][1] = $transactions['ToAccountID'];
+            $transactionData[$i][2] = $transactions['MoneyIn'];
+            $transactionData[$i][3] = $transactions['MoneyOut'];
+            $transactionData[$i][4] = $transactions['Balance'];
+            $transactionData[$i][6] = $transactions['Description'];
+            $transactionData[$i][5] = $transactions['DateOfTrans'];
             $i++;
         }
-        return $temp;
+        return $transactionData;
     }
 }

@@ -1,16 +1,10 @@
 <?php
 namespace agilman\a2\model;
 
-/**
- * Class AccountCollectionModel
- *
- * @package agilman/a2
- * @author  Andrew Gilman <a.gilman@massey.ac.nz>
- */
+
 class AccountCollectionModel extends Model
 {
     private $accountIds;
-
     private $N;
 
     public function __construct()
@@ -18,7 +12,6 @@ class AccountCollectionModel extends Model
         parent::__construct();
         try {
             if (!$result = $this->db->query("SELECT `ID` FROM `user`;")) {
-                // throw new ...
                 throw new \Exception();
             }
             $this->accountIds = array_column($result->fetch_all(), 0);
@@ -28,15 +21,6 @@ class AccountCollectionModel extends Model
         }
     }
 
-    public function bankAccountCreate(){
-
-    }
-
-    /**
-     * Get account collection
-     *
-     * @return \Generator|AccountModel[] Accounts
-     */
     public function getAccounts()
     {
         foreach ($this->accountIds as $id) {
