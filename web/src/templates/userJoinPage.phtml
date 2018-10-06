@@ -25,6 +25,10 @@
         print("<p> Please fill in the required fields. </p> <br>");
         $_SESSION['emptyField'] = False;
     }
+    if($_SESSION['invalidInput']){
+        print("<p> Invalid Input : Account Name Already exists </p> <br>");
+        $_SESSION['invalidInput'] = False;
+    }
     ?>
     <br>
 

@@ -47,6 +47,7 @@ class AccountController extends Controller
                 $view = new View('userJoinPage');
                 echo $view->render();
             } catch (\LogicException $e) {
+                $_SESSION['invalidInput'] = True;
                 $view = new View('userJoinPage');
                 echo $view->render();
             }

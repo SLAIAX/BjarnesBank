@@ -273,7 +273,7 @@ class AccountModel extends Model
         }
 
 
-        if ($result = $this->db->query("SELECT * FROM `user` WHERE `Username` = $username;")) {
+        if (!$result = $this->db->query("SELECT * FROM `user` WHERE `Username` = $username;")) {
             // throw new ...
             throw new \LogicException();
         }

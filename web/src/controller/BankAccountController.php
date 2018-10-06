@@ -49,6 +49,7 @@ class BankAccountController extends Controller
                 $view = new View('bankAccountCreatePage');
                 echo $view->render();
             } catch (\LogicException $e){
+                 $_SESSION['invalidInput'] = True;
                 $view = new View('bankAccountCreatePage');
                 echo $view->render();
             }

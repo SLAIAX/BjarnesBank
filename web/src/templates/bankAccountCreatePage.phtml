@@ -19,14 +19,21 @@
 	</div>
 
 	<!------header wrapper ends ----------------->
-    <?php
-    if($_SESSION['emptyField']){
-        print("<p> Please fill in the required fields. </p> <br>");
-    }
-    ?>
+
+    
 	<div id="accountcreate">
 		<h3><b> Create an Account</b></h3>
 		<br>
+		 <?php
+		    if($_SESSION['emptyField']){
+		        print("<p> Please fill in the required fields. </p> ");
+		        $_SESSION['emptyField'] = False;
+		    }
+		     if($_SESSION['invalidInput']){
+		        print("<p> Invalid Input : Account Name Already exists </p>");
+		        $_SESSION['invalidInput'] = False;
+		    }
+   		 ?>
 		<form method="POST" action="<?= $linkTo('bankAccountCreate'); ?>">
 			
 		<div>
