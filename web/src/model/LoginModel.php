@@ -28,33 +28,22 @@ class LoginModel extends Model
      */
     public function validateLogin()
     {
-
-        try {
-            $usernameTest = $this->db->query("SELECT `Username` FROM `user` WHERE `Username` = '$this->username' ;");
-            $username = array_column($usernameTest->fetch_all(),0);
-            if($username[0] == ""){
-                throw new \Exception();
-            }
-
-
-            if (!$result = $this->db->query("SELECT `Password` FROM `user` WHERE `Username` = '$this->username' ;")) {
-                throw new \Exception();
-
-            }
-           $temp = array_column($result->fetch_all(),0);
-
-            if($temp[0] == $this->password){
-
-                unset($password);
-                unset($result);
-
-
-                return true;
-            }
-        }catch(\Exception $e){
+        if(!$result = $this->db->query("SELECT `Username` FROM `user` WHERE `Username` = '$this->username' ;")){
+            throw new \mysqli_sql_exception();
+        }
+        $username = array_column($result->fetch_all(),0);
+        if($username[0] == ""){
+            throw new \UnexpectedValueException();
+        }
+        if (!$result = $this->db->query("SELECT `Password` FROM `user` WHERE `Username` = '$this->username' ;")) {
+            throw new \mysqli_sql_exception();
+        }
+        $temp = array_column($result->fetch_all(),0);
+        if($temp[0] == $this->password){
             unset($password);
+            unset($result);
+            return true;
         }
         return false;
-
     }
 }

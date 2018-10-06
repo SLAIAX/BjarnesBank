@@ -166,7 +166,7 @@ $collection->attachRoute(
     new Route(
         '/Transactions',
         array(
-            '_controller' => 'agilman\a2\controller\HomeController::transactionAction',
+            '_controller' => 'agilman\a2\controller\HomeController::transactionIndexAction',
             'methods' => 'GET',
             'name' => 'transaction'
         )

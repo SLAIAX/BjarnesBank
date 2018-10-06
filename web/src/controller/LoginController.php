@@ -20,11 +20,8 @@ class LoginController extends Controller
      */
     public function indexAction()
     {
-
         $view = new View('loginPage');
         echo $view->render();
-
-
     }
 
 
@@ -33,15 +30,12 @@ class LoginController extends Controller
      */
     public function validateAction()
     {
-
        $_SESSION["access"] = 0;
        $username = $_POST['username'];
        $password = $_POST['password'];
        try {
            $login = new LoginModel($username, $password);
            $flag = $login->validateLogin();
-
-
            if ($flag) {
                $_SESSION['username'] = $username;
                $_SESSION["access"] = 1;
@@ -51,9 +45,9 @@ class LoginController extends Controller
                $_SESSION["access"] = 2;
                $this->redirect('loginPage');
            }
-
        } catch (\Exception $e){
-           echo "ERROR";
+           $view = new View('loginPage');
+           echo $view->render();
        }
        unset($password);
        unset($username);

@@ -22,11 +22,10 @@ class bankAccountModel extends Model
     public function findID($accountName, $id)
     {
         if (!$result = $this->db->query("SELECT `AccountID` FROM `account` WHERE `AccountName` = '$accountName' and `UserID` = '$id';")) {
-          //  return 0;
+          throw new \UnexpectedValueException();
 
         }
         $result = $result->fetch_assoc();
-        //$result = $result->fetch_assoc();
         return $result['AccountID'];
     }
 
@@ -34,7 +33,7 @@ class bankAccountModel extends Model
 
     public function getAccounts($id){
         if (!$result = $this->db->query("SELECT * FROM `account` WHERE `UserID` = '$id';")) {
-            return 0;
+            throw new \Exception(); //MOVE TO COLLECTION MODEL
         }
 
         $i = 0;
@@ -48,9 +47,6 @@ class bankAccountModel extends Model
             $i++;
 
         }
-
-
-      //  $this->N = $result->num_rows;
         return $temp;
     }
 
@@ -73,11 +69,9 @@ class bankAccountModel extends Model
     public function validate($accname, $ID){
         if(!$accname){
             throw new \UnexpectedValueException();
-            //throw incomplete data
         }
     
         if ($result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = '$accname' and `UserID` = '$ID';")) {
-            // throw new ACCOUNT ALREADY EXISTS
             $accounts = $result->fetch_assoc();
             if($accounts['AccountName'] != ""){
                 throw new \LogicException();
@@ -88,10 +82,10 @@ class bankAccountModel extends Model
 
     public function deleteAccount($id){
         if (!$result = $this->db->query("DELETE FROM `account` WHERE `AccountID` = '$id';")) {
-            //throw new ...
+            throw new \mysqli_sql_exception();
         }
         if (!$result = $this->db->query("DELETE FROM `transactions` WHERE `AccountID` = '$id';")) {
-            //throw new ...
+            throw new \mysqli_sql_exception();
         }
     }
 }

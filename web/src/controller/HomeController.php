@@ -15,16 +15,13 @@ class HomeController extends Controller
     /**
      * Account Index action
      */
-    public function indexAction()
+    public function indexAction()       //Implement collection model here
     {
         if($_SESSION["access"] == 1) {
             $user = new AccountModel();
             $id = $user->findID($_SESSION['username']);
 
             $accounts = $user->getAccounts($id);
-
-
-
 
             $view = new View('homePage');
             echo $view->addData('accounts', $accounts)->render();
@@ -33,41 +30,17 @@ class HomeController extends Controller
 
     public function aboutusIndexAction(){
         $view = new View('aboutUsPage');
-            echo $view->render();
+        echo $view->render();
     }
 
-    public function transactionAction(){
-
-
+    public function transactionIndexAction(){
         $view = new View('transactionPage');
         echo $view->render();
     }
 
     public function logOutAction(){
-
         session_unset();
         $this->redirect('loginPage');
-    }
-
-    //Take to page to input account information
-    // eg name, type, init other vals to 0, link to user
-    public function createAccountAction(){
-
-    }
-
-    // delete account from table and deallocate
-    public function closeAccountAction(){
-
-    }
-
-
-    // takes to page where trans can be made between 2 accounts
-    // drop down for each side
-    // input description
-    // validate trans is possible
-    public function makeTransactionAction(){
-
-
     }
 
     public function closeAccountIndex(){
@@ -82,6 +55,5 @@ class HomeController extends Controller
         $view = new View('accountTypesPage');
         echo $view->render();
     }
-
 
 }
