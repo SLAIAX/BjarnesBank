@@ -31,6 +31,11 @@ class HomeController extends Controller
         }
     }
 
+    public function aboutusIndexAction(){
+        $view = new View('aboutUsPage');
+            echo $view->render();
+    }
+
     public function transactionAction(){
 
 

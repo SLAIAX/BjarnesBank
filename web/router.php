@@ -130,6 +130,17 @@ $collection->attachRoute(
 
 $collection->attachRoute(
     new Route(
+        '/aboutus',
+        array(
+            '_controller' => 'agilman\a2\controller\HomeController::aboutusIndexAction',
+            'methods' => 'GET',
+            'name' => 'aboutus'
+        )
+    )
+);
+
+$collection->attachRoute(
+    new Route(
         '/userJoinPage',
         array(
             '_controller' => 'agilman\a2\controller\UserCreateController::indexAction',

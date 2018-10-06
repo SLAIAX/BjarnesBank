@@ -1,0 +1,45 @@
+<?php
+session_start();
+
+$_SESSION['actionAvailable'] = True;
+$_SESSION['validTransaction'] = True;
+$_SESSION['emptyField'] = False;
+include "header.phtml"
+
+?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="/../../images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="#">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li><a href="<?= $linkTo('homePage');?>">Homepage</a></li>
+					<li><a href="<?= $linkTo('bankAccount'); ?>">Create Account</a></li>
+					<li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- end #header -->
+	<div id="page">
+		<div id="content">
+			<h2 class="title">About Us</h2>
+			<p>Bjarnes Bank is a new family oriented bank, we were previously known as FNB or First National Bank, but after playing a life changing game <a href="https://github.com/ZLamb101/BjarnesWorld">Bjarnes World</a>, we were inspired to rename.</p>
+
+			
+			
+
+		</div>
+	</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	<!-- end #page --> 
+</div>
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>
