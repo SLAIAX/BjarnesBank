@@ -16,69 +16,6 @@ class bankAccountModel extends Model
     private $mBalance;
 
 
-
-    /**
-     * @return mixed
-     */
-    public function getMID()
-    {
-        return $this->mID;
-    }
-
-
-
-    /**
-     * @return mixed
-     */
-    public function getMAccountName()
-    {
-        return $this->mAccountName;
-    }
-
-    /**
-     * @param mixed $mAccountName
-     */
-    public function setMAccountName($mAccountName)
-    {
-        $this->mAccountName = $mAccountName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMType()
-    {
-        return $this->mType;
-    }
-
-    /**
-     * @param mixed $mType
-     */
-    public function setMType($mType)
-    {
-        $this->mType = $mType;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMBalance()
-    {
-        return $this->mBalance;
-    }
-
-    /**
-     * @param mixed $mBalance
-     */
-    public function setMBalance($mBalance)
-    {
-        $this->mBalance = $mBalance;
-    }
-
-
-
-
-
     /**
      * @return mixed
      */
@@ -92,24 +29,6 @@ class bankAccountModel extends Model
         //$result = $result->fetch_assoc();
         return $result['AccountID'];
     }
-
-
-    /**
-     * @return mixed
-     */
-    public function findUserID($username)
-    {
-        if (!$result = $this->db->query("SELECT `ID` FROM `user` WHERE `Username` = '$username';")) {
-            //  return 0;
-
-
-        }
-        $result = $result->fetch_assoc();
-        //$result = $result->fetch_assoc();
-        return $result['ID'];
-    }
-
-
 
 
 
@@ -136,32 +55,6 @@ class bankAccountModel extends Model
     }
 
 
-
-
-
-
-
-
-    /**
-     * Loads account information from the database
-     *
-     * @param int $id Account ID
-     *
-     * @return $this AccountModel
-     */
-    public function load($id)
-    {
-        if (!$result = $this->db->query("SELECT * FROM `user` WHERE `ID` = $id;")) {
-            // throw new ...
-        }
-
-        $result = $result->fetch_assoc();
-        $this->mFirstName = $result['name'];
-        $this->mID = $id;
-
-        return $this;
-    }
-
     /**
      * Saves account information to the database
 
@@ -169,38 +62,13 @@ class bankAccountModel extends Model
      */
     public function save($id)
     {
-
         $AccountName = $_POST['AccountName'];
         $AccountType = $_POST['AccountType'];
-        if (!isset($this->mID)) {
-            // New account - Perform INSERT
-
-            if (!$result = $this->db->query("INSERT INTO `account` VALUES (NULL, '$id', '$AccountType', 0, '$AccountName');")) {
-                // throw new ...
-            }
-            $this->mID = $this->db->insert_id;
-        } else {
-            // saving existing account - perform UPDATE
-            //if (!$result = $this->db->query("UPDATE `account` SET `user` = '$name' WHERE `ID` = $this->mID;")) {
-                // throw new ...
-        //    }
+        if (!$result = $this->db->query("INSERT INTO `account` VALUES (NULL, '$id', '$AccountType', 0, '$AccountName');")) {
+            throw new \mysqli_sql_exception();
         }
-        return $this;
     }
 
-    /**
-     * Deletes account from the database
-
-     * @return $this AccountModel
-     */
-    public function delete()
-    {
-        if (!$result = $this->db->query("DELETE FROM `user` WHERE `user`.`ID` = $this->mID;")) {
-            //throw new ...
-        }
-
-        return $this;
-    }
 
     public function validate($accname, $ID){
         if(!$accname){

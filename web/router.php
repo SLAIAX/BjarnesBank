@@ -21,7 +21,7 @@ $collection->attachRoute(
     new Route(
         '/transactions',
         array(
-            '_controller' => 'agilman\a2\controller\BankAccountController::viewTransactions',
+            '_controller' => 'agilman\a2\controller\TransactionController::viewTransactions',
             'methods' => 'POST',
             'name' => 'viewTransactions'
         )
@@ -88,7 +88,7 @@ $collection->attachRoute(
     new Route(
         '/bank/account/close',
         array(
-            '_controller' => 'agilman\a2\controller\BankAccountController::closeAccountIndex',
+            '_controller' => 'agilman\a2\controller\HomeController::closeAccountIndex',
             'methods' => 'GET',
             'name' => 'closeAccountPage'
         )
@@ -121,7 +121,7 @@ $collection->attachRoute(
     new Route(
         '/bank/account/type',
         array(
-            '_controller' => 'agilman\a2\controller\BankAccountController::typeAccountIndex',
+            '_controller' => 'agilman\a2\controller\HomeController::typeAccountIndex',
             'methods' => 'GET',
             'name' => 'typeAccountPage'
         )

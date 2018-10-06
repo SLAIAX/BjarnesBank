@@ -70,7 +70,18 @@ class HomeController extends Controller
 
     }
 
+    public function closeAccountIndex(){
+        $user = new AccountModel();
+        $id = $user->findID($_SESSION['username']);
+        $accounts = $user->getAccounts($id);
+        $view = new View('closeBankAccountPage');
+        echo $view->addData('accounts', $accounts)->render();
+    }
 
+    public function typeAccountIndex(){
+        $view = new View('accountTypesPage');
+        echo $view->render();
+    }
 
 
 }

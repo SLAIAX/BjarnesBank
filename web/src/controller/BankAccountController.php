@@ -2,8 +2,9 @@
 
 namespace agilman\a2\controller;
 session_start();
-use agilman\a2\model\bankAccountModel;
+
 use agilman\a2\model\AccountModel;
+use agilman\a2\model\bankAccountModel;
 use agilman\a2\model\transactionModel;
 use agilman\a2\view\View;
 
@@ -21,15 +22,6 @@ class BankAccountController extends Controller
     }
 
 
-    public function viewTransactions()
-    {
-        $account = $_POST['account'];
-        $transMod = new transactionModel();
-        $transactions = $transMod->getTransactions($account);
-        $view = new View('transactionPage');
-        echo $view->addData('transactions', $transactions)->render();
-    }
-
     public function createBankAccount()
     {
         if($_SESSION['actionAvailable']) {
@@ -37,7 +29,8 @@ class BankAccountController extends Controller
 
                 $accountname = $_POST['AccountName'];
                 $account = new bankAccountModel();
-                $id = $account->findUserID($_SESSION['username']);
+                $user = new AccountModel();
+                $id = $user->findID($_SESSION['username']);
                
                 $account->validate($accountname, $id);
                 $account->save($id);
@@ -45,14 +38,16 @@ class BankAccountController extends Controller
                 $_SESSION['actionAvailable'] = False;
 
             } catch (\UnexpectedValueException $e) {
-                // display and redirect
                 $_SESSION['emptyField'] = True;
-               // $view = new View('bankAccountCreatePage');
-              //  echo $view->render();
+                $view = new View('bankAccountCreatePage');
+                echo $view->render();
             } catch (\LogicException $e){
-                 $_SESSION['invalidInput'] = True;
-              //  $view = new View('bankAccountCreatePage');
-              //  echo $view->render();
+                $_SESSION['invalidInput'] = True;
+                $view = new View('bankAccountCreatePage');
+                echo $view->render();
+            } catch (\Exception $e) {
+                $view = new View('bankAccountCreatePage');
+                echo $view->render();
             }
         }
     }
@@ -60,23 +55,11 @@ class BankAccountController extends Controller
     public function closeBankAccount(){
         $bank = new bankAccountModel();
         $accountName = $_POST['accountClose'];
-        $userid = $bank->findUserID($_SESSION['username']);
+        $user = new AccountModel();
+        $userid = $user->findID($_SESSION['username']);
         $id = $bank->findID($accountName, $userid);
         $bank->deleteAccount($id);
         $view = new View('deletionComplete');
-        echo $view->render();
-    }
-
-    public function closeAccountIndex(){
-        $user = new AccountModel();
-        $id = $user->findID($_SESSION['username']);
-        $accounts = $user->getAccounts($id);
-        $view = new View('closeBankAccountPage');
-        echo $view->addData('accounts', $accounts)->render();
-    }
-
-    public function typeAccountIndex(){
-        $view = new View('accountTypesPage');
         echo $view->render();
     }
 }
