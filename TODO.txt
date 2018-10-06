@@ -11,3 +11,6 @@ Make database loadable with data
 
 
 ADD SIDEBAR TO MAKE TRANSFER AND MAKE PAYMENTS
+
+Comment on our code
+PSR Standards
