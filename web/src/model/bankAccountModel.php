@@ -207,7 +207,7 @@ class bankAccountModel extends Model
             throw new \UnexpectedValueException();
             //throw incomplete data
         }
-        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = $accname and `UserID` = $ID; ")) {
+        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = '$accname' and `UserID` = '$ID'; ")) {
             // throw new ACCOUNT ALREADY EXISTS
             throw new \LogicException();
         }
@@ -215,10 +215,10 @@ class bankAccountModel extends Model
     }
 
     public function deleteAccount($id){
-        if (!$result = $this->db->query("DELETE FROM `account` WHERE `AccountID` = $id;")) {
+        if (!$result = $this->db->query("DELETE FROM `account` WHERE `AccountID` = '$id';")) {
             //throw new ...
         }
-        if (!$result = $this->db->query("DELETE FROM `transactions` WHERE `AccountID` = $id;")) {
+        if (!$result = $this->db->query("DELETE FROM `transactions` WHERE `AccountID` = '$id';")) {
             //throw new ...
         }
     }
