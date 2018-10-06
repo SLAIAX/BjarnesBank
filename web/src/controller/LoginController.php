@@ -39,6 +39,7 @@ class LoginController extends Controller
            if ($flag) {
                $_SESSION['username'] = $username;
                $_SESSION["access"] = 1;
+               
                $this->redirect('homePage');
            } else {
                unset($login);
@@ -46,8 +47,7 @@ class LoginController extends Controller
                $this->redirect('loginPage');
            }
        } catch (\Exception $e){
-           $view = new View('loginPage');
-           echo $view->render();
+           $this->redirect('loginPage');
        }
        unset($password);
        unset($username);
