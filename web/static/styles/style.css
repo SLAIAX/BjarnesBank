@@ -111,7 +111,7 @@ a:hover {
 
 #usercreate #personinfo {
 	float : left;
-	width: 150px;
+	width: 1000px;
 }
 
 #usercreate #address {
@@ -531,8 +531,8 @@ ul.style1 .first {
 
 #createUserAccount {
 	position: absolute;
-	top: 524px;
-	left: 35%;
+	top: 75%;
+	left: 23%;
 	display: block;
 	float: left;
 	width: 88px;
