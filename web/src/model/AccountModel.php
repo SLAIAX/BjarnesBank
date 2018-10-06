@@ -21,21 +21,6 @@ class AccountModel extends Model
         return $result['ID'];
     }
 
-    public function getAccounts($id){
-        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `UserID` = '$id';")) {
-            throw new \mysqli_sql_exception();
-        }
-        $i = 0;
-        while($accounts = $result->fetch_assoc()){
-            $accountData[$i][0] = $accounts['AccountType'];
-            $accountData[$i][1] = $accounts['AccountName'];
-            $accountData[$i][2] = $accounts['Balance'];
-            $accountData[$i][3] = $accounts['AccountID'];
-            $i++;
-        }
-        return $accountData;
-    }
-
     public function load($id)
     {
         if (!$result = $this->db->query("SELECT * FROM `user` WHERE `ID` = $id;")) {

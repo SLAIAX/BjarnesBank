@@ -24,22 +24,15 @@ class BankAccountModel extends Model
         }
         $i = 0;
         while($accounts = $result->fetch_assoc()){
-            $temp[$i][0] = $accounts['AccountType'];
-            $temp[$i][1] = $accounts['AccountName'];
-            $temp[$i][2] = $accounts['Balance'];
-            $temp[$i][3] = $accounts['AccountID'];
+            $accountData[$i][0] = $accounts['AccountType'];
+            $accountData[$i][1] = $accounts['AccountName'];
+            $accountData[$i][2] = $accounts['Balance'];
+            $accountData[$i][3] = $accounts['AccountID'];
             $i++;
-
         }
-        return $temp;
+        return $accountData;
     }
 
-
-    /**
-     * Saves account information to the database
-
-     * @return $this AccountModel
-     */
     public function save($id)
     {
         $AccountName = $_POST['AccountName'];
@@ -49,19 +42,16 @@ class BankAccountModel extends Model
         }
     }
 
-
     public function validate($accname, $ID){
         if(!$accname){
             throw new \UnexpectedValueException();
         }
-    
         if ($result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = '$accname' and `UserID` = '$ID';")) {
             $accounts = $result->fetch_assoc();
             if($accounts['AccountName'] != ""){
                 throw new \LogicException();
             }
         }
-
     }
 
     public function deleteAccount($id){

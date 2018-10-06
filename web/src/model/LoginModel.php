@@ -1,16 +1,9 @@
 <?php
 namespace agilman\a2\model;
 
-/**
- * Class AccountCollectionModel
- *
- * @package agilman/a2
- * @author  Andrew Gilman <a.gilman@massey.ac.nz>
- */
 class LoginModel extends Model
 {
     private $username;
-
     private $password;
 
     public function __construct($username, $password)
@@ -18,14 +11,8 @@ class LoginModel extends Model
         $this->username = $username;
         $this->password = $password;
         parent::__construct();
-
     }
 
-    /**
-     * Get account collection
-     *
-     * @return \Generator|AccountModel[] Accounts
-     */
     public function validateLogin()
     {
         if(!$result = $this->db->query("SELECT `Username` FROM `user` WHERE `Username` = '$this->username' ;")){
