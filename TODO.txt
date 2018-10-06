@@ -1,23 +1,13 @@
 TO DO:
 
-- Format account display
-
-• view a detailed list of transactions for a selected account (date/time,
-amount, transaction type)
-• perform transactions (deposit/withdraw/transfer) on a given account
-• filtering (e.g. of accounts by id or transactions by type)
-• sorting of transactions by date, asc/desc order
+• filtering (e.g. of accounts by id or transactions by type)	//NO
+• sorting of transactions by date, asc/desc order		//NO
 • etc etc etc
 
 Current issues:
-Users can have the same username
-Users can have multiple accounts with the same name
+
 
 Make database loadable with data
-Types of Accounts
-About Us
 
-FORMAT bank account CREATE page
-FORMAT USER CREATE ACCOUNT PAGE error
 
-make HTML more user friendly e.g. Say the required fields and format.
+ADD SIDEBAR TO MAKE TRANSFER AND MAKE PAYMENTS
