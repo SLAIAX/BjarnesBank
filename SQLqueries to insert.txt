@@ -1,8 +1,7 @@
 INSERT INTO `user` (`ID`, `First Name`, `Last Name`, `Username`, `Password`, `Address`, `Email`, `Phone`) VALUES
 (NULL, 'Bob', 'jim', 'admin', 'Admin1234', '17 Alnack Place', 'admin@admin.co', '02298719235'),
-(NULL, 'Jordan', 'Drumm', 'SLAIAX', 'football22', '16 ', 'jordan@gmail.com', '094730000'),
 (NULL, 'Andrew', 'Gilman', 'AGilman', 'AGilman1', '124 Sunset Avenue', 'a.gilman@massey.ac.nz', '4451234'),
-
+(NULL, 'Jordan', 'Drumm', 'SLAIAX', 'football22', '16 ', 'jordan@gmail.com', '094730000'),
 (NULL, 'Zane', 'Lamb', 'Zane', 'ZaneLamb2', '12 Time Avenue', 'lanelamb@gmail.com', '0421483');
 (NULL, 'Sam', 'Arnet', 'Sammy', 'Sammy', '9 Pleasantville ave', 'sam@gmail.com', '1027493');
 
@@ -48,9 +47,15 @@ INSERT INTO `transactions` (`TransID`, `FromAccountID`, `Description`, `DateOfTr
 (NULL, 3, 'Drinks', '2018-10-06', '25', '0', '569', 2);
 
 INSERT INTO `account` (`AccountID`, `UserID`, `AccountType`, `Balance`, `AccountName`) VALUES
-(1, 1, 'Savings', '6780', 'Test'),
-(3, 1, 'Cheque', '18955', 'Spendings'),
-(4, 2, 'Savings', '152287', 'My Savings'),
-(5, 2, 'FastSaver', '7612', 'Holiday'),
-(6, 2, 'Cheque', '1200', 'Spendings'),
-(7, 2, 'Savings', '876', 'Bills');
+
+(NULL, 1, 'Savings', '6780', 'Test'),
+
+(NULL, 1, 'Cheque', '18955', 'Spendings'),
+
+(NULL, 2, 'Savings', '152287', 'My Savings'),
+
+(NULL, 2, 'FastSaver', '7612', 'Holiday'),
+
+(NULL, 2, 'Cheque', '1200', 'Spendings'),
+
+(NULL, 2, 'Savings', '876', 'Bills');
