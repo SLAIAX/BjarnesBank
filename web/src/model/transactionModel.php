@@ -11,57 +11,66 @@ use agilman\a2\exception\EmptyFieldException;
  */
 class transactionModel extends Model
 {
-    private $accountName;
-    private $array;
-    private $N;
+    private $mAmount;
+    private $mToAccountID;
+    private $mFromAccountID;
+    private $mBalanceFrom;
+    private $mBalanceTo;
 
-    public function makeTransfer($toAccountID, $fromAccountID){
+    public function validateTransfer(){
+        if(!$this->mAmount){
+            throw new \UnexpectedValueException();
+        }
+        if($this->mToAccountID == $this->mFromAccountID) {
+            throw new \LogicException();
+        }
+
+    }
+
+    public function makeTransfer(){
 
             $amount = $_POST['amount'];
             $description = $_POST['description'];
 
-            if(!$amount){
-                throw new \UnexpectedValueException();
-            }
+
 
             $date = date("Y-m-d");
-            if($toAccountID == $fromAccountID) {
-                throw new \LogicException();
-            }
 
-            if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$toAccountID';")){
+
+            if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mToAccountID';")){
                 throw new \mysqli_sql_exception();
             }
             $toAccount = $result->fetch_assoc();
-            $toAccountBal = (int)$toAccount['Balance'];
+            $this->mBalanceTo = (int)$toAccount['Balance'];
 
-            if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$fromAccountID';")){
+            if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mFromAccountID';")){
                 throw new \mysqli_sql_exception();
             }
             $fromAccount = $result->fetch_assoc();
-            $fromAccountBal = (int)$fromAccount['Balance'];
+            $this->mBalanceFrom = (int)$fromAccount['Balance'];
 
-            if ($fromAccountBal < $amount) {
+            if ($this->mBalanceFrom < $amount) {
                 throw new \LogicException();
             }
 
-            $balanceFrom = $fromAccountBal - $amount;
-            $balanceTo = $toAccountBal + $amount;
-            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$fromAccountID', '$description', '$date', 0, '$amount', '$balanceFrom','$toAccountID');")) {
+            $this->mBalanceFrom -= $amount;
+            $this->mBalanceTo += $amount;
+            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', 0, '$amount', '$this->mBalanceFrom','$this->mToAccountID');")) {
                 throw new \mysqli_sql_exception();
             }
-            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$fromAccountID', '$description', '$date', '$amount', 0, '$balanceTo','$toAccountID');")) {
-                throw new \mysqli_sql_exception();
-            }
-            if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$balanceFrom' WHERE `AccountID` = '$fromAccountID';")) {
-                throw new \mysqli_sql_exception();
-            }
-            if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$balanceTo' WHERE `AccountID` = '$toAccountID';")) {
+            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', '$amount', 0, '$this->mBalanceTo','$this->mToAccountID');")) {
                 throw new \mysqli_sql_exception();
             }
 
+    }
 
-
+    public function save(){
+        if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$this->mBalanceFrom' WHERE `AccountID` = '$this->mFromAccountID';")) {
+            throw new \mysqli_sql_exception();
+        }
+        if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$this->mBalanceTo' WHERE `AccountID` = '$this->mToAccountID';")) {
+            throw new \mysqli_sql_exception();
+        }
     }
 
 

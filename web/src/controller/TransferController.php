@@ -28,7 +28,6 @@ class transferController extends Controller
 
     public function makeTransferAction()
     {
-
         if($_SESSION['actionAvailable']){
             try {
                 $account = new bankAccountModel();
@@ -38,6 +37,7 @@ class transferController extends Controller
                 $fromAccountID = $account->findID($_POST['accountFrom'], $id);
                 $transaction = new transactionModel();
                 $transaction->makeTransfer($toAccountID, $fromAccountID);
+
                 $view = new View('transactionComplete');
                 echo $view->render();
                 $_SESSION['actionAvailable'] = False;
