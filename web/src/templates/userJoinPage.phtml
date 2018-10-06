@@ -20,21 +20,22 @@
 	<!------header wrapper ends ----------------->
 
 
-    <?php
-    if($_SESSION['emptyField']){
-        print("<p> Please fill in the required fields. </p> <br>");
-        $_SESSION['emptyField'] = False;
-    }
-    if($_SESSION['invalidInput']){
-        print("<p> Invalid Input : Account Name Already exists </p> <br>");
-        $_SESSION['invalidInput'] = False;
-    }
-    ?>
+   
     <br>
 
 	<div id="usercreate">
 		<form method="POST" action="<?= $linkTo('accountCreate'); ?>">
             <p>Fields marked with a * are required</p>
+             <?php
+			    if($_SESSION['emptyField']){
+			        print("<p> Please fill in the required fields. </p> <br>");
+			        $_SESSION['emptyField'] = False;
+			    }
+			    if($_SESSION['invalidInput']){
+			        print("<p> Invalid Input : Account Name Already exists </p> <br>");
+			        $_SESSION['invalidInput'] = False;
+			    }
+			    ?>
 		<div id="personinfo">
 			<p> *First Name <br> <input type="text" name="firstname" pattern="[A-Za-z]{2,}" title="Alphabetic characters only with no spaces." size="25"> </p>
 			<p> *Last Name <br> <input type="text" name="lastname" pattern="[A-Za-z]{2,}" title="Alphabetic characters only with no spaces." size="25"> </p>
