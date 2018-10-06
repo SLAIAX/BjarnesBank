@@ -38,11 +38,10 @@ class BankAccountController extends Controller
                 $accountname = $_POST['AccountName'];
                 $account = new bankAccountModel();
                 $id = $account->findUserID($_SESSION['username']);
-                echo "$accountname";
-                echo "$id";
+               
                 $account->validate($accountname, $id);
                 $account->save($id);
-             //   $this->redirect('homePage');
+               $this->redirect('homePage');
                 $_SESSION['actionAvailable'] = False;
 
             } catch (\UnexpectedValueException $e) {

@@ -207,9 +207,13 @@ class bankAccountModel extends Model
             throw new \UnexpectedValueException();
             //throw incomplete data
         }
-        if ($result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = '$accname' and `UserID` = '$ID'; ")) {
+      //  echo "$accname, $ID";
+        if ($result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = '$accname' and `UserID` = '$ID';")) {
             // throw new ACCOUNT ALREADY EXISTS
-            throw new \LogicException();
+            $accounts = $result->fetch_assoc();
+            if($accounts['AccountName'] != ""){
+                throw new \LogicException();
+            }
         }
 
     }
