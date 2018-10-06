@@ -17,8 +17,6 @@ class PaymentController extends Controller
 {
     public function indexAction()
     {
-
-
         $user = new AccountModel();
         $id = $user->findID($_SESSION['username']);
 
@@ -28,15 +26,14 @@ class PaymentController extends Controller
         echo $view->addData('accounts', $accounts)->render();
     }
 
-
     public function makePaymentAction()
     {
-
         if ($_SESSION['actionAvailable']) {
             try {
                 $account = new bankAccountModel();
                 $toAccountID = $_POST['accountTo'];
-                $id = $account->findUserID($_SESSION['username']);
+                $user = new AccountModel();
+                $id = $user->findID($_SESSION['username']);
                 $fromAccountID = $account->findID($_POST['accountFrom'], $id);
                 $transaction = new transactionModel();
                 $transaction->makeTransfer($toAccountID, $fromAccountID);

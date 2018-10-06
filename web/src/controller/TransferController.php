@@ -6,7 +6,6 @@ use agilman\a2\model\bankAccountModel;
 use agilman\a2\model\AccountModel;
 use agilman\a2\model\transactionModel;
 use agilman\a2\view\View;
-use const Grpc\CALL_ERROR_TOO_MANY_OPERATIONS;
 
 /**
  * Class AccountController
@@ -16,9 +15,8 @@ use const Grpc\CALL_ERROR_TOO_MANY_OPERATIONS;
  */
 class transferController extends Controller
 {
-    public function indexAction(){
-
-
+    public function indexAction()
+    {
         $user = new AccountModel();
         $id = $user->findID($_SESSION['username']);
 
@@ -28,14 +26,14 @@ class transferController extends Controller
         echo $view->addData('accounts', $accounts)->render();
     }
 
-
     public function makeTransferAction()
     {
 
         if($_SESSION['actionAvailable']){
             try {
                 $account = new bankAccountModel();
-                $id = $account->findUserID($_SESSION['username']);
+                $user = new AccountModel();
+                $id = $user->findID($_SESSION['username']);
                 $toAccountID = $account->findID($_POST['accountTo'], $id);
                 $fromAccountID = $account->findID($_POST['accountFrom'], $id);
                 $transaction = new transactionModel();
