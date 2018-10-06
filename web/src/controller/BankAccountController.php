@@ -38,20 +38,22 @@ class BankAccountController extends Controller
                 $accountname = $_POST['AccountName'];
                 $account = new bankAccountModel();
                 $id = $account->findUserID($_SESSION['username']);
+                echo "$accountname";
+                echo "$id";
                 $account->validate($accountname, $id);
                 $account->save($id);
-                $this->redirect('homePage');
+             //   $this->redirect('homePage');
                 $_SESSION['actionAvailable'] = False;
 
             } catch (\UnexpectedValueException $e) {
                 // display and redirect
                 $_SESSION['emptyField'] = True;
-                $view = new View('bankAccountCreatePage');
-                echo $view->render();
+               // $view = new View('bankAccountCreatePage');
+              //  echo $view->render();
             } catch (\LogicException $e){
                  $_SESSION['invalidInput'] = True;
-                $view = new View('bankAccountCreatePage');
-                echo $view->render();
+              //  $view = new View('bankAccountCreatePage');
+              //  echo $view->render();
             }
         }
     }
