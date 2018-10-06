@@ -4,8 +4,8 @@ namespace agilman\a2\controller;
 session_start();
 
 use agilman\a2\model\AccountModel;
-use agilman\a2\model\bankAccountModel;
-use agilman\a2\model\transactionModel;
+use agilman\a2\model\BankAccountModel;
+use agilman\a2\model\TransactionModel;
 use agilman\a2\view\View;
 
 /**
@@ -28,7 +28,7 @@ class BankAccountController extends Controller
             try {
 
                 $accountname = $_POST['AccountName'];
-                $account = new bankAccountModel();
+                $account = new BankAccountModel();
                 $user = new AccountModel();
                 $id = $user->findID($_SESSION['username']);
                
@@ -54,7 +54,7 @@ class BankAccountController extends Controller
 
     public function closeBankAccount(){
         try {
-            $bank = new bankAccountModel();
+            $bank = new BankAccountModel();
             $accountName = $_POST['accountClose'];
             $user = new AccountModel();
             $userid = $user->findID($_SESSION['username']);

@@ -9,7 +9,7 @@ use agilman\a2\exception\EmptyFieldException;
  * @package agilman/a2
  * @author  Andrew Gilman <a.gilman@massey.ac.nz>
  */
-class transactionModel extends Model
+class TransactionModel extends Model
 {
     private $mAmount;
     private $mToAccountID;

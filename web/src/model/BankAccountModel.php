@@ -8,7 +8,7 @@ session_start();
  * @package agilman/a2
  * @author  Andrew Gilman <a.gilman@massey.ac.nz>
  */
-class bankAccountModel extends Model
+class BankAccountModel extends Model
 {
     private $mID;
     private $mAccountName;

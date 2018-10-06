@@ -2,9 +2,9 @@
 namespace agilman\a2\controller;
 session_start();
 
-use agilman\a2\model\bankAccountModel;
+use agilman\a2\model\BankAccountModel;
 use agilman\a2\model\AccountModel;
-use agilman\a2\model\transactionModel;
+use agilman\a2\model\TransactionModel;
 use agilman\a2\view\View;
 use const Grpc\CALL_ERROR_TOO_MANY_OPERATIONS;
 
@@ -21,7 +21,7 @@ class TransactionController extends Controller
     public function viewTransactions()
     {
         $account = $_POST['account'];
-        $transMod = new transactionModel();
+        $transMod = new TransactionModel();
         $transactions = $transMod->getTransactions($account);
         $view = new View('transactionPage');
         echo $view->addData('transactions', $transactions)->render();
@@ -31,12 +31,12 @@ class TransactionController extends Controller
     {
         if($_SESSION['actionAvailable']){
             try {
-                $account = new bankAccountModel();
+                $account = new BankAccountModel();
                 $user = new AccountModel();
                 $id = $user->findID($_SESSION['username']);
                 $toAccountID = $account->findID($_POST['accountTo'], $id);
                 $fromAccountID = $account->findID($_POST['accountFrom'], $id);
-                $transaction = new transactionModel();
+                $transaction = new TransactionModel();
                 $transaction->validateTransfer($toAccountID, $fromAccountID);
                 $transaction->makeTransfer();
                 $transaction->save();
@@ -61,12 +61,12 @@ class TransactionController extends Controller
     {
         if ($_SESSION['actionAvailable']) {
             try {
-                $account = new bankAccountModel();
+                $account = new BankAccountModel();
                 $toAccountID = $_POST['accountTo'];
                 $user = new AccountModel();
                 $id = $user->findID($_SESSION['username']);
                 $fromAccountID = $account->findID($_POST['accountFrom'], $id);
-                $transaction = new transactionModel();
+                $transaction = new TransactionModel();
                 $transaction->validateTransfer($toAccountID, $fromAccountID);
                 $transaction->makeTransfer();
                 $transaction->save();
