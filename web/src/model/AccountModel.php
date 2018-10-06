@@ -273,9 +273,13 @@ class AccountModel extends Model
         }
 
 
-        if (!$result = $this->db->query("SELECT * FROM `user` WHERE `Username` = $username;")) {
-            // throw new ...
-            throw new \LogicException();
+        if ($result = $this->db->query("SELECT * FROM `user` WHERE `Username` = $username;")) {
+             
+            $accounts = $result->fetch_assoc();
+            if($accounts['Username'] != ""){
+                throw new \LogicException();
+            }
+        
         }
 
     }
