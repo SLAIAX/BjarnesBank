@@ -56,4 +56,27 @@ class HomeController extends Controller
         echo $view->render();
     }
 
+    public function TransferIndexAction(){
+        $user = new AccountModel();
+        $id = $user->findID($_SESSION['username']);
+        $accounts = $user->getAccounts($id);
+        $view = new View('transferPage');
+        echo $view->addData('accounts', $accounts)->render();
+    }
+
+    public function PaymentIndexAction()
+    {
+        $user = new AccountModel();
+        $id = $user->findID($_SESSION['username']);
+        $accounts = $user->getAccounts($id);
+        $view = new View('paymentPage');
+        echo $view->addData('accounts', $accounts)->render();
+    }
+
+    public function UserJoinIndexAction()
+    {
+        $view = new View('userJoinPage');
+        echo $view->render();
+    }
+
 }

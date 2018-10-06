@@ -17,48 +17,44 @@ class transactionModel extends Model
     private $mBalanceFrom;
     private $mBalanceTo;
 
-    public function validateTransfer(){
+    public function validateTransfer($accountTo, $accountFrom){
+        $this->mAmount = $_POST['amount'];
+        $this->mToAccountID = $accountTo;
+        $this->mFromAccountID = $accountFrom;
+
         if(!$this->mAmount){
             throw new \UnexpectedValueException();
         }
         if($this->mToAccountID == $this->mFromAccountID) {
             throw new \LogicException();
         }
+        if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mToAccountID';")){
+            throw new \mysqli_sql_exception();
+        }
+        $toAccount = $result->fetch_assoc();
+        $this->mBalanceTo = (int)$toAccount['Balance'];
+
+        if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mFromAccountID';")){
+            throw new \mysqli_sql_exception();
+        }
+        $fromAccount = $result->fetch_assoc();
+        $this->mBalanceFrom = (int)$fromAccount['Balance'];
+
+        if ($this->mBalanceFrom < $this->mAmount) {
+            throw new \LogicException();
+        }
 
     }
 
     public function makeTransfer(){
-
-            $amount = $_POST['amount'];
             $description = $_POST['description'];
-
-
-
             $date = date("Y-m-d");
-
-
-            if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mToAccountID';")){
+            $this->mBalanceFrom -= $this->mAmount;
+            $this->mBalanceTo += $this->mAmount;
+            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', 0, '$this->mAmount', '$this->mBalanceFrom','$this->mToAccountID');")) {
                 throw new \mysqli_sql_exception();
             }
-            $toAccount = $result->fetch_assoc();
-            $this->mBalanceTo = (int)$toAccount['Balance'];
-
-            if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mFromAccountID';")){
-                throw new \mysqli_sql_exception();
-            }
-            $fromAccount = $result->fetch_assoc();
-            $this->mBalanceFrom = (int)$fromAccount['Balance'];
-
-            if ($this->mBalanceFrom < $amount) {
-                throw new \LogicException();
-            }
-
-            $this->mBalanceFrom -= $amount;
-            $this->mBalanceTo += $amount;
-            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', 0, '$amount', '$this->mBalanceFrom','$this->mToAccountID');")) {
-                throw new \mysqli_sql_exception();
-            }
-            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', '$amount', 0, '$this->mBalanceTo','$this->mToAccountID');")) {
+            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', '$this->mAmount', 0, '$this->mBalanceTo','$this->mToAccountID');")) {
                 throw new \mysqli_sql_exception();
             }
 
@@ -74,24 +70,10 @@ class transactionModel extends Model
     }
 
 
-    /**
-     * Get account collection
-     *
-     * @return \Generator|AccountModel[] Accounts
-     */
-    public function getAccounts()
-    {
-        foreach ($this->accountIds as $id) {
-            // Use a generator to save on memory/resources
-            // load accounts from DB one at a time only when required
-            yield (new AccountModel())->load($id);
-        }
-    }
 
-    public function getTransactions($accountID){
+    public function getTransactions($accountID){  //Move to collection Model
         if(!$result = $this->db->query("SELECT * FROM `transactions` WHERE `FromAccountID` = '$accountID' and `MoneyOut` > 0 or `ToAccountID` = '$accountID' and `MoneyIn` > 0;")){
-            //throw
-            echo "throw";
+            throw new \mysqli_sql_exception();
         }
         $i = 0;
         while($transactions = $result->fetch_assoc()){

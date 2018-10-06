@@ -32,7 +32,7 @@ $collection->attachRoute(
     new Route(
         '/payments',
         array(
-            '_controller' => 'agilman\a2\controller\PaymentController::indexAction',
+            '_controller' => 'agilman\a2\controller\HomeController::PaymentIndexAction',
             'methods' => 'GET',
             'name' => 'paymentPage'
         )
@@ -43,7 +43,7 @@ $collection->attachRoute(
     new Route(
         '/payments/make',
         array(
-            '_controller' => 'agilman\a2\controller\PaymentController::makePaymentAction',
+            '_controller' => 'agilman\a2\controller\TransactionController::makePaymentAction',
             'methods' => 'POST',
             'name' => 'makepayment'
         )
@@ -54,7 +54,7 @@ $collection->attachRoute(
     new Route(
         '/transfers',
         array(
-            '_controller' => 'agilman\a2\controller\TransferController::indexAction',
+            '_controller' => 'agilman\a2\controller\HomeController::TransferIndexAction',
             'methods' => 'GET',
             'name' => 'transferPage'
         )
@@ -65,7 +65,7 @@ $collection->attachRoute(
     new Route(
         '/transfers/make',
         array(
-            '_controller' => 'agilman\a2\controller\transferController::makeTransferAction',
+            '_controller' => 'agilman\a2\controller\TransactionController::makeTransferAction',
             'methods' => 'POST',
             'name' => 'maketransfer'
         )
@@ -143,7 +143,7 @@ $collection->attachRoute(
     new Route(
         '/userJoinPage',
         array(
-            '_controller' => 'agilman\a2\controller\UserCreateController::indexAction',
+            '_controller' => 'agilman\a2\controller\HomeController::UserJoinIndexAction',
             'methods' => 'GET',
             'name' => 'userJoinPage'
         )
