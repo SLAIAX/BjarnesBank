@@ -34,8 +34,6 @@ p, ul, ol {
 	line-height: 180%;
 }
 
-ul, ol {
-}
 
 a {
 	color: #B50D0D;
@@ -131,8 +129,7 @@ a:hover {
 	color: #FFFFFF;
 }
 
-#logo h1, #logo p {
-}
+
 
 #logo h1 {
 	line-height: 120px;
@@ -145,18 +142,6 @@ a:hover {
 	text-transform: uppercase;
 }
 
-#logo p {
-	margin: 0;
-	padding: 0px 0 0 0px;
-	letter-spacing: -1px;
-	font: normal 18px Georgia, "Times New Roman", Times, serif;
-	font-style: italic;
-	color: #8E8E8E;
-}
-
-#logo p a {
-	color: #8E8E8E;
-}
 
 #logo a {
 	border: none;
@@ -169,14 +154,6 @@ a:hover {
 	float: left;
 	padding: -50px;
 
-}
-
-/* Splash */
-
-#splash {
-	width: 960px;
-	height: 300px;
-	margin: 0px auto;
 }
 
 
@@ -259,25 +236,7 @@ a:hover {
 	color: #222222;
 }
 
-.post .meta {
-	margin-bottom: 30px;
-	padding: 10px 0px 0px 0px;
-	text-align: left;
-	font-family: 'Abel', sans-serif;
-	font-size: 16px;
-	font-weight: 300;
-}
 
-.post .meta .date {
-	float: left;
-}
-
-.post .meta .posted {
-	float: right;
-}
-
-.post .meta a {
-}
 
 .post .entry {
 	padding: 0px 0px 40px 0px;
@@ -289,30 +248,7 @@ a:hover {
 	margin-bottom: 30px;
 }
 
-.more {
-	display: block;
-	float: left;
-	width: 88px;
-	padding: 5px 5px;
-	margin-right: 10px;
-	background: #B50D0D;
-	border-radius: 5px;
-	color: #FFFFFF;
-	text-align: center;
-	text-decoration: none;
-}
 
-.comments {
-	display: block;
-	float: left;
-	width: 88px;
-	padding: 5px 5px;
-	background: #B50D0D;
-	border-radius: 5px;
-	color: #FFFFFF;
-	text-align: center;
-	text-decoration: none;
-}
 
 /* Sidebar */
 
@@ -348,13 +284,7 @@ a:hover {
 	border-left: none;
 }
 
-#sidebar li li span {
-	display: block;
-	margin-top: -20px;
-	padding: 0;
-	font-size: 11px;
-	font-style: italic;
-}
+
 
 #sidebar li li a {
 	padding: 0px 0px 0px 20px;
@@ -368,23 +298,6 @@ a:hover {
 	font-size: 1.8em;
 	color: #222222;
 }
-
-#sidebar p {
-	margin: 0 0px;
-	padding: 0px 30px 20px 30px;
-	text-align: justify;
-}
-
-#sidebar a {
-	border: none;
-}
-
-#sidebar a:hover {
-	text-decoration: underline;
-}
-
-
-
 
 
 /* Footer */
@@ -411,48 +324,6 @@ a:hover {
 
 
 
-#banner .content {
-}
-
-.list-style1 {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-}
-
-.list-style1 a {
-	color: #7F7F7F;
-}
-
-/** LIST STYLE 1 */
-
-ul.style1 {
-	margin: 0px;
-	padding: 0px 0px 0px 0px;
-	list-style: none;
-}
-
-ul.style1 li {
-	padding: 10px 0px 10px 0px;
-	border-top: 1px solid #162738;
-	line-height: 160%;
-}
-
-ul.style1 a {
-	display: block;
-	padding: 0px 0px 0px 0px;
-	text-decoration: none;
-	color: #93B2A0;
-}
-
-ul.style1 a:hover {
-	text-decoration: underline;
-}
-
-ul.style1 .first {
-	border-top: none;
-	padding-top: 0px;
-}
 
 #featured-content {
 	overflow: hidden;
