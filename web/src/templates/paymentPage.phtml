@@ -33,9 +33,11 @@ include "header.phtml"
         <form method="POST" action="<?= $linkTo('makepayment'); ?>">
             <?php if(!$_SESSION['validTransaction']){
                 print("<p>Invalid Payment </p><br>");
+                $_SESSION['validTransaction'] = True;
             }
             if($_SESSION['emptyField']){
                 print("<p> Please fill in the required fields. </p> <br>");
+                $_SESSION['emptyField'] = False;
             }
 
             ?>
@@ -57,7 +59,7 @@ include "header.phtml"
 
 
             <p> To: <input class="transferFields" type="text" name="accountTo" size="25"> </p>
-            <p> Amount:  <input class="transferFields" type="text" name="amount" pattern="^\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$" title="Please enter a valid amount" size="25"> </p>
+            <p> Amount:  <input class="transferFields" type="text" name="amount" pattern="([0-9]+)(.[0-9][0-9])" title="Please enter a valid amount" size="25"> </p>
             <p> Description:  <input class="transferFields" type="text" name="description" pattern="^[a-zA-Z0-9_\s]+$" title="Alphanumeric characters with spaces and underscores only." size="25"> </p>
             <input class="transfer" type="submit" value="Make Transfer" > </p>
         </form>

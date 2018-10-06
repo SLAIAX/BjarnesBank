@@ -23,6 +23,7 @@
     <?php
     if($_SESSION['emptyField']){
         print("<p> Please fill in the required fields. </p> <br>");
+        $_SESSION['emptyField'] = False;
     }
     ?>
     <br>

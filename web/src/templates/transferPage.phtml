@@ -76,7 +76,7 @@ include "header.phtml"
                     }
                     ?>
                 </select> Can't be the same as From account.</p>
-            <p> Amount:  <input class="transferFields" type="text" name="amount" pattern="^\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$" title="Please enter a valid amount" size="25"> </p>
+            <p> Amount:  <input class="transferFields" type="text" name="amount" pattern="([0-9]+)(.[0-9][0-9])" title="Please enter a valid amount" size="25"> </p>
             <p> Description:  <input class="transferFields" type="text" name="description" pattern="^[a-zA-Z0-9_\s]+$" title="Alphanumeric characters with spaces and underscores only." size="25"> </p>
             <input class="transfer" type="submit" value="Make Transfer" > </p>
         </form>
