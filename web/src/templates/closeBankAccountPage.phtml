@@ -27,11 +27,10 @@ include "header.phtml"
 		</div>
 	</div>
 
-	<!------header wrapper ends ----------------->
+	   <!-- end #header -->
     <div id="page">
         <div id="content">
-            <div class="entry">
-                <form method="POST" action="<?= $linkTo('bankAccountCloseAction'); ?>">
+           <form method="POST" action="<?= $linkTo('bankAccountCloseAction'); ?>">
                     <?php if(!$_SESSION['validTransaction']){
                         print("<p>Invalid Payment </p><br>");
                     }
@@ -46,25 +45,16 @@ include "header.phtml"
                             ?>
 
                             <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]."   \t $".money_format('%.2n', $accounts[$i][2])?></option>
-
                             <?php
                             }
                             ?>
 
                         </select> </p>
                     <br>
-
-
-
-
-
                     <input class="transfer" type="submit" value="Delete" > </p>
                 </form>
-
-            </div>
-            <!------Login ends ----------------->
-
         </div>
+        <!-- end #content -->
         <div id="sidebar">
             <ul>
                 <li>
@@ -80,8 +70,9 @@ include "header.phtml"
             </ul>
         </div>
         <!-- end #sidebar -->
+        <div style="clear: both;">&nbsp;</div>
     </div>
-</div>
+    <!-- end #page --> <!------header wrapper ends ----------------->
 
 
 
