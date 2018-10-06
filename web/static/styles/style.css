@@ -544,3 +544,7 @@ ul.style1 .first {
 	text-align: center;
 	text-decoration: none
 }
+
+table{
+	width: 100%;
+}

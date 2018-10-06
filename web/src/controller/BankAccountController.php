@@ -59,7 +59,8 @@ class BankAccountController extends Controller
     public function closeBankAccount(){
         $bank = new bankAccountModel();
         $accountName = $_POST['accountClose'];
-        $id = $bank->findID($accountName);
+        $userid = $bank->findUserID($_SESSION['username']);
+        $id = $bank->findID($accountName, $userid);
         $bank->deleteAccount($id);
         $view = new View('deletionComplete');
         echo $view->render();
