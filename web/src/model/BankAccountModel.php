@@ -4,10 +4,93 @@ session_start();
 
 class BankAccountModel extends Model
 {
-    private $mID;
+    private $mAccountID;
+    private $mUserID;
     private $mAccountName;
     private $mType;
     private $mBalance;
+
+    /**
+     * @return mixed
+     */
+    public function getAccountID()
+    {
+        return $this->mAccountID;
+    }
+
+    /**
+     * @param mixed $mAccountID
+     */
+    public function setAccountID($mAccountID)
+    {
+        $this->mAccountID = $mAccountID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserID()
+    {
+        return $this->mUserID;
+    }
+
+    /**
+     * @param mixed $mUserID
+     */
+    public function setUserID($mUserID)
+    {
+        $this->mUserID = $mUserID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccountName()
+    {
+        return $this->mAccountName;
+    }
+
+    /**
+     * @param mixed $mAccountName
+     */
+    public function setAccountName($mAccountName)
+    {
+        $this->mAccountName = $mAccountName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->mType;
+    }
+
+    /**
+     * @param mixed $mType
+     */
+    public function setType($mType)
+    {
+        $this->mType = $mType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBalance()
+    {
+        return $this->mBalance;
+    }
+
+    /**
+     * @param mixed $mBalance
+     */
+    public function setBalance($mBalance)
+    {
+        $this->mBalance = $mBalance;
+    }
+
+
 
     public function findID($accountName, $id)
     {
@@ -32,6 +115,22 @@ class BankAccountModel extends Model
         }
         return $accountData;
     }
+
+
+    public function load($id)
+    {
+        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = $id;")) {
+            throw new \mysqli_sql_exception();
+        }
+        $result = $result->fetch_assoc();
+        $this->setAccountID($result['AccountID']);
+        $this->setUserID($result['UserID']);
+        $this->setBalance($result['Balance']);
+        $this->setType($result['AccountType']);
+        $this->setAccountName($result['AccountName']);
+        return $this;
+    }
+
 
     public function save($id)
     {

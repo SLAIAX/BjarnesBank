@@ -4,7 +4,7 @@ namespace agilman\a2\model;
 
 class TransactionCollectionModel extends Model
 {
-    private $accountIds;
+    private $transactionIds;
     private $N;
 
     public function __construct($accountID)
@@ -23,10 +23,10 @@ class TransactionCollectionModel extends Model
 
     public function getAccounts()
     {
-        foreach ($this->accountIds as $id) {
+        foreach ($this->transactionIds as $id) {
             // Use a generator to save on memory/resources
             // load accounts from DB one at a time only when required
-            yield (new AccountModel())->load($id);
+            yield (new TransactionModel())->load($id);
         }
     }
 }
