@@ -21,7 +21,7 @@ $collection->attachRoute(
     new Route(
         '/transactions',
         array(
-            '_controller' => 'agilman\a2\controller\TransactionController::viewTransactions',
+            '_controller' => 'agilman\a2\controller\TransactionController::transactionsIndexAction',
             'methods' => 'POST',
             'name' => 'viewTransactions'
         )
@@ -32,7 +32,7 @@ $collection->attachRoute(
     new Route(
         '/payments',
         array(
-            '_controller' => 'agilman\a2\controller\HomeController::PaymentIndexAction',
+            '_controller' => 'agilman\a2\controller\HomeController::paymentIndexAction',
             'methods' => 'GET',
             'name' => 'paymentPage'
         )
@@ -54,7 +54,7 @@ $collection->attachRoute(
     new Route(
         '/transfers',
         array(
-            '_controller' => 'agilman\a2\controller\HomeController::TransferIndexAction',
+            '_controller' => 'agilman\a2\controller\HomeController::transferIndexAction',
             'methods' => 'GET',
             'name' => 'transferPage'
         )
@@ -88,7 +88,7 @@ $collection->attachRoute(
     new Route(
         '/bank/account/close',
         array(
-            '_controller' => 'agilman\a2\controller\HomeController::closeAccountIndex',
+            '_controller' => 'agilman\a2\controller\HomeController::closeAccountIndexAction',
             'methods' => 'GET',
             'name' => 'closeAccountPage'
         )
@@ -99,7 +99,7 @@ $collection->attachRoute(
     new Route(
         '/bank/account/closeAction',
         array(
-            '_controller' => 'agilman\a2\controller\BankAccountController::closeBankAccount',
+            '_controller' => 'agilman\a2\controller\BankAccountController::deleteAction',
             'methods' => 'POST',
             'name' => 'bankAccountCloseAction'
         )
@@ -110,7 +110,7 @@ $collection->attachRoute(
     new Route(
         '/bank/account/create',
         array(
-            '_controller' => 'agilman\a2\controller\BankAccountController::createBankAccount',
+            '_controller' => 'agilman\a2\controller\BankAccountController::createAction',
             'methods' => 'POST',
             'name' => 'bankAccountCreate'
         )
@@ -121,7 +121,7 @@ $collection->attachRoute(
     new Route(
         '/bank/account/type',
         array(
-            '_controller' => 'agilman\a2\controller\HomeController::typeAccountIndex',
+            '_controller' => 'agilman\a2\controller\HomeController::typeAccountIndexAction',
             'methods' => 'GET',
             'name' => 'typeAccountPage'
         )
@@ -132,7 +132,7 @@ $collection->attachRoute(
     new Route(
         '/aboutus',
         array(
-            '_controller' => 'agilman\a2\controller\HomeController::aboutusIndexAction',
+            '_controller' => 'agilman\a2\controller\HomeController::aboutUsIndexAction',
             'methods' => 'GET',
             'name' => 'aboutus'
         )
@@ -143,7 +143,7 @@ $collection->attachRoute(
     new Route(
         '/userJoinPage',
         array(
-            '_controller' => 'agilman\a2\controller\HomeController::UserJoinIndexAction',
+            '_controller' => 'agilman\a2\controller\HomeController::userJoinIndexAction',
             'methods' => 'GET',
             'name' => 'userJoinPage'
         )
@@ -162,16 +162,6 @@ $collection->attachRoute(
 );
 
 
-$collection->attachRoute(
-    new Route(
-        '/Transactions',
-        array(
-            '_controller' => 'agilman\a2\controller\HomeController::transactionIndexAction',
-            'methods' => 'GET',
-            'name' => 'transaction'
-        )
-    )
-);
 
 $collection->attachRoute(
     new Route(

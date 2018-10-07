@@ -15,6 +15,13 @@ class AccountController extends Controller
 {
     /**
      * Account Create action
+     *
+     * Checks if Create Action is Available( used to stop recreating accounts on refresh)
+     * Intialises Account with Post Data
+     * Validates the account information, Throws is something is wrong and handled appropriately
+     * Saves the Account , Inserting into Database
+     * Renders account Created Page
+     * Sets action available false, so that if press refresh it will not create an identical entry
      */
     public function createAction()
     {

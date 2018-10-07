@@ -6,8 +6,17 @@ use agilman\a2\model\LoginModel;
 use agilman\a2\model\Model;
 use agilman\a2\view\View;
 
+/**
+ * Class LoginController
+ * @package agilman\a2\controller
+ */
 class LoginController extends Controller
 {
+    /**
+     * Login Controller Index Action
+     *
+     * Renders Login Page
+     */
     public function indexAction()
     {
         new Model();
@@ -15,6 +24,15 @@ class LoginController extends Controller
         echo $view->render();
     }
 
+    /**
+     * Validate Action
+     *
+     * Gets the Post data
+     * Create a Login Model, Initialise with username and password
+     * Validate the login attempt
+     * If Pass redirect to homepage and turn access to 1
+     * if Fail redirect to loginPage and turn access to 2(wrong password message)
+     */
     public function validateAction()
     {
         $_SESSION["access"] = 0;

@@ -9,9 +9,29 @@ use agilman\a2\model\TransactionModel;
 use agilman\a2\view\View;
 use const Grpc\CALL_ERROR_TOO_MANY_OPERATIONS;
 
+/**
+ * Class TransactionController
+ * @package agilman\a2\controller
+ */
 class TransactionController extends Controller
+
+
 {
-    public function viewTransactions()
+
+
+
+    /**
+     * View Transactions Action
+     *
+     * Get the Post Data
+     * Initialise BankAccountModel
+     * Find the Account Id with AccountName and Session UserID
+     * Initialise Transaction Collection Model
+     * Get a transaction Collection
+     * Render Transaction Page and pass data to it
+     *
+     */
+    public function transactionsIndexAction()
     {
         try {
             $accountName = $_POST['account'];
@@ -30,6 +50,22 @@ class TransactionController extends Controller
         }
     }
 
+    /**
+     *
+     * Make Transfer Action
+     * (slightly different to payment)
+     *
+     * Checks If Session Action is Available ( to avoid double creates on refresh)
+     * Initialise a bank Account Model
+     * Find the account Ids associated with transfer using Post Data
+     * Create a transaction model
+     * Fill with post data and account Ids
+     * Validate Transfer , Throw and handle appropriately if something goes wrong
+     * Make Transfer, Perform the transfer
+     * Save The transfer to DataBase
+     * Render Transaction Complete Page
+     *
+     */
     public function makeTransferAction()
     {
         if($_SESSION['actionAvailable']){
@@ -61,6 +97,22 @@ class TransactionController extends Controller
         }
     }
 
+    /**
+     *
+     * Make Payment Action
+     * (slightly different to transfer)
+     *
+     * Checks If Session Action is Available ( to avoid double creates on refresh)
+     * Initialise a bank Account Model
+     * Find the account Ids associated with transfer using Post Data
+     * Create a transaction model
+     * Fill with post data and account Ids
+     * Validate Transfer , Throw and handle appropriately if something goes wrong
+     * Make Transfer, Perform the transfer
+     * Save The transfer to DataBase
+     * Render Payment Complete Page
+     *
+     */
     public function makePaymentAction()
     {
         if ($_SESSION['actionAvailable']) {
