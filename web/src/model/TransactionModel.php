@@ -239,21 +239,4 @@ class TransactionModel extends Model
         }
     }
 
-    public function getTransactions($accountID){  //Move to collection Model
-        if(!$result = $this->db->query("SELECT * FROM `transactions` WHERE `FromAccountID` = '$accountID' and `MoneyOut` > 0 or `ToAccountID` = '$accountID' and `MoneyIn` > 0;")){
-            throw new \mysqli_sql_exception();
-        }
-        $i = 0;
-        while($transactions = $result->fetch_assoc()){
-            $transactionData[$i][0] = $transactions['FromAccountID'];
-            $transactionData[$i][1] = $transactions['ToAccountID'];
-            $transactionData[$i][2] = $transactions['MoneyIn'];
-            $transactionData[$i][3] = $transactions['MoneyOut'];
-            $transactionData[$i][4] = $transactions['Balance'];
-            $transactionData[$i][6] = $transactions['Description'];
-            $transactionData[$i][5] = $transactions['DateOfTrans'];
-            $i++;
-        }
-        return $transactionData;
-    }
 }
