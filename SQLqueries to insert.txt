@@ -2,7 +2,7 @@ INSERT INTO `user` (`ID`, `First Name`, `Last Name`, `Username`, `Password`, `Ad
 (NULL, 'Bob', 'jim', 'admin', 'Admin1234', '17 Alnack Place', 'admin@admin.co', '02298719235'),
 (NULL, 'Andrew', 'Gilman', 'AGilman', 'AGilman1', '124 Sunset Avenue', 'a.gilman@massey.ac.nz', '4451234'),
 (NULL, 'Jordan', 'Drumm', 'SLAIAX', 'football22', '16 ', 'jordan@gmail.com', '094730000'),
-(NULL, 'Zane', 'Lamb', 'Zane', 'ZaneLamb2', '12 Time Avenue', 'lanelamb@gmail.com', '0421483');
+(NULL, 'Zane', 'Lamb', 'Zane', 'ZaneLamb2', '12 Time Avenue', 'lanelamb@gmail.com', '0421483'),
 (NULL, 'Sam', 'Arnet', 'Sammy', 'Sammy', '9 Pleasantville ave', 'sam@gmail.com', '1027493');
 
 INSERT INTO `transactions` (`TransID`, `FromAccountID`, `Description`, `DateOfTrans`, `MoneyIn`, `MoneyOut`, `Balance`, `ToAccountID`) VALUES

@@ -18,3 +18,5 @@ use getter and setters
 
 close account is shit and not working...
 Make view transactions table smaller and add the sidebar to that and all the other pages 
+
+Make database load info before a model is initially created?

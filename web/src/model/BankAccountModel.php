@@ -157,8 +157,11 @@ class BankAccountModel extends Model
         if (!$result = $this->db->query("DELETE FROM `account` WHERE `AccountID` = '$id';")) {
             throw new \mysqli_sql_exception();
         }
-        if (!$result = $this->db->query("DELETE FROM `transactions` WHERE `AccountID` = '$id';")) {
-            throw new \mysqli_sql_exception();
+//        if (!$result = $this->db->query("DELETE FROM `transactions` WHERE `AccountID` = '$id';")) {
+//            throw new \mysqli_sql_exception();
+//        }
+        if(!$result = $this->db->query("DELETE FROM `transactions` WHERE `ToAccountID` = '$id' and `MoneyIn` > 0;")){
+            //Don't throw as may not have any transactions.
         }
     }
 }

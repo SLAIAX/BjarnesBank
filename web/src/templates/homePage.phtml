@@ -34,8 +34,8 @@ include "header.phtml"
 
                 <div class="entry">
                     <table>
-                    <tr><tr><th>Account ID</th>
-                            <th>Account Name</th>
+                    <tr><tr><th>Account Name</th>
+                            <th>Account ID</th>
                             <th>Account Type</th>
                             <th>Account Balance</th>
                         </tr>
@@ -47,12 +47,10 @@ include "header.phtml"
                         foreach($accounts as $account) { ?>
 
                             <tr>
-                                <td><?=$account->getAccountID()?></td>
                                 <form method="post" action="<?= $linkTo('viewTransactions'); ?>">
                                     <td><input type="submit" id="tranzLink" name="account" value="<?= $account->getAccountName() ?>"></td>
                                 </form>
-
-
+                                <td><?=$account->getAccountID()?></td>
                             <td><?=$account->getType()?></td>
                         <td><?="$".money_format('%.2n', $account->getBalance());?></td></tr>
                         <?php

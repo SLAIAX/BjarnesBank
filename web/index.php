@@ -1,8 +1,9 @@
 <?php
 /**
- * 159.339 Internet Programming 2017.2
- * Student ID: 99999999
- * Assignment: 2   Date: 01/09/17
+ * 159.339 Internet Programming 2018.2
+ * Names: Jordan Drumm & Zane Lamb
+ * Student IDs: 17044923 & 15160640
+ * Assignment: 2
  * System: PHP 7.1
  * Code guidelines: PSR-1, PSR-2
  *
