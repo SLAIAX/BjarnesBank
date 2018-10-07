@@ -90,8 +90,6 @@ class BankAccountModel extends Model
         $this->mBalance = $mBalance;
     }
 
-
-
     public function findID($accountName, $id)
     {
         if(!$accountName){
@@ -117,7 +115,6 @@ class BankAccountModel extends Model
         $this->setAccountName($result['AccountName']);
         return $this;
     }
-
 
     public function save($id)
     {
