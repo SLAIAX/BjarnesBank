@@ -7,6 +7,7 @@ use agilman\a2\model\AccountModel;
 use agilman\a2\model\BankAccountModel;
 use agilman\a2\model\TransactionModel;
 use agilman\a2\view\View;
+use http\Exception\InvalidArgumentException;
 
 /**
  * Class AccountController
@@ -29,8 +30,8 @@ class BankAccountController extends Controller
 
                 $accountname = $_POST['AccountName'];
                 $account = new BankAccountModel();
-                $user = new AccountModel();
-                $id = $user->findID($_SESSION['username']);
+
+                $id = $_SESSION['id'];
                
                 $account->validate($accountname, $id);
                 $account->save($id);
@@ -56,8 +57,9 @@ class BankAccountController extends Controller
         try {
             $bank = new BankAccountModel();
             $accountName = $_POST['accountClose'];
-            $user = new AccountModel();
-            $userid = $user->findID($_SESSION['username']);
+
+
+            $userid = $_SESSION['id'];
             $id = $bank->findID($accountName, $userid);
             $bank->deleteAccount($id);
             $view = new View('deletionComplete');

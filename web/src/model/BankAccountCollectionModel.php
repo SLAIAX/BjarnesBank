@@ -2,7 +2,7 @@
 namespace agilman\a2\model;
 
 
-class AccountCollectionModel extends Model
+class BankAccountCollectionModel extends Model
 {
     private $accountIds;
     private $N;

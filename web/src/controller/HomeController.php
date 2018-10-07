@@ -18,8 +18,7 @@ class HomeController extends Controller
     public function indexAction()       //Implement collection model here
     {
         if($_SESSION["access"] == 1) {
-            $user = new AccountModel();
-            $id = $user->findID($_SESSION['username']);
+            $id = $_SESSION['id'];
             $bank = new BankAccountModel();
             $accounts = $bank->getAccounts($id);
 
@@ -44,8 +43,8 @@ class HomeController extends Controller
     }
 
     public function closeAccountIndex(){
-        $user = new AccountModel();
-        $id = $user->findID($_SESSION['username']);
+        $user = new BankAccountModel();
+        $id = $_SESSION['id'];
         $accounts = $user->getAccounts($id);
         $view = new View('closeBankAccountPage');
         echo $view->addData('accounts', $accounts)->render();
@@ -57,8 +56,8 @@ class HomeController extends Controller
     }
 
     public function TransferIndexAction(){
-        $user = new AccountModel();
-        $id = $user->findID($_SESSION['username']);
+        $user = new BankAccountModel();
+        $id = $_SESSION['id'];
         $accounts = $user->getAccounts($id);
         $view = new View('transferPage');
         echo $view->addData('accounts', $accounts)->render();
@@ -66,8 +65,8 @@ class HomeController extends Controller
 
     public function PaymentIndexAction()
     {
-        $user = new AccountModel();
-        $id = $user->findID($_SESSION['username']);
+        $user = new BankAccountModel();
+        $id = $_SESSION['id'];
         $accounts = $user->getAccounts($id);
         $view = new View('paymentPage');
         echo $view->addData('accounts', $accounts)->render();

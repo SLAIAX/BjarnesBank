@@ -39,7 +39,6 @@ class LoginController extends Controller
            if ($flag) {
                $_SESSION['username'] = $username;
                $_SESSION["access"] = 1;
-               
                $this->redirect('homePage');
            } else {
                unset($login);

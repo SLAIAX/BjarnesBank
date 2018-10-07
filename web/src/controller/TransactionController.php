@@ -32,8 +32,7 @@ class TransactionController extends Controller
         if($_SESSION['actionAvailable']){
             try {
                 $account = new BankAccountModel();
-                $user = new AccountModel();
-                $id = $user->findID($_SESSION['username']);
+                $id = $_SESSION['id'];
                 $toAccountID = $account->findID($_POST['accountTo'], $id);
                 $fromAccountID = $account->findID($_POST['accountFrom'], $id);
                 $transaction = new TransactionModel();
@@ -63,8 +62,8 @@ class TransactionController extends Controller
             try {
                 $account = new BankAccountModel();
                 $toAccountID = $_POST['accountTo'];
-                $user = new AccountModel();
-                $id = $user->findID($_SESSION['username']);
+             
+                $id = $_SESSION['id'];
                 $fromAccountID = $account->findID($_POST['accountFrom'], $id);
                 $transaction = new TransactionModel();
                 $transaction->validateTransfer($toAccountID, $fromAccountID);
