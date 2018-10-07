@@ -52,10 +52,11 @@ INSERT INTO `account` (`AccountID`, `UserID`, `AccountType`, `Balance`, `Account
 
 (NULL, 1, 'Cheque', '18955', 'Spendings'),
 
-(NULL, 2, 'Savings', '152287', 'My Savings'),
+(NULL, 2, 'Serious-Saver', '152287', 'My Savings'),
 
-(NULL, 2, 'FastSaver', '7612', 'Holiday'),
+(NULL, 2, 'Select', '7612', 'Holiday'),
 
-(NULL, 2, 'Cheque', '1200', 'Spendings'),
+(NULL, 2, 'Jump-Start', '1200', 'Spendings'),
 
-(NULL, 2, 'Savings', '876', 'Bills');
+(NULL, 2, 'Freedom', '876', 'Bills'),
+(NULL, 2, 'Ready-Saver', '50', 'ForBob');

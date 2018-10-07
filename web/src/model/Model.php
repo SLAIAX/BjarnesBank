@@ -98,6 +98,53 @@ class Model
             }
         }
 
+        if(!$this->db->query("INSERT INTO `user` (`ID`, `First Name`, `Last Name`, `Username`, `Password`, `Address`, `Email`, `Phone`) VALUES
+            (NULL, 'Bob', 'jim', 'admin', 'Admin1234', '17 Alnack Place', 'admin@admin.co', '02298719235'),
+            (NULL, 'Andrew', 'Gilman', 'AGilman', 'AGilman1', '124 Sunset Avenue', 'a.gilman@massey.ac.nz', '4451234'),
+            (NULL, 'Jordan', 'Drumm', 'SLAIAX', 'football22', '16 ', 'jordan@gmail.com', '094730000'),
+            (NULL, 'Zane', 'Lamb', 'Zane', 'ZaneLamb2', '12 Time Avenue', 'lanelamb@gmail.com', '0421483'),
+            (NULL, 'Sam', 'Arnet', 'Sammy', 'Sammy', '9 Pleasantville ave', 'sam@gmail.com', '1027493');")){
+             echo $this->db->error;
+            error_log("Failed creating sample data!", 0);
+        }
+
+        if(!$this->db->query("INSERT INTO `transactions` (`TransID`, `FromAccountID`, `Description`, `DateOfTrans`, `MoneyIn`, `MoneyOut`, `Balance`, `ToAccountID`) VALUES
+          (NULL, 4, 'Heating', '2018-10-06', '0', '100', '149900', 7),
+          (NULL, 4, 'Heating', '2018-10-06', '100', '0', '663', 7),
+          (NULL, 3, 'Dinner', '2018-10-06', '0', '56', '18880', 5),
+          (NULL, 3, 'Dinner', '2018-10-06', '56', '0', '7612', 5),
+          (NULL, 1, 'Wage', '2018-09-29', '0', '1600', '8400', 4),
+          (NULL, 1, 'Wage', '2018-09-29', '1600', '0', '151500', 4),
+          (NULL, 1, 'Wage', '2018-10-06', '0', '1600', '6800', 4),
+          (NULL, 1, 'Wage', '2018-10-06', '1600', '0', '153100', 4),
+          (NULL, 3, 'Core i5 7600K', '2018-10-06', '0', '400', '18480', 2),
+          (NULL, 3, 'Core i5 7600K', '2018-10-06', '400', '0', '424', 2),
+          (NULL, 4, 'Top up', '2018-10-06', '0', '500', '152600', 3),
+          (NULL, 4, 'Top up', '2018-10-06', '500', '0', '18980', 3),
+          (NULL, 4, 'Gas', '2018-10-06', '0', '213', '152387', 7),
+          (NULL, 4, 'Gas', '2018-10-06', '213', '0', '876', 7),
+          (NULL, 4, 'Allowance', '2018-10-06', '0', '100', '152287', 6),
+          (NULL, 4, 'Allowance', '2018-10-06', '100', '0', '1300', 6),
+          (NULL, 6, 'Dinner', '2018-10-06', '0', '100', '1200', 2),
+          (NULL, 6, 'Dinner', '2018-10-06', '100', '0', '524', 2),
+          (NULL, 3, 'Drinks', '2018-10-06', '0', '25', '18955', 2),
+          (NULL, 3, 'Drinks', '2018-10-06', '25', '0', '569', 2);")){
+            echo $this->db->error;
+            error_log("Failed creating sample data!", 0);
+        }
+
+        if(!$this->db->query("INSERT INTO `account` (`AccountID`, `UserID`, `AccountType`, `Balance`, `AccountName`) VALUES
+          (NULL, 1, 'Savings', '6780', 'Test'),
+          (NULL, 1, 'Cheque', '18955', 'Spendings'),
+          (NULL, 2, 'Serious-Saver', '152287', 'My Savings'),
+          (NULL, 2, 'Select', '7612', 'Holiday'),
+          (NULL, 2, 'Jump-Start', '1200', 'Spendings'),
+          (NULL, 2, 'Freedom', '876', 'Bills'),
+          (NULL, 2, 'Ready-Saver', '50', 'ForBob');")){
+            echo $this->db->error;
+            error_log("Failed creating sample data!", 0);
+        }
+
 //        if (!$this->db->query("INSERT INTO `user` VALUES (NULL,'Bob', 'jim', 'address', 'st','st');")) {
 //            // handle appropriately
 //            echo $this->db->error;
