@@ -13,6 +13,28 @@ class AccountModel extends Model
     private $mPhone;
 
     /**
+     * AccountModel constructor.
+     * @param $mUserName
+     * @param $mFirstName
+     * @param $mLastName
+     * @param $mAddress
+     * @param $mPassword
+     * @param $mEmail
+     * @param $mPhone
+     */
+    public function __construct($mUserName, $mFirstName, $mLastName, $mPassword, $mAddress, $mEmail, $mPhone)
+    {
+        $this->mUserName = $mUserName;
+        $this->mFirstName = $mFirstName;
+        $this->mLastName = $mLastName;
+        $this->mAddress = $mAddress;
+        $this->mPassword = $mPassword;
+        $this->mEmail = $mEmail;
+        $this->mPhone = $mPhone;
+    }
+
+
+    /**
      * @return mixed
      */
     public function getUserName()
@@ -142,52 +164,35 @@ class AccountModel extends Model
 
 
 
-    public function findID($username)
+    public function save()
     {
-        if (!$result = $this->db->query("SELECT ID FROM `user` WHERE `Username` = '$username';")) {
-            throw new \mysqli_sql_exception();
-        }
-        $result = $result->fetch_assoc();
-        return $result['ID'];
-    }
-
-    public function load($id)
-    {
-        if (!$result = $this->db->query("SELECT * FROM `user` WHERE `ID` = $id;")) {
-            throw new \mysqli_sql_exception();
-        }
-        $result = $result->fetch_assoc();
-        $this->setFirstName($result['FirstName']);
-        $this->setID($id);
-        return $this;
-    }
-
-    public function save($firstname, $lastname, $username, $password)
-    {
-        $name = $this->mFirstName ?? "NULL";
-        $address = $_POST['address'];
-        $email = $_POST['email'];
-        $phonenumber = $_POST['phonenumber'];
+        $firstname = $this->getFirstName();
+        $address = $this->getAddress();
+        $email = $this->getEmail();
+        $phonenumber = $this->getPhone();
+        $lastname = $this->getLastName();
+        $password = $this->getPassword();
+        $username = $this->getUserName();
         if (!isset($this->mID)) {
             if (!$result = $this->db->query("INSERT INTO `user` VALUES (NULL, '$firstname', '$lastname', '$username', '$password', '$address', '$email','$phonenumber');")) {
                 throw new \mysqli_sql_exception();
             }
             $this->mID = $this->db->insert_id;
         } else {
-            if (!$result = $this->db->query("UPDATE `user` SET `user` = '$name' WHERE `ID` = $this->mID;")) {
-                throw new \mysqli_sql_exception();
-            }
+//            if (!$result = $this->db->query("UPDATE `user` SET `user` = '' WHERE `ID` = $this->mID;")) {
+//                throw new \mysqli_sql_exception();
+//            }
         }
     }
 
-    public function validate($firstname, $lastname, $username, $password)
-    {
-        if (!$firstname || !$lastname || !$username || !$password) {
+    public function validate(){
+        $username = $this->getUserName();
+        if(!$this->getFirstName() || !$this->getLastName() || !$username || !$this->getPassword()){
             throw new \UnexpectedValueException();
         }
         if ($result = $this->db->query("SELECT * FROM `user` WHERE `Username` = '$username';")) {
             $accounts = $result->fetch_assoc();
-            if ($accounts['Username'] != "") {
+            if($accounts['Username'] != ""){
                 throw new \LogicException();
             }
         }
