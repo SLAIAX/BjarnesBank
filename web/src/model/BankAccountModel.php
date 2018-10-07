@@ -19,6 +19,7 @@ class BankAccountModel extends Model
     {
         $this->mAccountID = $mAccountID;
         $this->mUserID = $mUserID;
+        parent::__construct();
     }
 
 
