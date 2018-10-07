@@ -46,35 +46,25 @@ include "header.phtml"
             <p> From:  <select class="transferFields" name="accountFrom">
 
                     <?php
-
-                    foreach($accounts as $account){
-
+                    foreach($accountsa as $account){
                     ?>
 
                     <option value="<?= $account->getAccountName()?>"><?= $account->getAccountName()." $".money_format('%.2n', $account->getBalance())?></option>
 
                     <?php
                     }
-
                     ?>
 
                 </select> </p>
 
-
-
             <p> To:  <select class="transferFields" name="accountTo">
-
                     <?php
-
-
-                    foreach($accounts as $account){
-
+                    foreach($accountsb as $accountz){
                         ?>
 
                         <option value="<?= $accountz->getAccountName()?>"><?= $accountz->getAccountName()." $".money_format('%.2n', $accountz->getBalance())?></option>
 
                         <?php
-
                     }
                     ?>
                 </select> <span class="transferInfoExtra">Can't be the same as From account.</span></p>

@@ -48,10 +48,13 @@ class HomeController extends Controller
 
     public function TransferIndexAction(){
         $id = $_SESSION['id'];
-        $collection = new BankAccountCollectionModel($id);
-        $accounts = $collection->getAccounts();
+        $collectiona = new BankAccountCollectionModel($id);
+        $collectionb = new BankAccountCollectionModel($id);
+        $accountsa = $collectiona->getAccounts();
+        $accountsb = $collectionb->getAccounts();
         $view = new View('transferPage');
-        echo $view->addData('accounts', $accounts)->render();
+        $view->addData('accountsa',$accountsa);
+        echo $view->addData('accountsb', $accountsb)->render();
     }
 
     public function PaymentIndexAction()
