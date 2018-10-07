@@ -174,8 +174,8 @@ class TransactionModel extends Model
     public function validateTransfer($accountTo, $accountFrom)
     {
         $this->mAmount = $_POST['amount'];
-        $this->mToAccountID = $accountTo;
-        $this->mFromAccountID = $accountFrom;
+        $this->setToAccountID($accountTo);
+        $this->setFromAccountID($accountFrom);
 
         if (!$this->mAmount) {
             throw new \UnexpectedValueException();

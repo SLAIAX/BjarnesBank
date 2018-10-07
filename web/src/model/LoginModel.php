@@ -65,7 +65,7 @@ class LoginModel extends Model
         }
         $result = $result->fetch_assoc();
 
-        if ($result['Password'] == $this->password) {
+        if ($result['Password'] == $this->getPassword()) {
             $_SESSION['id'] = $result['ID'];
             return true;
         }
