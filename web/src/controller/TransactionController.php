@@ -8,16 +8,8 @@ use agilman\a2\model\TransactionModel;
 use agilman\a2\view\View;
 use const Grpc\CALL_ERROR_TOO_MANY_OPERATIONS;
 
-/**
- * Class AccountController
- *
- * @package agilman/a2
- * @author  Andrew Gilman <a.gilman@massey.ac.nz>
- */
 class TransactionController extends Controller
 {
-
-
     public function viewTransactions()
     {
         $account = $_POST['account'];
@@ -52,9 +44,6 @@ class TransactionController extends Controller
             }
         }
     }
-
-
-
 
     public function makePaymentAction()
     {
