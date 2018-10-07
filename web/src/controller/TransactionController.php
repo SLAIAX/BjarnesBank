@@ -15,6 +15,7 @@ class TransactionController extends Controller
     {
         try {
             $accountName = $_POST['account'];
+
             $userID = $_SESSION['id'];
             $bank = new BankAccountModel(NULL, $userID);
             $id = $bank->findID($accountName);
@@ -38,7 +39,12 @@ class TransactionController extends Controller
                 $toAccountID = $account->findID($_POST['accountTo']);
                 $fromAccountID = $account->findID($_POST['accountFrom']);
                 $transaction = new TransactionModel();
-                $transaction->validateTransfer($toAccountID, $fromAccountID);
+                $transaction->setAmount($_POST['amount']);
+                $transaction->setDescription($_POST['description']);
+                $transaction->setToAccountID($toAccountID);
+                $transaction->setFromAccountID($fromAccountID);
+
+                $transaction->validateTransfer();
                 $transaction->makeTransfer();
                 $transaction->save();
 

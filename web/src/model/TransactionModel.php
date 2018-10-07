@@ -166,49 +166,84 @@ class TransactionModel extends Model
         $this->mBalance = $mBalance;
     }
 
-
-
-
-
-
-    public function validateTransfer($accountTo, $accountFrom)
+    /**
+     * @return mixed
+     */
+    public function getBalanceFrom()
     {
-        $this->mAmount = $_POST['amount'];
-        $this->setToAccountID($accountTo);
-        $this->setFromAccountID($accountFrom);
+        return $this->mBalanceFrom;
+    }
 
-        if (!$this->mAmount) {
+    /**
+     * @param mixed $mBalanceFrom
+     */
+    public function setBalanceFrom($mBalanceFrom)
+    {
+        $this->mBalanceFrom = $mBalanceFrom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBalanceTo()
+    {
+        return $this->mBalanceTo;
+    }
+
+    /**
+     * @param mixed $mBalanceTo
+     */
+    public function setBalanceTo($mBalanceTo)
+    {
+        $this->mBalanceTo = $mBalanceTo;
+    }
+
+
+
+
+
+
+    public function validateTransfer()
+    {
+
+        $toAccountID = $this->getToAccountID();
+        $fromAccountID = $this->getAccountID();
+        if (!$this->getAmount()) {
             throw new \UnexpectedValueException();
         }
-        if ($this->mToAccountID == $this->mFromAccountID) {
+        if ($toAccountID == $fromAccountID) {
             throw new \LogicException();
         }
-        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mToAccountID';")) {
+        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$toAccountID';")) {
             throw new \mysqli_sql_exception();
         }
         $toAccount = $result->fetch_assoc();
-        $this->mBalanceTo = (int)$toAccount['Balance'];
+        $this->setBalanceTo((int)$toAccount['Balance']);
 
-        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mFromAccountID';")) {
+        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$fromAccountID';")) {
             throw new \mysqli_sql_exception();
         }
         $fromAccount = $result->fetch_assoc();
-        $this->mBalanceFrom = (int)$fromAccount['Balance'];
-        if ($this->mBalanceFrom < $this->mAmount) {
+        $this->setBalanceFrom((int)$fromAccount['Balance']);
+        if ($this->getBalanceFrom() < $this->getAmount()) {
             throw new \LogicException();
         }
     }
 
     public function makeTransfer()
     {
-            $description = $_POST['description'];
+
+            $toAccountID = $this->getToAccountID();
+            $fromAccountID = $this->getAccountID();
+            $description = $this->getDescription();
             $date = date("Y-m-d");
-            $this->mBalanceFrom -= $this->mAmount;
-            $this->mBalanceTo += $this->mAmount;
-        if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', 0, '$this->mAmount', '$this->mBalanceFrom','$this->mToAccountID');")) {
+            $amount = $this->getAmount();
+            $balanceFrom = $this->getBalanceFrom() - $amount;
+            $balanceTo =  $this->getBalanceTo() + $amount;
+        if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$fromAccountID', '$description', '$date', 0, '$amount', '$balanceFrom','$toAccountID');")) {
             throw new \mysqli_sql_exception();
         }
-        if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', '$this->mAmount', 0, '$this->mBalanceTo','$this->mToAccountID');")) {
+        if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$fromAccountID', '$description', '$date', '$amount', 0, '$balanceTo','$toAccountID');")) {
             throw new \mysqli_sql_exception();
         }
     }
@@ -220,7 +255,7 @@ class TransactionModel extends Model
             throw new \mysqli_sql_exception();
         }
         $result = $result->fetch_assoc();
-        $this->setToAccountID(['ToAccoutnID']);
+        $this->setToAccountID($result['ToAccountID']);
         $this->setFromAccountID($result['FromAccountID']);
         $this->setBalance($result['Balance']);
         $this->setDate($result['DateOfTrans']);
@@ -234,10 +269,12 @@ class TransactionModel extends Model
 
     public function save()
     {
-        if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$this->mBalanceFrom' WHERE `AccountID` = '$this->mFromAccountID';")) {
+        $balanceTo = $this->getBalanceTo();
+        $balanceFrom = $this->getBalanceFrom);
+        if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$balanceFrom' WHERE `AccountID` = '$this->mFromAccountID';")) {
             throw new \mysqli_sql_exception();
         }
-        if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$this->mBalanceTo' WHERE `AccountID` = '$this->mToAccountID';")) {
+        if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$balanceTo' WHERE `AccountID` = '$this->mToAccountID';")) {
             throw new \mysqli_sql_exception();
         }
     }
