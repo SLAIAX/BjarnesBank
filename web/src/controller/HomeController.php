@@ -34,9 +34,9 @@ class HomeController extends Controller
     }
 
     public function closeAccountIndex(){
-        $user = new BankAccountModel();
         $id = $_SESSION['id'];
-        $accounts = $user->getAccounts($id);
+        $collection = new BankAccountCollectionModel($id);
+        $accounts = $collection->getAccounts();
         $view = new View('closeBankAccountPage');
         echo $view->addData('accounts', $accounts)->render();
     }
@@ -47,18 +47,19 @@ class HomeController extends Controller
     }
 
     public function TransferIndexAction(){
-        $user = new BankAccountModel();
         $id = $_SESSION['id'];
-        $accounts = $user->getAccounts($id);
+        $collection = new BankAccountCollectionModel($id);
+        $accounts = $collection->getAccounts();
         $view = new View('transferPage');
         echo $view->addData('accounts', $accounts)->render();
     }
 
     public function PaymentIndexAction()
     {
-        $user = new BankAccountModel();
+
         $id = $_SESSION['id'];
-        $accounts = $user->getAccounts($id);
+        $collection = new BankAccountCollectionModel($id);
+        $accounts = $collection->getAccounts();
         $view = new View('paymentPage');
         echo $view->addData('accounts', $accounts)->render();
     }

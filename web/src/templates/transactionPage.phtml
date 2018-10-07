@@ -41,26 +41,21 @@ include "header.phtml"
             </tr>
 
             <?php
-
-            for($i = 0; $i < count($transactions); $i++){
-
+            foreach ($transactions as $transaction){
                 ?>
 
                 <tr>
-                <td><?=$transactions[$i][0]?></td>
-                <td><?=$transactions[$i][1]?></td>
-                <td><?="$".money_format('%.2n',$transactions[$i][2])?></td>
-                <td><?="$".money_format('%.2n',$transactions[$i][3])?></td>
-                <td><?="$".money_format('%.2n',$transactions[$i][4])?></td>
-                <td><?=$transactions[$i][5]?></td>
-                <td><?=$transactions[$i][6]?></td></tr>
-
+                <td><?=$transaction->getFromAccountID()?></td>
+                <td><?=$transaction->getToAccountID()?></td>
+                <td><?="$".money_format('%.2n',$transaction->getMoneyIn())?></td>
+                <td><?="$".money_format('%.2n',$transaction->getMoneyOut())?></td>
+                <td><?="$".money_format('%.2n',$transaction->getBalance())?></td>
+                <td><?=$transaction->getDescription()?></td>
+                <td><?=$transaction->getDate()?></td>
+                </tr>
 
                 <?php
-
             }
-
-
             ?>
         </table>
 

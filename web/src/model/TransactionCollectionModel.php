@@ -14,14 +14,14 @@ class TransactionCollectionModel extends Model
             if (!$result = $this->db->query("SELECT `TransID` FROM `transactions` WHERE `FromAccountID` = '$accountID' and `MoneyOut` > 0 or `ToAccountID` = '$accountID' and `MoneyIn` > 0;")) {
                 throw new \Exception();
             }
-            $this->accountIds = array_column($result->fetch_all(), 0);
+            $this->transactionIds = array_column($result->fetch_all(), 0);
             $this->N = $result->num_rows;
         }catch(\Exception $e){
 
         }
     }
 
-    public function getAccounts()
+    public function getTransactions()
     {
         foreach ($this->transactionIds as $id) {
             // Use a generator to save on memory/resources

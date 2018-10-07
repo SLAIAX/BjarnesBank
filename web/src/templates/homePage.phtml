@@ -47,10 +47,11 @@ include "header.phtml"
                         foreach($accounts as $account) { ?>
 
                             <tr>
+                                <td><?=$account->getAccountID()?></td>
                                 <form method="post" action="<?= $linkTo('viewTransactions'); ?>">
-                                    <td><input type="submit" id="tranzLink" name="account" value="<?= $account->getAccountID() ?>"></td>
+                                    <td><input type="submit" id="tranzLink" name="account" value="<?= $account->getAccountName() ?>"></td>
                                 </form>
-                                <td><?=$account->getAccountName()?></td>
+
 
                             <td><?=$account->getType()?></td>
                         <td><?="$".money_format('%.2n', $account->getBalance());?></td></tr>

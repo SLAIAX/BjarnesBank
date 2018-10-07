@@ -4,6 +4,7 @@ session_start();
 
 use agilman\a2\model\BankAccountModel;
 use agilman\a2\model\AccountModel;
+use agilman\a2\model\TransactionCollectionModel;
 use agilman\a2\model\TransactionModel;
 use agilman\a2\view\View;
 use const Grpc\CALL_ERROR_TOO_MANY_OPERATIONS;
@@ -12,9 +13,15 @@ class TransactionController extends Controller
 {
     public function viewTransactions()
     {
-        $account = $_POST['account'];
-        $transMod = new TransactionModel();
-        $transactions = $transMod->getTransactions($account);
+
+
+        $accountName = $_POST['account'];
+        $userID = $_SESSION['id'];
+        $bank = new BankAccountModel();
+        $id = $bank->findID($accountName, $userID);
+        unset($bank);
+        $collection = new TransactionCollectionModel($id);
+        $transactions = $collection->getTransactions();
         $view = new View('transactionPage');
         echo $view->addData('transactions', $transactions)->render();
     }

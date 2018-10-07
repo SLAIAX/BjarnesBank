@@ -45,11 +45,11 @@ include "header.phtml"
             <p> From:  <select class="transferFields" name="accountFrom">
                     <?php
 
-                    for($i = 0; $i < count($accounts);$i++){
+                    foreach($accounts as $account){
 
                     ?>
 
-                    <option value="<?= $accounts[$i][1]?>"><?= $accounts[$i][1]."   \t $".money_format('%.2n', $accounts[$i][2])?></option>
+                    <option value="<?= $account->getAccountName()?>"><?= $account->getAccountName()."   \t $".money_format('%.2n', $account->getBalance())?></option>
 
                     <?php
                     }

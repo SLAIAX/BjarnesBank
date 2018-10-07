@@ -288,7 +288,7 @@ a:hover {
 
 #sidebar li li a {
 	padding: 0px 0px 0px 20px;
-	background: url(images/img04.jpg) no-repeat left 50%;
+
 }
 
 #sidebar h2 {
@@ -386,12 +386,12 @@ a:hover {
 
 #tranzLink {
 	background:none!important;
-	color:inherit;
+	color:#B50D0D;
 	border:none;
 	padding:0!important;
 	font: inherit;
 	/*border is optional*/
-	border-bottom:1px solid #444;
+	border-bottom:1px solid #B50D0D;
 	cursor: pointer;
 }
 
