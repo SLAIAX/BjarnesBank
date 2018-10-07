@@ -9,12 +9,6 @@ use agilman\a2\model\TransactionModel;
 use agilman\a2\view\View;
 use http\Exception\InvalidArgumentException;
 
-/**
- * Class AccountController
- *
- * @package agilman/a2
- * @author  Andrew Gilman <a.gilman@massey.ac.nz>
- */
 class BankAccountController extends Controller
 {
     public function indexAction(){
@@ -22,17 +16,13 @@ class BankAccountController extends Controller
         echo $view->render();
     }
 
-
     public function createBankAccount()
     {
         if($_SESSION['actionAvailable']) {
             try {
-
                 $accountname = $_POST['AccountName'];
                 $account = new BankAccountModel();
-
                 $id = $_SESSION['id'];
-               
                 $account->validate($accountname, $id);
                 $account->save($id);
                $this->redirect('homePage');
@@ -57,8 +47,6 @@ class BankAccountController extends Controller
         try {
             $bank = new BankAccountModel();
             $accountName = $_POST['accountClose'];
-
-
             $userid = $_SESSION['id'];
             $id = $bank->findID($accountName, $userid);
             $bank->deleteAccount($id);

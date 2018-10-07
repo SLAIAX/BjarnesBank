@@ -4,24 +4,15 @@ namespace agilman\a2\controller;
 session_start();
 use agilman\a2\view\View;
 use agilman\a2\model\{AccountModel, AccountCollectionModel, BankAccountModel};
-/**
- * Class HomeController
- *
- * @package agilman/a2
- * @author  Andrew Gilman <a.gilman@massey.ac.nz>
- */
+
 class HomeController extends Controller
 {
-    /**
-     * Account Index action
-     */
     public function indexAction()       //Implement collection model here
     {
         if($_SESSION["access"] == 1) {
             $id = $_SESSION['id'];
             $bank = new BankAccountModel();
             $accounts = $bank->getAccounts($id);
-
             $view = new View('homePage');
             echo $view->addData('accounts', $accounts)->render();
         }
@@ -77,5 +68,4 @@ class HomeController extends Controller
         $view = new View('userJoinPage');
         echo $view->render();
     }
-
 }
