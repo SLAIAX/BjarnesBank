@@ -25,7 +25,7 @@ class Model
             Model::DB_HOST,
             Model::DB_USER,
             Model::DB_PASS
-            //Model::DB_NAME
+        //Model::DB_NAME
         );
 
         if (!$this->db) {
@@ -68,8 +68,7 @@ class Model
             }
 
 
-
-            $result = $this->db->query(  "CREATE TABLE `transactions` (
+            $result = $this->db->query("CREATE TABLE `transactions` (
                     `TransID` INT(8) unsigned NOT NULL AUTO_INCREMENT , 
                     `FromAccountID` INT(8) unsigned NOT NULL,
             `Description` VARCHAR(256) DEFAULT NULL , 
@@ -84,7 +83,7 @@ class Model
                 // handle appropriately
                 error_log("Failed creating table transaction", 0);
             }
-            $result = $this->db->query( "CREATE TABLE `account` (
+            $result = $this->db->query("CREATE TABLE `account` (
                     `AccountID` INT(8) unsigned NOT NULL AUTO_INCREMENT , 
                     `UserID` INT(8) unsigned DEFAULT NULL , 
             `AccountType` VARCHAR(256) DEFAULT NULL , 
@@ -96,19 +95,30 @@ class Model
                 // handle appropriately
                 error_log("Failed creating table account", 0);
             }
-        }
 
-        if(!$this->db->query("INSERT INTO `user` (`ID`, `First Name`, `Last Name`, `Username`, `Password`, `Address`, `Email`, `Phone`) VALUES
+            if(!$this->db->query("INSERT INTO `user` (`ID`, `First Name`, `Last Name`, `Username`, `Password`, `Address`, `Email`, `Phone`) VALUES
             (NULL, 'Bob', 'jim', 'admin', 'Admin1234', '17 Alnack Place', 'admin@admin.co', '02298719235'),
             (NULL, 'Andrew', 'Gilman', 'AGilman', 'AGilman1', '124 Sunset Avenue', 'a.gilman@massey.ac.nz', '4451234'),
             (NULL, 'Jordan', 'Drumm', 'SLAIAX', 'football22', '16 ', 'jordan@gmail.com', '094730000'),
             (NULL, 'Zane', 'Lamb', 'Zane', 'ZaneLamb2', '12 Time Avenue', 'lanelamb@gmail.com', '0421483'),
             (NULL, 'Sam', 'Arnet', 'Sammy', 'Sammy', '9 Pleasantville ave', 'sam@gmail.com', '1027493');")){
-             echo $this->db->error;
-            error_log("Failed creating sample data!", 0);
-        }
+                echo $this->db->error;
+                error_log("Failed creating sample data!", 0);
+            }
 
-        if(!$this->db->query("INSERT INTO `transactions` (`TransID`, `FromAccountID`, `Description`, `DateOfTrans`, `MoneyIn`, `MoneyOut`, `Balance`, `ToAccountID`) VALUES
+            if(!$this->db->query("INSERT INTO `account` (`AccountID`, `UserID`, `AccountType`, `Balance`, `AccountName`) VALUES
+          (NULL, 1, 'Ready-Saver', '6780', 'Test'),
+          (NULL, 1, 'Select', '18955', 'Spendings'),
+          (NULL, 2, 'Serious-Saver', '152287', 'My Savings'),
+          (NULL, 2, 'Select', '7612', 'Holiday'),
+          (NULL, 2, 'Jump-Start', '1200', 'Spendings'),
+          (NULL, 2, 'Freedom', '876', 'Bills'),
+          (NULL, 2, 'Ready-Saver', '50', 'ForBob');")){
+                echo $this->db->error;
+                error_log("Failed creating sample data!", 0);
+            }
+
+            if(!$this->db->query("INSERT INTO `transactions` (`TransID`, `FromAccountID`, `Description`, `DateOfTrans`, `MoneyIn`, `MoneyOut`, `Balance`, `ToAccountID`) VALUES
           (NULL, 4, 'Heating', '2018-10-06', '0', '100', '149900', 7),
           (NULL, 4, 'Heating', '2018-10-06', '100', '0', '663', 7),
           (NULL, 3, 'Dinner', '2018-10-06', '0', '56', '18880', 5),
@@ -129,27 +139,9 @@ class Model
           (NULL, 6, 'Dinner', '2018-10-06', '100', '0', '524', 2),
           (NULL, 3, 'Drinks', '2018-10-06', '0', '25', '18955', 2),
           (NULL, 3, 'Drinks', '2018-10-06', '25', '0', '569', 2);")){
-            echo $this->db->error;
-            error_log("Failed creating sample data!", 0);
+                echo $this->db->error;
+                error_log("Failed creating sample data!", 0);
+            }
         }
-
-        if(!$this->db->query("INSERT INTO `account` (`AccountID`, `UserID`, `AccountType`, `Balance`, `AccountName`) VALUES
-          (NULL, 1, 'Savings', '6780', 'Test'),
-          (NULL, 1, 'Cheque', '18955', 'Spendings'),
-          (NULL, 2, 'Serious-Saver', '152287', 'My Savings'),
-          (NULL, 2, 'Select', '7612', 'Holiday'),
-          (NULL, 2, 'Jump-Start', '1200', 'Spendings'),
-          (NULL, 2, 'Freedom', '876', 'Bills'),
-          (NULL, 2, 'Ready-Saver', '50', 'ForBob');")){
-            echo $this->db->error;
-            error_log("Failed creating sample data!", 0);
-        }
-
-//        if (!$this->db->query("INSERT INTO `user` VALUES (NULL,'Bob', 'jim', 'address', 'st','st');")) {
-//            // handle appropriately
-//            echo $this->db->error;
-//            error_log("Failed creating sample data!", 0);
-//        }
-        //----------------------------------------------------------------------------
     }
 }
