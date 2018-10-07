@@ -4,10 +4,25 @@ session_start();
 
 class BankAccountModel extends Model
 {
+    /**
+     * @var Bank account ID
+     */
     private $mAccountID;
+    /**
+     * @var Users ID who owns said bank account
+     */
     private $mUserID;
+    /**
+     * @var The name of the bank account
+     */
     private $mAccountName;
+    /**
+     * @var The type of bank account
+     */
     private $mType;
+    /**
+     * @var The balance of the bank account
+     */
     private $mBalance;
 
     /**
@@ -103,6 +118,11 @@ class BankAccountModel extends Model
         $this->mBalance = $mBalance;
     }
 
+    /**
+     * Finds the ID of the account given a account name
+     * @param $accountName
+     * @return mixed
+     */
     public function findID($accountName)
     {
         $id = $this->getUserID();
@@ -116,6 +136,10 @@ class BankAccountModel extends Model
         return $result['AccountID'];
     }
 
+    /**
+     * Loads the object with data found in the database
+     * @return $this
+     */
     public function load()
     {
         $id = $this->getAccountID();
@@ -131,6 +155,9 @@ class BankAccountModel extends Model
         return $this;
     }
 
+    /**
+     * Creates an account and saves it in the database
+     */
     public function save()
     {
         $id = $this->getUserID();
@@ -141,6 +168,9 @@ class BankAccountModel extends Model
         }
     }
 
+    /**
+     * Validates that the user entered all necessary information and that an account of the same name doesn't already exist
+     */
     public function validate()
     {
         $accountName = $this->getAccountName();
@@ -156,6 +186,9 @@ class BankAccountModel extends Model
         }
     }
 
+    /**
+     * Deletes an account and its corresponding transactions
+     */
     public function deleteAccount()
     {
         $id = $this->getAccountID();

@@ -6,18 +6,49 @@ use agilman\a2\exception\EmptyFieldException;
 
 class TransactionModel extends Model
 {
+    /**
+     * @var Transaction ID
+     */
     private $mID;
+    /**
+     * @var Transaction Amount
+     */
     private $mAmount;
+    /**
+     * @var ID of the bank account the money is being sent to
+     */
     private $mToAccountID;
+    /**
+     * @var ID of the bank account the money is being sent from
+     */
     private $mFromAccountID;
+    /**
+     * @var Description of the transaction
+     */
     private $mDescription;
+    /**
+     * @var Date of the transaction
+     */
     private $mDate;
+    /**
+     * @var How much money was inserted into the corresponding account
+     */
     private $mMoneyIn;
+    /**
+     * @var How much money was taken out of the corresponding account
+     */
     private $mMoneyOut;
+    /**
+     * @var Final balance after the transaction has taken place
+     */
     private $mBalance;
-
-
+    /**
+     * @var The balance of the from account
+     */
     private $mBalanceFrom;
+    /**
+     * @var The balance of the to account
+     */
     private $mBalanceTo;
 
     /**
@@ -35,8 +66,6 @@ class TransactionModel extends Model
     {
         $this->mID = $mID;
     }
-
-
 
     /**
      * @return mixed
@@ -199,10 +228,12 @@ class TransactionModel extends Model
     }
 
 
-
-
-
-
+    /**
+     * Validates that the transaction is valid
+     * Ensures that an amount is entered
+     * Ensures that it's not being performed on the same account
+     * Ensures that the transaction is possible (the account has enough money)
+     */
     public function validateTransfer()
     {
 
@@ -230,9 +261,11 @@ class TransactionModel extends Model
         }
     }
 
+    /**
+     * Makes the transfer and saves the information in the transfers table in the database
+     */
     public function makeTransfer()
     {
-
             $toAccountID = $this->getToAccountID();
             $fromAccountID = $this->getAccountID();
             $description = $this->getDescription();
@@ -249,6 +282,11 @@ class TransactionModel extends Model
     }
 
 
+    /**
+     * Loads the object with the information of the corresponding transfer
+     * @param $id
+     * @return $this
+     */
     public function load($id)
     {
         if (!$result = $this->db->query("SELECT * FROM `transactions` WHERE `TransID` = $id;")) {
@@ -267,6 +305,9 @@ class TransactionModel extends Model
     }
 
 
+    /**
+     * Updates the balances of the accounts involved in the transfer
+     */
     public function save()
     {
         $balanceTo = $this->getBalanceTo();

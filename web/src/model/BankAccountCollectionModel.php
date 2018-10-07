@@ -4,11 +4,20 @@ namespace agilman\a2\model;
 
 class BankAccountCollectionModel extends Model
 {
+    /**
+     * @var array of Bank Account IDs
+     */
     private $accountIds;
+    /**
+     * @var The number of bank accounts for said user
+     */
     private $N;
 
 
-
+    /**
+     * BankAccountCollectionModel constructor.
+     * @param $id
+     */
     public function __construct($id)
     {
         parent::__construct();
@@ -22,6 +31,10 @@ class BankAccountCollectionModel extends Model
         }
     }
 
+    /**
+     * Gets bank account information
+     * @return \Generator
+     */
     public function getAccounts()
     {
         foreach ($this->accountIds as $id) {

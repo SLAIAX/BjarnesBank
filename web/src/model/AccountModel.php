@@ -4,35 +4,35 @@ namespace agilman\a2\model;
 class AccountModel extends Model
 {
     /**
-     * @var
+     * @var User ID
      */
     private $mID;
     /**
-     * @var
+     * @var User Name
      */
     private $mUserName;
     /**
-     * @var
+     * @var Users first name
      */
     private $mFirstName;
     /**
-     * @var
+     * @var Users last name
      */
     private $mLastName;
     /**
-     * @var
+     * @var Users Address
      */
     private $mAddress;
     /**
-     * @var
+     * @var Users Password
      */
     private $mPassword;
     /**
-     * @var
+     * @var Users Email
      */
     private $mEmail;
     /**
-     * @var
+     * @var Users Phone number
      */
     private $mPhone;
 
@@ -57,7 +57,6 @@ class AccountModel extends Model
         $this->mPhone = $mPhone;
         parent::__construct();
     }
-
 
     /**
      * @return mixed
@@ -189,7 +188,7 @@ class AccountModel extends Model
 
 
     /**
-     *
+     * If this user does not already exist, insert the users information into the database thus creating their account
      */
     public function save()
     {
@@ -209,7 +208,7 @@ class AccountModel extends Model
     }
 
     /**
-     *
+     * Validates the Users information ensuring that the critical fields have been completed
      */
     public function validate(){
         $userName = $this->getUserName();

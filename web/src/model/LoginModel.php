@@ -3,7 +3,13 @@ namespace agilman\a2\model;
 
 class LoginModel extends Model
 {
+    /**
+     * @var The entered username
+     */
     private $mUserName;
+    /**
+     * @var The entered password
+     */
     private $mPassword;
 
     /**
@@ -51,9 +57,10 @@ class LoginModel extends Model
     }
 
 
-
-
-
+    /**
+     * Validates that information was entered and that the password entered matches the password for the user account attempted to be accessed
+     * @return bool
+     */
     public function validateLogin()
     {
         $userName = $this->getUserName();

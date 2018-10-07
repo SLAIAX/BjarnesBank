@@ -4,9 +4,19 @@ namespace agilman\a2\model;
 
 class TransactionCollectionModel extends Model
 {
+    /**
+     * @var array of transaction ids
+     */
     private $transactionIds;
+    /**
+     * @var number of transacion IDs
+     */
     private $N;
 
+    /**
+     * TransactionCollectionModel constructor.
+     * @param $accountID
+     */
     public function __construct($accountID)
     {
         parent::__construct();
@@ -20,6 +30,9 @@ class TransactionCollectionModel extends Model
         }
     }
 
+    /**
+     * @return \Generator gets all the transactions
+     */
     public function getTransactions()
     {
         foreach ($this->transactionIds as $id) {
