@@ -3,13 +3,37 @@ namespace agilman\a2\model;
 
 class AccountModel extends Model
 {
+    /**
+     * @var
+     */
     private $mID;
+    /**
+     * @var
+     */
     private $mUserName;
+    /**
+     * @var
+     */
     private $mFirstName;
+    /**
+     * @var
+     */
     private $mLastName;
+    /**
+     * @var
+     */
     private $mAddress;
+    /**
+     * @var
+     */
     private $mPassword;
+    /**
+     * @var
+     */
     private $mEmail;
+    /**
+     * @var
+     */
     private $mPhone;
 
     /**
@@ -164,7 +188,9 @@ class AccountModel extends Model
     }
 
 
-
+    /**
+     *
+     */
     public function save()
     {
         $firstName = $this->getFirstName();
@@ -182,6 +208,9 @@ class AccountModel extends Model
         }
     }
 
+    /**
+     *
+     */
     public function validate(){
         $userName = $this->getUserName();
         if(!$this->getFirstName() || !$this->getLastName() || !$userName || !$this->getPassword()){

@@ -427,3 +427,7 @@ table{
 .transferInfoExtra {
 	margin-left: 332px;
 }
+
+#TransTable{
+	width: 50%;
+}
