@@ -13,17 +13,20 @@ class TransactionController extends Controller
 {
     public function viewTransactions()
     {
-
-
-        $accountName = $_POST['account'];
-        $userID = $_SESSION['id'];
-        $bank = new BankAccountModel();
-        $id = $bank->findID($accountName, $userID);
-        unset($bank);
-        $collection = new TransactionCollectionModel($id);
-        $transactions = $collection->getTransactions();
-        $view = new View('transactionPage');
-        echo $view->addData('transactions', $transactions)->render();
+        try {
+            $accountName = $_POST['account'];
+            $userID = $_SESSION['id'];
+            $bank = new BankAccountModel();
+            $id = $bank->findID($accountName, $userID);
+            unset($bank);
+            $collection = new TransactionCollectionModel($id);
+            $transactions = $collection->getTransactions();
+            $view = new View('transactionPage');
+            echo $view->addData('transactions', $transactions)->render();
+        } catch (\Exception $e){
+            $view = new View('transactionPage');
+            echo $view->render();
+        }
     }
 
     public function makeTransferAction()

@@ -3,12 +3,14 @@ namespace agilman\a2\controller;
 session_start();
 
 use agilman\a2\model\LoginModel;
+use agilman\a2\model\Model;
 use agilman\a2\view\View;
 
 class LoginController extends Controller
 {
     public function indexAction()
     {
+        new Model();
         $view = new View('loginPage');
         echo $view->render();
     }
