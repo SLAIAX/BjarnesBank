@@ -270,7 +270,7 @@ class TransactionModel extends Model
     public function save()
     {
         $balanceTo = $this->getBalanceTo();
-        $balanceFrom = $this->getBalanceFrom);
+        $balanceFrom = $this->getBalanceFrom();
         if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$balanceFrom' WHERE `AccountID` = '$this->mFromAccountID';")) {
             throw new \mysqli_sql_exception();
         }
