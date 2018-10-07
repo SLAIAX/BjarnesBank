@@ -238,7 +238,7 @@ class TransactionModel extends Model
     {
 
         $toAccountID = $this->getToAccountID();
-        $fromAccountID = $this->getAccountID();
+        $fromAccountID = $this->getFromAccountID();
         if (!$this->getAmount()) {
             throw new \UnexpectedValueException();
         }
@@ -267,7 +267,7 @@ class TransactionModel extends Model
     public function makeTransfer()
     {
             $toAccountID = $this->getToAccountID();
-            $fromAccountID = $this->getAccountID();
+            $fromAccountID = $this->getFromAccountID();
             $description = $this->getDescription();
             $date = date("Y-m-d");
             $amount = $this->getAmount();

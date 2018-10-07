@@ -36,8 +36,8 @@ include "header.phtml"
                 <th align="left">Amount In</th>
                 <th align="left">Amount Out</th>
                 <th align="left">Balance</th>
-                <th align="left">Description</th>
                 <th align="left">Date of Transaction</th>
+                <th align="left">Description</th>
             </tr>
 
             <?php
@@ -50,8 +50,8 @@ include "header.phtml"
                 <td><?="$".money_format('%.2n',$transaction->getMoneyIn())?></td>
                 <td><?="$".money_format('%.2n',$transaction->getMoneyOut())?></td>
                 <td><?="$".money_format('%.2n',$transaction->getBalance())?></td>
-                <td><?=$transaction->getDescription()?></td>
                 <td><?=$transaction->getDate()?></td>
+                    <td><?=$transaction->getDescription()?></td>
                 </tr>
 
                 <?php
