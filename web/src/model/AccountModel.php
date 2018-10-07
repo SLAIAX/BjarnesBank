@@ -31,6 +31,7 @@ class AccountModel extends Model
         $this->mPassword = $mPassword;
         $this->mEmail = $mEmail;
         $this->mPhone = $mPhone;
+        parent::__construct();
     }
 
 
@@ -166,15 +167,15 @@ class AccountModel extends Model
 
     public function save()
     {
-        $firstname = $this->getFirstName();
+        $firstName = $this->getFirstName();
         $address = $this->getAddress();
         $email = $this->getEmail();
-        $phonenumber = $this->getPhone();
-        $lastname = $this->getLastName();
+        $phoneNumber = $this->getPhone();
+        $lastName = $this->getLastName();
         $password = $this->getPassword();
-        $username = $this->getUserName();
+        $userName = $this->getUserName();
         if (!isset($this->mID)) {
-            if (!$result = $this->db->query("INSERT INTO `user` VALUES (NULL, '$firstname', '$lastname', '$username', '$password', '$address', '$email','$phonenumber');")) {
+            if (!$result = $this->db->query("INSERT INTO `user` VALUES (NULL, '$firstName', '$lastName', '$userName', '$password', '$address', '$email','$phoneNumber');")) {
                 throw new \mysqli_sql_exception();
             }
             $this->setID($this->db->insert_id);
@@ -182,11 +183,11 @@ class AccountModel extends Model
     }
 
     public function validate(){
-        $username = $this->getUserName();
-        if(!$this->getFirstName() || !$this->getLastName() || !$username || !$this->getPassword()){
+        $userName = $this->getUserName();
+        if(!$this->getFirstName() || !$this->getLastName() || !$userName || !$this->getPassword()){
             throw new \UnexpectedValueException();
         }
-        if ($result = $this->db->query("SELECT * FROM `user` WHERE `Username` = '$username';")) {
+        if ($result = $this->db->query("SELECT * FROM `user` WHERE `Username` = '$userName';")) {
             $accounts = $result->fetch_assoc();
             if($accounts['Username'] != ""){
                 throw new \LogicException();

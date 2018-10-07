@@ -3,30 +3,70 @@ namespace agilman\a2\model;
 
 class LoginModel extends Model
 {
-    private $username;
-    private $password;
+    private $mUserName;
+    private $mPassword;
 
-    public function __construct($username, $password)
+    /**
+     * LoginModel constructor.
+     * @param $mUserName
+     * @param $mPassword
+     */
+    public function __construct($mUserName, $mPassword)
     {
-        $this->username = $username;
-        $this->password = $password;
+        $this->mUserName = $mUserName;
+        $this->mPassword = $mPassword;
         parent::__construct();
     }
 
+    /**
+     * @return mixed
+     */
+    public function getUserName()
+    {
+        return $this->mUserName;
+    }
+
+    /**
+     * @param mixed $mUserName
+     */
+    public function setUserName($mUserName)
+    {
+        $this->mUserName = $mUserName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->mPassword;
+    }
+
+    /**
+     * @param mixed $mPassword
+     */
+    public function setPassword($mPassword)
+    {
+        $this->mPassword = $mPassword;
+    }
+
+
+
+
+
     public function validateLogin()
     {
-        if ($this->username == "") {
+        $userName = $this->getUserName();
+        if ($userName == "") {
             throw new \UnexpectedValueException();
         }
-        if (!$result = $this->db->query("SELECT * FROM `user` WHERE `Username` = '$this->username' ;")) {
+        if (!$result = $this->db->query("SELECT * FROM `user` WHERE `Username` = '$userName' ;")) {
             throw new \mysqli_sql_exception();
         }
         $result = $result->fetch_assoc();
 
         if ($result['Password'] == $this->password) {
             $_SESSION['id'] = $result['ID'];
-            unset($password);
-            unset($result);
             return true;
         }
         return false;
