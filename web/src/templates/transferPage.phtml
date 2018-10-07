@@ -46,13 +46,16 @@ include "header.phtml"
             <p> From:  <select class="transferFields" name="accountFrom">
 
                     <?php
+
                     foreach($accounts as $account){
+
                     ?>
 
                     <option value="<?= $account->getAccountName()?>"><?= $account->getAccountName()." $".money_format('%.2n', $account->getBalance())?></option>
 
                     <?php
                     }
+
                     ?>
 
                 </select> </p>
@@ -63,11 +66,12 @@ include "header.phtml"
 
                     <?php
 
+
                     foreach($accounts as $account){
 
                         ?>
 
-                        <option value="<?= $account->getAccountName()?>"><?= $account->getAccountName()." $".money_format('%.2n', $account->getBalance())?></option>
+                        <option value="<?= $accountz->getAccountName()?>"><?= $accountz->getAccountName()." $".money_format('%.2n', $accountz->getBalance())?></option>
 
                         <?php
 
