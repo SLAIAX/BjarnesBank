@@ -14,7 +14,7 @@ class BankAccountCollectionModel extends Model
         parent::__construct();
         try {
             if (!$result = $this->db->query("SELECT `AccountID` FROM `account` WHERE `UserID` = $id;")) {
-                throw new \Exception();
+               // throw new \Exception();
             }
             $this->accountIds = array_column($result->fetch_all(), 0);
             $this->N = $result->num_rows;

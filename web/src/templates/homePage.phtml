@@ -40,19 +40,20 @@ include "header.phtml"
                             <th>Account Balance</th>
                         </tr>
 
+
                     <?php
                     setlocale(LC_MONETARY, 'en_NZ.UTF-8');
 
-                        for($i = 0; $i < count($accounts); $i++){
-                    ?>
+                        foreach($accounts as $account) { ?>
+
                             <tr>
                                 <form method="post" action="<?= $linkTo('viewTransactions'); ?>">
-                                    <td><input type="submit" id="tranzLink" name="account" value="<?= $accounts[$i][3] ?>"></td>
+                                    <td><input type="submit" id="tranzLink" name="account" value="<?= $account->getAccountID() ?>"></td>
                                 </form>
-                                <td><?=$accounts[$i][1]?></td>
+                                <td><?=$account->getAccountName()?></td>
 
-                            <td><?=$accounts[$i][0]?></td>
-                        <td><?="$".money_format('%.2n', $accounts[$i][2]);?></td></tr>
+                            <td><?=$account->getType()?></td>
+                        <td><?="$".money_format('%.2n', $account->getBalance());?></td></tr>
                         <?php
                         }
                     ?>

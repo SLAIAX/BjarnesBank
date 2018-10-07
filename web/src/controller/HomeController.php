@@ -3,7 +3,7 @@ namespace agilman\a2\controller;
 
 session_start();
 use agilman\a2\view\View;
-use agilman\a2\model\{AccountModel, AccountCollectionModel, BankAccountModel};
+use agilman\a2\model\{AccountModel, BankAccountCollectionModel, BankAccountModel};
 
 class HomeController extends Controller
 {
@@ -11,8 +11,8 @@ class HomeController extends Controller
     {
         if($_SESSION["access"] == 1) {
             $id = $_SESSION['id'];
-            $bank = new BankAccountModel();
-            $accounts = $bank->getAccounts($id);
+            $collection = new BankAccountCollectionModel($id);
+            $accounts = $collection->getAccounts();
             $view = new View('homePage');
             echo $view->addData('accounts', $accounts)->render();
         }
