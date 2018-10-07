@@ -28,7 +28,7 @@ class HomeController extends Controller
                 $accounts = $collection->getAccounts();
                 $view = new View('homePage');
                 echo $view->addData('accounts', $accounts)->render();
-            } catch (\Exception $e){
+            } catch (\Exception $e) {
                 $this->redirect('loginPage');
             }
         }
@@ -73,7 +73,7 @@ class HomeController extends Controller
             $accounts = $collection->getAccounts();
             $view = new View('closeBankAccountPage');
             echo $view->addData('accounts', $accounts)->render();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             $this->redirect('homePage');
         }
     }
@@ -107,7 +107,7 @@ class HomeController extends Controller
             $view = new View('transferPage');
             $view->addData('accountsa', $accountsa);
             echo $view->addData('accountsb', $accountsb)->render();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             $this->redirect('homePage');
         }
     }
@@ -127,7 +127,7 @@ class HomeController extends Controller
             $accounts = $collection->getAccounts();
             $view = new View('paymentPage');
             echo $view->addData('accounts', $accounts)->render();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             $this->redirect('homePage');
         }
     }

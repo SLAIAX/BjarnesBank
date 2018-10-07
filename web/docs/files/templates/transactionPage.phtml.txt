@@ -1,0 +1,69 @@
+
+
+<?php
+
+session_start();
+
+
+include "header.phtml"
+
+?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="<?= $linkTo('homePage'); ?>">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+                    <li><a href="<?= $linkTo('homePage'); ?>">Homepage</a></li>
+                    <li><a href="<?= $linkTo('bankAccount'); ?>">Create Account</a></li>
+                    <li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!------header wrapper ends ----------------->
+
+    <div class="entry">
+
+        <table id="TransTable"><tr><th align="left">From</th>
+                <th align="left">To</th>
+                <th align="left">Amount In</th>
+                <th align="left">Amount Out</th>
+                <th align="left">Balance</th>
+                <th align="left">Date of Transaction</th>
+                <th align="left">Description</th>
+            </tr>
+
+            <?php
+            foreach ($transactions as $transaction){
+                ?>
+
+                <tr>
+                <td><?=$transaction->getFromAccountID()?></td>
+                <td><?=$transaction->getToAccountID()?></td>
+                <td><?="$".money_format('%.2n',$transaction->getMoneyIn())?></td>
+                <td><?="$".money_format('%.2n',$transaction->getMoneyOut())?></td>
+                <td><?="$".money_format('%.2n',$transaction->getBalance())?></td>
+                <td><?=$transaction->getDate()?></td>
+                    <td><?=$transaction->getDescription()?></td>
+                </tr>
+
+                <?php
+            }
+            ?>
+        </table>
+
+    </div>
+	<!------Login ends ----------------->
+</div>
+
+
+
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

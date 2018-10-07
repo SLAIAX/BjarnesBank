@@ -1,0 +1,73 @@
+
+
+<?php
+
+session_start();
+
+
+include "header.phtml"
+
+?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="<?= $linkTo('homePage'); ?>">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+                    <li><a href="<?= $linkTo('homePage'); ?>">Homepage</a></li>
+                    <li><a href="<?= $linkTo('bankAccount'); ?>">Create Account</a></li>
+                    <li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!------header wrapper ends ----------------->
+
+    <div class="entry">
+        <form method="POST" action="<?= $linkTo('makepayment'); ?>">
+            <?php if(!$_SESSION['validTransaction']){
+                print("<p>Invalid Payment </p><br>");
+                $_SESSION['validTransaction'] = True;
+            }
+            if($_SESSION['emptyField']){
+                print("<p> Please fill in the required fields. </p> <br>");
+                $_SESSION['emptyField'] = False;
+            }
+
+            ?>
+            <br>
+            <p> From:  <select class="transferFields" name="accountFrom">
+                    <?php
+
+                    foreach($accounts as $account){
+
+                    ?>
+
+                    <option value="<?= $account->getAccountName()?>"><?= $account->getAccountName()."   \t $".money_format('%.2n', $account->getBalance())?></option>
+
+                    <?php
+                    }
+                    ?>
+
+                </select> </p>
+
+
+            <p> To: <input class="transferFields" type="text" name="accountTo" pattern="([0-9]+)" title="Numeric values only." size="25"> <span class="transferInfoExtra">Account ID you wish to send money to.</span></p>
+            <p> Amount:  <input class="transferFields" type="text" name="amount" pattern="([0-9]+)(.[0-9][0-9])*" title="Please enter a valid amount" size="25"> <span class="transferInfo"> Don't put a dollar sign. Values can't be zero or under.</span></p>
+            <p> Description:  <input class="transferFields" type="text" name="description" pattern="^[a-zA-Z0-9_\s]+$" title="Alphanumeric characters with spaces and underscores only." size="25"> </p>
+            <input class="transfer" type="submit" value="Make Transfer" > </p>
+        </form>
+    </div>
+	<!------Login ends ----------------->
+</div>
+
+
+
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

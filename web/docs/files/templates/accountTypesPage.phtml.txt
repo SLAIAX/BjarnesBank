@@ -1,0 +1,111 @@
+<?php
+session_start();
+
+$_SESSION['actionAvailable'] = True;
+$_SESSION['validTransaction'] = True;
+$_SESSION['invalidInput'] = False;
+$_SESSION['emptyField'] = False;
+include "header.phtml"
+
+?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="/../../images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="<?= $linkTo('homePage');?>">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li><a href="<?= $linkTo('homePage');?>">Homepage</a></li>
+					<li><a href="<?= $linkTo('bankAccount'); ?>">Create Account</a></li>
+					<li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- end #header -->
+	<div id="page">
+		<div id="content">
+			<h1 class="title">Types of Accounts</h1>
+
+			<p>Here at Bjarne's Bank we offer a plethora of account types with bonus's and perks to help your financial life , from Everyday Account to Saving accounts</p>
+
+			<h2 class="title">Everyday Accounts</h2>
+			<div id = 'freedom'>
+				<h3>Freedom Account</h3>
+				An everyday account that gives you the freedom to bank the way you want to.
+				<ul>
+					<li>No transaction fees, non-standard fees may apply.</li>
+					<li>Easy access to your account 24 hours, 365 days.</li>
+					<li>The $5 monthly account fee will be waived each month that you deposit at least $2,500 into your account.</li>
+				</ul>
+
+			</div>
+
+			<div id = 'jumpstart'>
+				<h3>Jump-Start Account</h3>
+				<p>A bank account for under 21s or if you are studying full-time.</p>
+				<ul>
+					<li>No monthly account or transaction fees, non-standard fees may apply.</li>
+					<li>Easy access to your account 24 hours, 365 days.</li>
+					<li>An interest free overdraft of up to $2000^, and special benefits if you are studying full-time.</li>
+				</ul>
+
+			</div>
+
+			<div id = 'select'>
+				<h3>Select Account</h3>
+				<p>An interest bearing everyday account for customers who keep an average monthly balance of $5,000 or more.</p>
+				<ul>
+					<li>Your $6 monthly account fee will be waived if your average monthly balance is $5,000 or more.</li>
+					<li>No transaction fees, non-standard fees may apply.</li>
+					<li>Earn interest on credit balances $5,000 and over.</li>
+					<li>Easy access to your account 24 hours, 365 days.</li>
+				</ul>
+
+			</div>
+
+
+			<h2 class="title">Savings Accounts</h2>
+
+			<div id='serioussaver'>
+				<h3>Serious Saver Account</h3>
+				<p>The Serious Saver helps you reach your savings goals by rewarding you with Premium interest if you can commit to making no withdrawals and saving $20 or more each month (not including credit interest). .</p>
+			</div>
+
+		
+
+			<div id = 'readysaver'>
+				<h3>Ready-Saver Account</h3>
+				<p>Ready Saver is ideal to set aside money for upcoming expenses and still earn interest, while having the flexibility to access your money anytime you need..</p>
+			</div>
+
+			
+
+		</div>
+		<!-- end #content -->
+		<div id="sidebar">
+			<ul>
+				<li>
+					<h2>Categories</h2>
+					<ul>
+						<li><a href="<?= $linkTo('transferPage'); ?>">Make Transfer</a></li>
+						<li><a href="<?= $linkTo('paymentPage'); ?>">Make Payment</a></li>
+						<li><a href="<?= $linkTo('closeAccountPage'); ?>">Close Account</a></li>
+						<li><a href="#">Types of accounts</a></li>
+						<li><a href="<?= $linkTo('aboutus'); ?>">About us</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	<!-- end #page --> 
+</div>
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>
+

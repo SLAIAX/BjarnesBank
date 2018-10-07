@@ -1,0 +1,62 @@
+<?php include "header.phtml" ?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="/images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="<?= $linkTo('homePage'); ?>">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+                <ul>
+                    <li><a href="<?= $linkTo('homePage'); ?>">Homepage</a></li>
+                    <li class="current_page_item"><a href="#">Create Account</a></li>
+                    <li><a href="<?= $linkTo('logOut'); ?>">Log out</a></li>
+                </ul>
+			</div>
+		</div>
+	</div>
+
+	<!------header wrapper ends ----------------->
+
+    
+	<div id="accountcreate">
+		<h3><b> Create an Account</b></h3>
+		<br>
+		 <?php
+		    if($_SESSION['emptyField']){
+		        print("<p> Please fill in the required fields. </p> ");
+		        $_SESSION['emptyField'] = False;
+		    }
+		     if($_SESSION['invalidInput']){
+		        print("<p> Invalid Input : Account Name Already exists </p>");
+		        $_SESSION['invalidInput'] = False;
+		    }
+   		 ?>
+		<form method="POST" action="<?= $linkTo('bankAccountCreate'); ?>">
+			
+		<div>
+			<p> Account Name:  <input class="transferFields" type="text" name="AccountName" pattern="^[a-zA-Z0-9_\s]+$" title="Alphanumeric characters and underscores only with no spaces." size="25"> </p>
+			<p> Account Type:  <select class="transferFields" name="AccountType">
+                    <option value="Freedom">Freedom</option>
+                    <option value="Select">Select</option>
+                    <option value="Jump-Start">Jump-Start</option>
+                    <option value="Serious-Saver">Serious-Saver</option>
+                    <option value="Read-Saver">Ready-Saver</option>
+                </select> </p>
+            
+            <p>Not sure which account to choose, Get more info <a href="<?= $linkTo('typeAccountPage'); ?>">here</a></p>
+            <br>
+		</div>
+			<input class="login" type="submit" value="Create"> </p>
+		</form>
+
+	</div>
+	<!------User Create ends ----------------->
+
+</div>
+
+
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

@@ -27,9 +27,15 @@ class AccountController extends Controller
     {
         if ($_SESSION['actionAvailable']) {
             try {
-                $account = new AccountModel($_POST['username'],$_POST['firstname'],
-                                            $_POST['lastname'],$_POST['password'],
-                                            $_POST['address'], $_POST['email'], $_POST['phonenumber']);
+                $account = new AccountModel(
+                    $_POST['username'],
+                    $_POST['firstname'],
+                    $_POST['lastname'],
+                    $_POST['password'],
+                    $_POST['address'],
+                    $_POST['email'],
+                    $_POST['phonenumber']
+                );
                 $account->validate();
                 $account->save();
                 $view = new View('accountCreated');

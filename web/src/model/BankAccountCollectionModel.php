@@ -40,7 +40,7 @@ class BankAccountCollectionModel extends Model
         foreach ($this->accountIds as $id) {
             // Use a generator to save on memory/resources
             // load accounts from DB one at a time only when required
-            yield (new BankAccountModel($id, NULL))->load();
+            yield (new BankAccountModel($id, null))->load();
         }
     }
 }

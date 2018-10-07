@@ -1,0 +1,57 @@
+
+
+<?php
+
+session_start();
+
+$_SESSION['actionAvailable'] = True;
+$_SESSION['emptyField'] = False;
+include "header.phtml"
+
+?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="#">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li class="current_page_item"><a href="#">Log in</a></li>
+					<li><a href=<?= $linkTo('userJoinPage'); ?>>Join</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!------header wrapper ends ----------------->
+
+	<div id="login">
+
+		<h3><b> Log in to Bjarnes Bank</b></h3>
+		<br>
+        <?php
+        if($_SESSION['access'] == 2){
+            print '<p><b> Wrong Password or Username</b> </p>';
+        }
+        ?>
+		<form method="POST" action="<?= $linkTo('validateLogin'); ?>">
+			<p> Username:  <input type="text" class="loginFields" name="username" placeholder="Username" pattern="^[a-zA-Z0-9_]+$" title="Alphanumeric characters and underscores only (no spaces)." size="25"> </p>
+			<p> Password:  <input type="password" class="loginFields" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Illegal Password" size ="25"> </p>
+			
+			<p> <u><a href=<?= $linkTo('userJoinPage'); ?>>Don't have an account? Create one here.</a></u>  <input class="login" type="submit" value="Login"> </p>
+		
+		</form>
+
+		
+	</div>
+	<!------Login ends ----------------->
+</div>
+
+
+
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

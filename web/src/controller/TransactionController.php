@@ -14,8 +14,6 @@ use const Grpc\CALL_ERROR_TOO_MANY_OPERATIONS;
  * @package agilman\a2\controller
  */
 class TransactionController extends Controller
-
-
 {
 
 
@@ -37,14 +35,14 @@ class TransactionController extends Controller
             $accountName = $_POST['account'];
 
             $userID = $_SESSION['id'];
-            $bank = new BankAccountModel(NULL, $userID);
+            $bank = new BankAccountModel(null, $userID);
             $id = $bank->findID($accountName);
             unset($bank);
             $collection = new TransactionCollectionModel($id);
             $transactions = $collection->getTransactions();
             $view = new View('transactionPage');
             echo $view->addData('transactions', $transactions)->render();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             $view = new View('transactionPage');
             echo $view->render();
         }
@@ -68,10 +66,10 @@ class TransactionController extends Controller
      */
     public function makeTransferAction()
     {
-        if($_SESSION['actionAvailable']){
+        if ($_SESSION['actionAvailable']) {
             try {
                 $id = $_SESSION['id'];
-                $account = new BankAccountModel(NULL, $id);
+                $account = new BankAccountModel(null, $id);
                 $toAccountID = $account->findID($_POST['accountTo']);
                 $fromAccountID = $account->findID($_POST['accountFrom']);
                 $transaction = new TransactionModel();
@@ -86,12 +84,12 @@ class TransactionController extends Controller
 
                 $view = new View('transactionComplete');
                 echo $view->render();
-                $_SESSION['actionAvailable'] = False;
-            }catch(\UnexpectedValueException $e){
-                $_SESSION['emptyField'] = True;
+                $_SESSION['actionAvailable'] = false;
+            } catch (\UnexpectedValueException $e) {
+                $_SESSION['emptyField'] = true;
                 $this->redirect('transferPage');
-            }catch(\LogicException $e){
-                $_SESSION['validTransaction'] = False;
+            } catch (\LogicException $e) {
+                $_SESSION['validTransaction'] = false;
                 $this->redirect('transferPage');
             }
         }
@@ -118,7 +116,7 @@ class TransactionController extends Controller
         if ($_SESSION['actionAvailable']) {
             try {
                 $id = $_SESSION['id'];
-                $account = new BankAccountModel(NULL, $id);
+                $account = new BankAccountModel(null, $id);
                 $toAccountID = $_POST['accountTo'];
 
 
@@ -130,12 +128,12 @@ class TransactionController extends Controller
 
                 $view = new View('transactionComplete');
                 echo $view->render();
-                $_SESSION['actionAvailable'] = False;
+                $_SESSION['actionAvailable'] = false;
             } catch (\UnexpectedValueException $e) {
-                $_SESSION['emptyField'] = True;
+                $_SESSION['emptyField'] = true;
                 $this->redirect('paymentPage');
             } catch (\LogicException $e) {
-                $_SESSION['validTransaction'] = False;
+                $_SESSION['validTransaction'] = false;
                 $this->redirect('paymentPage');
             }
         }

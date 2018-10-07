@@ -41,7 +41,7 @@ class BankAccountController extends Controller
         if ($_SESSION['actionAvailable']) {
             try {
                 $id = $_SESSION['id'];
-                $account = new BankAccountModel(NULL,$id);
+                $account = new BankAccountModel(null, $id);
                 $account->setAccountName($_POST['AccountName']);
                 $account->setType($_POST['AccountType']);
                 $account->validate();
@@ -76,7 +76,7 @@ class BankAccountController extends Controller
     {
         try {
             $userid = $_SESSION['id'];
-            $bank = new BankAccountModel(NULL, $userid);
+            $bank = new BankAccountModel(null, $userid);
             $accountName = $_POST['accountClose'];
             $id = $bank->findID($accountName, $userid);
             $bank->setAccountID($id);

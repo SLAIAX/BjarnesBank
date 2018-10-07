@@ -1,0 +1,58 @@
+<?php include "header.phtml" ?>
+
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<img src="/images/BjarnesLogo.png" width="90" height="170" alt="Logo" />
+				<h1><a href="<?= $linkTo('loginPage'); ?>">Bjarnes Bank</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li ><a href=<?= $linkTo('loginPage'); ?>>Log in</a></li>
+					<li class="current_page_item"><a href="#">Join</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!------header wrapper ends ----------------->
+
+
+   
+    <br>
+
+	<div id="usercreate">
+		<form method="POST" action="<?= $linkTo('accountCreate'); ?>">
+            <p>Fields marked with a * are required</p>
+             <?php
+			    if($_SESSION['emptyField']){
+			        print("<p> Please fill in the required fields. </p> <br>");
+			        $_SESSION['emptyField'] = False;
+			    }
+			    if($_SESSION['invalidInput']){
+			        print("<p> Invalid Input : Account Name Already exists </p> <br>");
+			        $_SESSION['invalidInput'] = False;
+			    }
+			    ?>
+		<div id="personinfo">
+			<p> *First Name <br> <input type="text" name="firstname" pattern="[A-Za-z]{2,}" title="Alphabetic characters only with no spaces." size="25"> </p>
+			<p> *Last Name <br> <input type="text" name="lastname" pattern="[A-Za-z]{2,}" title="Alphabetic characters only with no spaces." size="25"> </p>
+			<p>  Email <br> <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please enter a valid email address e.g: example@gmail.com" size="25"> No capitol letters. </p>
+			<p>  Phone Number <br> <input type="text" name="phonenumber" pattern="^[0-9]+$" title="Digits only" size="25"> (Numeric values only)</p>
+            <p>  Address  <br><input type="text" name="address" pattern="^[a-zA-Z0-9_\s-]+$" title="Alphanumeric characters, underscores, dashes and spaces only" size ="25"> </p>
+			<p> *Username  <br><input type="text" name="username" pattern="^[a-zA-Z0-9_]+$" title="Alphanumeric characters and underscores only." size="25"> </p>
+			<p> *Password  <br><input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" size ="25"> (Must contain at least one number, one uppercase, one lowercase letter, and at least 8 or more characters)</p>
+			<br>
+		</div>
+			<p> <input id ="createUserAccount" type="submit" value="Create"> </p>
+		</form>
+	</div>
+	<!------User Create ends ----------------->
+
+</div>
+
+
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

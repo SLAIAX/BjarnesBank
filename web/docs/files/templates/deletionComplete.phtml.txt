@@ -1,0 +1,7 @@
+<?php include "header.phtml" ?>
+<!---------- Body starts --------------->
+Account Deleted Successfully. <br>
+<a href=<?= $linkTo('homePage'); ?>>Back</a>
+<br>
+    <!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

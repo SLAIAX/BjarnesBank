@@ -210,14 +210,15 @@ class AccountModel extends Model
     /**
      * Validates the Users information ensuring that the critical fields have been completed
      */
-    public function validate(){
+    public function validate()
+    {
         $userName = $this->getUserName();
-        if(!$this->getFirstName() || !$this->getLastName() || !$userName || !$this->getPassword()){
+        if (!$this->getFirstName() || !$this->getLastName() || !$userName || !$this->getPassword()) {
             throw new \UnexpectedValueException();
         }
         if ($result = $this->db->query("SELECT * FROM `user` WHERE `Username` = '$userName';")) {
             $accounts = $result->fetch_assoc();
-            if($accounts['Username'] != ""){
+            if ($accounts['Username'] != "") {
                 throw new \LogicException();
             }
         }
