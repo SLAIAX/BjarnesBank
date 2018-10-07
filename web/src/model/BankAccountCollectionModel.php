@@ -7,11 +7,13 @@ class BankAccountCollectionModel extends Model
     private $accountIds;
     private $N;
 
-    public function __construct()
+
+
+    public function __construct($id)
     {
         parent::__construct();
         try {
-            if (!$result = $this->db->query("SELECT `ID` FROM `user`;")) {
+            if (!$result = $this->db->query("SELECT `AccountID` FROM `account` WHERE `UserID` = $id;")) {
                 throw new \Exception();
             }
             $this->accountIds = array_column($result->fetch_all(), 0);

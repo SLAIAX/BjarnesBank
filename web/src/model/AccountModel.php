@@ -12,6 +12,136 @@ class AccountModel extends Model
     private $mEmail;
     private $mPhone;
 
+    /**
+     * @return mixed
+     */
+    public function getUserName()
+    {
+        return $this->mUserName;
+    }
+
+    /**
+     * @param mixed $mUserName
+     */
+    public function setUserName($mUserName)
+    {
+        $this->mUserName = $mUserName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->mFirstName;
+    }
+
+    /**
+     * @param mixed $mFirstName
+     */
+    public function setFirstName($mFirstName)
+    {
+        $this->mFirstName = $mFirstName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->mLastName;
+    }
+
+    /**
+     * @param mixed $mLastName
+     */
+    public function setLastName($mLastName)
+    {
+        $this->mLastName = $mLastName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->mAddress;
+    }
+
+    /**
+     * @param mixed $mAddress
+     */
+    public function setAddress($mAddress)
+    {
+        $this->mAddress = $mAddress;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->mPassword;
+    }
+
+    /**
+     * @param mixed $mPassword
+     */
+    public function setPassword($mPassword)
+    {
+        $this->mPassword = $mPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->mEmail;
+    }
+
+    /**
+     * @param mixed $mEmail
+     */
+    public function setEmail($mEmail)
+    {
+        $this->mEmail = $mEmail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhone()
+    {
+        return $this->mPhone;
+    }
+
+    /**
+     * @param mixed $mPhone
+     */
+    public function setPhone($mPhone)
+    {
+        $this->mPhone = $mPhone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMID()
+    {
+        return $this->mID;
+    }
+
+    /**
+     * @param mixed $mID
+     */
+    public function setMID($mID)
+    {
+        $this->mID = $mID;
+    }
+
+
+
     public function findID($username)
     {
         if (!$result = $this->db->query("SELECT ID FROM `user` WHERE `Username` = '$username';")) {
@@ -27,8 +157,8 @@ class AccountModel extends Model
             throw new \mysqli_sql_exception();
         }
         $result = $result->fetch_assoc();
-        $this->mFirstName = $result['name'];
-        $this->mID = $id;
+        $this->setFirstName($result['FirstName']);
+        $this->setID($id);
         return $this;
     }
 

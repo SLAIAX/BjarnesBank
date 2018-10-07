@@ -7,11 +7,11 @@ class TransactionCollectionModel extends Model
     private $accountIds;
     private $N;
 
-    public function __construct()
+    public function __construct($accountID)
     {
         parent::__construct();
         try {
-            if (!$result = $this->db->query("SELECT `ID` FROM `user`;")) {
+            if (!$result = $this->db->query("SELECT `TransID` FROM `transactions` WHERE `FromAccountID` = '$accountID' and `MoneyOut` > 0 or `ToAccountID` = '$accountID' and `MoneyIn` > 0;")) {
                 throw new \Exception();
             }
             $this->accountIds = array_column($result->fetch_all(), 0);
