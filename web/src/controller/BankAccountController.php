@@ -21,11 +21,12 @@ class BankAccountController extends Controller
     {
         if ($_SESSION['actionAvailable']) {
             try {
-                $accountname = $_POST['AccountName'];
-                $account = new BankAccountModel();
                 $id = $_SESSION['id'];
-                $account->validate($accountname, $id);
-                $account->save($id);
+                $account = new BankAccountModel(NULL,$id);
+                $account->setAccountName($_POST['AccountName']);
+                $account->setType($_POST['AccountType']);
+                $account->validate();
+                $account->save();
                 $this->redirect('homePage');
                 $_SESSION['actionAvailable'] = false;
             } catch (\UnexpectedValueException $e) {

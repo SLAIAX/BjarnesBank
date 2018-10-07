@@ -178,10 +178,6 @@ class AccountModel extends Model
                 throw new \mysqli_sql_exception();
             }
             $this->setID($this->db->insert_id);
-        } else {
-//            if (!$result = $this->db->query("UPDATE `user` SET `user` = '' WHERE `ID` = $this->mID;")) {
-//                throw new \mysqli_sql_exception();
-//            }
         }
     }
 

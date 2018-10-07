@@ -11,6 +11,18 @@ class BankAccountModel extends Model
     private $mBalance;
 
     /**
+     * BankAccountModel constructor.
+     * @param $mAccountID
+     * @param $mUserID
+     */
+    public function __construct($mAccountID, $mUserID)
+    {
+        $this->mAccountID = $mAccountID;
+        $this->mUserID = $mUserID;
+    }
+
+
+    /**
      * @return mixed
      */
     public function getAccountID()
@@ -90,8 +102,9 @@ class BankAccountModel extends Model
         $this->mBalance = $mBalance;
     }
 
-    public function findID($accountName, $id)
+    public function findID($accountName)
     {
+        $id = $this->getUserID();
         if (!$accountName) {
             throw new \UnexpectedValueException();
         }
@@ -102,8 +115,9 @@ class BankAccountModel extends Model
         return $result['AccountID'];
     }
 
-    public function load($id)
+    public function load()
     {
+        $id = $this->getAccountID();
         if (!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = $id;")) {
             throw new \mysqli_sql_exception();
         }
@@ -116,21 +130,24 @@ class BankAccountModel extends Model
         return $this;
     }
 
-    public function save($id)
+    public function save()
     {
-        $AccountName = $_POST['AccountName'];
-        $AccountType = $_POST['AccountType'];
+        $id = $this->getUserID();
+        $AccountName = $this->getAccountName();
+        $AccountType = $this->getType();
         if (!$result = $this->db->query("INSERT INTO `account` VALUES (NULL, '$id', '$AccountType', 0, '$AccountName');")) {
             throw new \mysqli_sql_exception();
         }
     }
 
-    public function validate($accname, $ID)
+    public function validate()
     {
-        if (!$accname) {
+        $accountName = $this->getAccountName();
+        $id = $this->getUserID();
+        if (!$accountName) {
             throw new \UnexpectedValueException();
         }
-        if ($result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = '$accname' and `UserID` = '$ID';")) {
+        if ($result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = '$accountName' and `UserID` = '$id';")) {
             $accounts = $result->fetch_assoc();
             if ($accounts['AccountName'] != "") {
                 throw new \LogicException();
@@ -138,8 +155,9 @@ class BankAccountModel extends Model
         }
     }
 
-    public function deleteAccount($id)
+    public function deleteAccount()
     {
+        $id = $this->getAccountID();
         if (!$result = $this->db->query("DELETE FROM `account` WHERE `AccountID` = '$id';")) {
             throw new \mysqli_sql_exception();
         }
