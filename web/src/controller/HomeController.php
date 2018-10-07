@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function indexAction()       //Implement collection model here
     {
-        if($_SESSION["access"] == 1) {
+        if ($_SESSION["access"] == 1) {
             $id = $_SESSION['id'];
             $collection = new BankAccountCollectionModel($id);
             $accounts = $collection->getAccounts();
@@ -18,22 +18,26 @@ class HomeController extends Controller
         }
     }
 
-    public function aboutusIndexAction(){
+    public function aboutusIndexAction()
+    {
         $view = new View('aboutUsPage');
         echo $view->render();
     }
 
-    public function transactionIndexAction(){
+    public function transactionIndexAction()
+    {
         $view = new View('transactionPage');
         echo $view->render();
     }
 
-    public function logOutAction(){
+    public function logOutAction()
+    {
         session_unset();
         $this->redirect('loginPage');
     }
 
-    public function closeAccountIndex(){
+    public function closeAccountIndex()
+    {
         $id = $_SESSION['id'];
         $collection = new BankAccountCollectionModel($id);
         $accounts = $collection->getAccounts();
@@ -41,19 +45,21 @@ class HomeController extends Controller
         echo $view->addData('accounts', $accounts)->render();
     }
 
-    public function typeAccountIndex(){
+    public function typeAccountIndex()
+    {
         $view = new View('accountTypesPage');
         echo $view->render();
     }
 
-    public function TransferIndexAction(){
+    public function TransferIndexAction()
+    {
         $id = $_SESSION['id'];
         $collectiona = new BankAccountCollectionModel($id);
         $collectionb = new BankAccountCollectionModel($id);
         $accountsa = $collectiona->getAccounts();
         $accountsb = $collectionb->getAccounts();
         $view = new View('transferPage');
-        $view->addData('accountsa',$accountsa);
+        $view->addData('accountsa', $accountsa);
         echo $view->addData('accountsb', $accountsb)->render();
     }
 

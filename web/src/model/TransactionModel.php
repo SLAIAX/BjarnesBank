@@ -171,24 +171,25 @@ class TransactionModel extends Model
 
 
 
-    public function validateTransfer($accountTo, $accountFrom){
+    public function validateTransfer($accountTo, $accountFrom)
+    {
         $this->mAmount = $_POST['amount'];
         $this->mToAccountID = $accountTo;
         $this->mFromAccountID = $accountFrom;
 
-        if(!$this->mAmount){
+        if (!$this->mAmount) {
             throw new \UnexpectedValueException();
         }
-        if($this->mToAccountID == $this->mFromAccountID) {
+        if ($this->mToAccountID == $this->mFromAccountID) {
             throw new \LogicException();
         }
-        if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mToAccountID';")){
+        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mToAccountID';")) {
             throw new \mysqli_sql_exception();
         }
         $toAccount = $result->fetch_assoc();
         $this->mBalanceTo = (int)$toAccount['Balance'];
 
-        if(!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mFromAccountID';")){
+        if (!$result = $this->db->query("SELECT * FROM `account` WHERE `AccountID` = '$this->mFromAccountID';")) {
             throw new \mysqli_sql_exception();
         }
         $fromAccount = $result->fetch_assoc();
@@ -198,17 +199,18 @@ class TransactionModel extends Model
         }
     }
 
-    public function makeTransfer(){
+    public function makeTransfer()
+    {
             $description = $_POST['description'];
             $date = date("Y-m-d");
             $this->mBalanceFrom -= $this->mAmount;
             $this->mBalanceTo += $this->mAmount;
-            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', 0, '$this->mAmount', '$this->mBalanceFrom','$this->mToAccountID');")) {
-                throw new \mysqli_sql_exception();
-            }
-            if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', '$this->mAmount', 0, '$this->mBalanceTo','$this->mToAccountID');")) {
-                throw new \mysqli_sql_exception();
-            }
+        if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', 0, '$this->mAmount', '$this->mBalanceFrom','$this->mToAccountID');")) {
+            throw new \mysqli_sql_exception();
+        }
+        if (!$result = $this->db->query("INSERT INTO `transactions` VALUES (NULL, '$this->mFromAccountID', '$description', '$date', '$this->mAmount', 0, '$this->mBalanceTo','$this->mToAccountID');")) {
+            throw new \mysqli_sql_exception();
+        }
     }
 
 
@@ -230,7 +232,8 @@ class TransactionModel extends Model
     }
 
 
-    public function save(){
+    public function save()
+    {
         if (!$result = $this->db->query("UPDATE `account` SET `Balance` = '$this->mBalanceFrom' WHERE `AccountID` = '$this->mFromAccountID';")) {
             throw new \mysqli_sql_exception();
         }
@@ -238,5 +241,4 @@ class TransactionModel extends Model
             throw new \mysqli_sql_exception();
         }
     }
-
 }

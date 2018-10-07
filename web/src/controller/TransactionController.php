@@ -28,7 +28,7 @@ class TransactionController extends Controller
 
     public function makeTransferAction()
     {
-        if($_SESSION['actionAvailable']){
+        if ($_SESSION['actionAvailable']) {
             try {
                 $account = new BankAccountModel();
                 $id = $_SESSION['id'];
@@ -41,12 +41,12 @@ class TransactionController extends Controller
 
                 $view = new View('transactionComplete');
                 echo $view->render();
-                $_SESSION['actionAvailable'] = False;
-            }catch(\UnexpectedValueException $e){
-                $_SESSION['emptyField'] = True;
+                $_SESSION['actionAvailable'] = false;
+            } catch (\UnexpectedValueException $e) {
+                $_SESSION['emptyField'] = true;
                 $this->redirect('transferPage');
-            }catch(\LogicException $e){
-                $_SESSION['validTransaction'] = False;
+            } catch (\LogicException $e) {
+                $_SESSION['validTransaction'] = false;
                 $this->redirect('transferPage');
             }
         }
@@ -68,12 +68,12 @@ class TransactionController extends Controller
 
                 $view = new View('transactionComplete');
                 echo $view->render();
-                $_SESSION['actionAvailable'] = False;
+                $_SESSION['actionAvailable'] = false;
             } catch (\UnexpectedValueException $e) {
-                $_SESSION['emptyField'] = True;
+                $_SESSION['emptyField'] = true;
                 $this->redirect('paymentPage');
             } catch (\LogicException $e) {
-                $_SESSION['validTransaction'] = False;
+                $_SESSION['validTransaction'] = false;
                 $this->redirect('paymentPage');
             }
         }

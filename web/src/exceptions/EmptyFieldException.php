@@ -8,7 +8,7 @@ namespace agilman\a2\exception;
  */
 use Exception;
 
-class EmptyFieldException extends  Exception
+class EmptyFieldException extends Exception
 {
   /**
      * DBException constructor.
@@ -16,7 +16,7 @@ class EmptyFieldException extends  Exception
      */
     public function __construct($message, $code)
     {
-     parent::__construct($message, $code);
+        parent::__construct($message, $code);
     }
 
 
@@ -24,6 +24,4 @@ class EmptyFieldException extends  Exception
     {
         return $this->message;
     }
-
-
 }

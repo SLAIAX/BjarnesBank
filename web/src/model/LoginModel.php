@@ -15,15 +15,15 @@ class LoginModel extends Model
 
     public function validateLogin()
     {
-        if($this->username == ""){
+        if ($this->username == "") {
             throw new \UnexpectedValueException();
         }
-        if(!$result = $this->db->query("SELECT * FROM `user` WHERE `Username` = '$this->username' ;")){
+        if (!$result = $this->db->query("SELECT * FROM `user` WHERE `Username` = '$this->username' ;")) {
             throw new \mysqli_sql_exception();
         }
         $result = $result->fetch_assoc();
 
-        if($result['Password'] == $this->password){
+        if ($result['Password'] == $this->password) {
             $_SESSION['id'] = $result['ID'];
             unset($password);
             unset($result);

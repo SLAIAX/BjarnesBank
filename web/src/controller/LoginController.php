@@ -15,25 +15,25 @@ class LoginController extends Controller
 
     public function validateAction()
     {
-       $_SESSION["access"] = 0;
-       $username = $_POST['username'];
-       $password = $_POST['password'];
-       try {
-           $login = new LoginModel($username, $password);
-           $flag = $login->validateLogin();
-           if ($flag) {
-               $_SESSION['username'] = $username;
-               $_SESSION["access"] = 1;
-               $this->redirect('homePage');
-           } else {
-               unset($login);
-               $_SESSION["access"] = 2;
-               $this->redirect('loginPage');
-           }
-       } catch (\Exception $e){
-           $this->redirect('loginPage');
-       }
-       unset($password);
-       unset($username);
+        $_SESSION["access"] = 0;
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        try {
+            $login = new LoginModel($username, $password);
+            $flag = $login->validateLogin();
+            if ($flag) {
+                $_SESSION['username'] = $username;
+                $_SESSION["access"] = 1;
+                $this->redirect('homePage');
+            } else {
+                unset($login);
+                $_SESSION["access"] = 2;
+                $this->redirect('loginPage');
+            }
+        } catch (\Exception $e) {
+            $this->redirect('loginPage');
+        }
+        unset($password);
+        unset($username);
     }
 }

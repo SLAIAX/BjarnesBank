@@ -11,29 +11,29 @@ use http\Exception\InvalidArgumentException;
 
 class BankAccountController extends Controller
 {
-    public function indexAction(){
+    public function indexAction()
+    {
         $view = new View('bankAccountCreatePage');
         echo $view->render();
     }
 
     public function createBankAccount()
     {
-        if($_SESSION['actionAvailable']) {
+        if ($_SESSION['actionAvailable']) {
             try {
                 $accountname = $_POST['AccountName'];
                 $account = new BankAccountModel();
                 $id = $_SESSION['id'];
                 $account->validate($accountname, $id);
                 $account->save($id);
-               $this->redirect('homePage');
-                $_SESSION['actionAvailable'] = False;
-
+                $this->redirect('homePage');
+                $_SESSION['actionAvailable'] = false;
             } catch (\UnexpectedValueException $e) {
-                $_SESSION['emptyField'] = True;
+                $_SESSION['emptyField'] = true;
                 $view = new View('bankAccountCreatePage');
                 echo $view->render();
-            } catch (\LogicException $e){
-                $_SESSION['invalidInput'] = True;
+            } catch (\LogicException $e) {
+                $_SESSION['invalidInput'] = true;
                 $view = new View('bankAccountCreatePage');
                 echo $view->render();
             } catch (\Exception $e) {
@@ -43,7 +43,8 @@ class BankAccountController extends Controller
         }
     }
 
-    public function closeBankAccount(){
+    public function closeBankAccount()
+    {
         try {
             $bank = new BankAccountModel();
             $accountName = $_POST['accountClose'];
@@ -52,7 +53,7 @@ class BankAccountController extends Controller
             $bank->deleteAccount($id);
             $view = new View('deletionComplete');
             echo $view->render();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             $this->redirect('closeAccountPage');
         }
     }

@@ -18,8 +18,7 @@ class BankAccountCollectionModel extends Model
             }
             $this->accountIds = array_column($result->fetch_all(), 0);
             $this->N = $result->num_rows;
-        }catch(\Exception $e){
-
+        } catch (\Exception $e) {
         }
     }
 

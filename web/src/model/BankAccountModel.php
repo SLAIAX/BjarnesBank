@@ -92,11 +92,11 @@ class BankAccountModel extends Model
 
     public function findID($accountName, $id)
     {
-        if(!$accountName){
+        if (!$accountName) {
             throw new \UnexpectedValueException();
         }
         if (!$result = $this->db->query("SELECT `AccountID` FROM `account` WHERE `AccountName` = '$accountName' and `UserID` = '$id';")) {
-          throw new \UnexpectedValueException();
+            throw new \UnexpectedValueException();
         }
         $result = $result->fetch_assoc();
         return $result['AccountID'];
@@ -125,23 +125,25 @@ class BankAccountModel extends Model
         }
     }
 
-    public function validate($accname, $ID){
-        if(!$accname){
+    public function validate($accname, $ID)
+    {
+        if (!$accname) {
             throw new \UnexpectedValueException();
         }
         if ($result = $this->db->query("SELECT * FROM `account` WHERE `AccountName` = '$accname' and `UserID` = '$ID';")) {
             $accounts = $result->fetch_assoc();
-            if($accounts['AccountName'] != ""){
+            if ($accounts['AccountName'] != "") {
                 throw new \LogicException();
             }
         }
     }
 
-    public function deleteAccount($id){
+    public function deleteAccount($id)
+    {
         if (!$result = $this->db->query("DELETE FROM `account` WHERE `AccountID` = '$id';")) {
             throw new \mysqli_sql_exception();
         }
-        if(!$result = $this->db->query("DELETE FROM `transactions` WHERE `ToAccountID` = '$id' and `MoneyIn` > 0 or `FromAccountID` = '$id' and `MoneyOut` > 0;")){
+        if (!$result = $this->db->query("DELETE FROM `transactions` WHERE `ToAccountID` = '$id' and `MoneyIn` > 0 or `FromAccountID` = '$id' and `MoneyOut` > 0;")) {
             //Don't throw as may not have any transactions.
         }
     }

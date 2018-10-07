@@ -180,13 +180,14 @@ class AccountModel extends Model
         }
     }
 
-    public function validate($firstname ,$lastname ,$username, $password){
-        if(!$firstname || !$lastname || !$username || !$password){
+    public function validate($firstname, $lastname, $username, $password)
+    {
+        if (!$firstname || !$lastname || !$username || !$password) {
             throw new \UnexpectedValueException();
         }
         if ($result = $this->db->query("SELECT * FROM `user` WHERE `Username` = '$username';")) {
             $accounts = $result->fetch_assoc();
-            if($accounts['Username'] != ""){
+            if ($accounts['Username'] != "") {
                 throw new \LogicException();
             }
         }

@@ -18,7 +18,7 @@ class AccountController extends Controller
      */
     public function createAction()
     {
-        if($_SESSION['actionAvailable']) {
+        if ($_SESSION['actionAvailable']) {
             try {
                 $account = new AccountModel();
 
@@ -34,13 +34,13 @@ class AccountController extends Controller
                 $account->save($firstname, $lastname, $username, $password);
                 $view = new View('accountCreated');
                 echo $view->render();
-                $_SESSION['actionAvailable'] = False;
-            } catch (\UnexpectedValueException $e){
-                $_SESSION['emptyField'] = True;
+                $_SESSION['actionAvailable'] = false;
+            } catch (\UnexpectedValueException $e) {
+                $_SESSION['emptyField'] = true;
                 $view = new View('userJoinPage');
                 echo $view->render();
             } catch (\LogicException $e) {
-                $_SESSION['invalidInput'] = True;
+                $_SESSION['invalidInput'] = true;
                 $view = new View('userJoinPage');
                 echo $view->render();
             }
