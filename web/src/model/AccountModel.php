@@ -177,7 +177,7 @@ class AccountModel extends Model
             if (!$result = $this->db->query("INSERT INTO `user` VALUES (NULL, '$firstname', '$lastname', '$username', '$password', '$address', '$email','$phonenumber');")) {
                 throw new \mysqli_sql_exception();
             }
-            $this->mID = $this->db->insert_id;
+            $this->setID($this->db->insert_id);
         } else {
 //            if (!$result = $this->db->query("UPDATE `user` SET `user` = '' WHERE `ID` = $this->mID;")) {
 //                throw new \mysqli_sql_exception();
