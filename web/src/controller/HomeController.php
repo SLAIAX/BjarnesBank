@@ -10,11 +10,15 @@ class HomeController extends Controller
     public function indexAction()       //Implement collection model here
     {
         if ($_SESSION["access"] == 1) {
-            $id = $_SESSION['id'];
-            $collection = new BankAccountCollectionModel($id);
-            $accounts = $collection->getAccounts();
-            $view = new View('homePage');
-            echo $view->addData('accounts', $accounts)->render();
+            try {
+                $id = $_SESSION['id'];
+                $collection = new BankAccountCollectionModel($id);
+                $accounts = $collection->getAccounts();
+                $view = new View('homePage');
+                echo $view->addData('accounts', $accounts)->render();
+            } catch (\Exception $e){
+                $this->redirect('loginPage');
+            }
         }
     }
 
@@ -38,11 +42,15 @@ class HomeController extends Controller
 
     public function closeAccountIndex()
     {
-        $id = $_SESSION['id'];
-        $collection = new BankAccountCollectionModel($id);
-        $accounts = $collection->getAccounts();
-        $view = new View('closeBankAccountPage');
-        echo $view->addData('accounts', $accounts)->render();
+        try {
+            $id = $_SESSION['id'];
+            $collection = new BankAccountCollectionModel($id);
+            $accounts = $collection->getAccounts();
+            $view = new View('closeBankAccountPage');
+            echo $view->addData('accounts', $accounts)->render();
+        } catch (\Exception $e){
+            $this->redirect('homePage');
+        }
     }
 
     public function typeAccountIndex()
@@ -53,24 +61,31 @@ class HomeController extends Controller
 
     public function TransferIndexAction()
     {
-        $id = $_SESSION['id'];
-        $collectiona = new BankAccountCollectionModel($id);
-        $collectionb = new BankAccountCollectionModel($id);
-        $accountsa = $collectiona->getAccounts();
-        $accountsb = $collectionb->getAccounts();
-        $view = new View('transferPage');
-        $view->addData('accountsa', $accountsa);
-        echo $view->addData('accountsb', $accountsb)->render();
+        try {
+            $id = $_SESSION['id'];
+            $collectiona = new BankAccountCollectionModel($id);
+            $collectionb = new BankAccountCollectionModel($id);
+            $accountsa = $collectiona->getAccounts();
+            $accountsb = $collectionb->getAccounts();
+            $view = new View('transferPage');
+            $view->addData('accountsa', $accountsa);
+            echo $view->addData('accountsb', $accountsb)->render();
+        } catch (\Exception $e){
+            $this->redirect('homePage');
+        }
     }
 
     public function PaymentIndexAction()
     {
-
-        $id = $_SESSION['id'];
-        $collection = new BankAccountCollectionModel($id);
-        $accounts = $collection->getAccounts();
-        $view = new View('paymentPage');
-        echo $view->addData('accounts', $accounts)->render();
+        try {
+            $id = $_SESSION['id'];
+            $collection = new BankAccountCollectionModel($id);
+            $accounts = $collection->getAccounts();
+            $view = new View('paymentPage');
+            echo $view->addData('accounts', $accounts)->render();
+        } catch (\Exception $e){
+            $this->redirect('homePage');
+        }
     }
 
     public function UserJoinIndexAction()
