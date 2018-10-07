@@ -14,8 +14,8 @@ class TransactionController extends Controller
         try {
             $accountName = $_POST['account'];
             $userID = $_SESSION['id'];
-            $bank = new BankAccountModel();
-            $id = $bank->findID($accountName, $userID);
+            $bank = new BankAccountModel(NULL, $userID);
+            $id = $bank->findID($accountName);
             unset($bank);
             $collection = new TransactionCollectionModel($id);
             $transactions = $collection->getTransactions();
@@ -30,10 +30,10 @@ class TransactionController extends Controller
     {
         if ($_SESSION['actionAvailable']) {
             try {
-                $account = new BankAccountModel();
                 $id = $_SESSION['id'];
-                $toAccountID = $account->findID($_POST['accountTo'], $id);
-                $fromAccountID = $account->findID($_POST['accountFrom'], $id);
+                $account = new BankAccountModel(NULL, $id);
+                $toAccountID = $account->findID($_POST['accountTo']);
+                $fromAccountID = $account->findID($_POST['accountFrom']);
                 $transaction = new TransactionModel();
                 $transaction->validateTransfer($toAccountID, $fromAccountID);
                 $transaction->makeTransfer();
@@ -56,11 +56,12 @@ class TransactionController extends Controller
     {
         if ($_SESSION['actionAvailable']) {
             try {
-                $account = new BankAccountModel();
+                $id = $_SESSION['id'];
+                $account = new BankAccountModel(NULL, $id);
                 $toAccountID = $_POST['accountTo'];
              
-                $id = $_SESSION['id'];
-                $fromAccountID = $account->findID($_POST['accountFrom'], $id);
+
+                $fromAccountID = $account->findID($_POST['accountFrom']);
                 $transaction = new TransactionModel();
                 $transaction->validateTransfer($toAccountID, $fromAccountID);
                 $transaction->makeTransfer();
